@@ -5,6 +5,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import HomePage from './pages/homePage';
 import AboutPage from './pages/aboutPage';
 import DashBoardPage from './pages/dashBoardPage';
+import VotingPage from './pages/votingPage';
 import './styles/App.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route exact path='/' element={<HomePage />} />
           <Route path='/about' element={<AboutPage />} />
           <Route path='/dashboard' element={<DashBoardPage />} />
+          <Route path='/voting' element={<VotingPage/>} />
         </Routes>
       </Router>
     </div>

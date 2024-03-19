@@ -22,4 +22,5 @@
 ./frontend/yarn-debug.log*
 ./frontend/yarn-error.log*
 
-./backend/venv
+./backend/venv/
+./backend/.ipynb_checkpoints/

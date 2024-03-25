@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const getMessage = async () => {
     try {
-        const response = await axios.get('http://127.0.0.1:4000/testingApi');
+        const response = await axios.get('http://127.0.0.1:4000/test');
         if (response.status === 200){
             console.log(response)
             const data = response.data;

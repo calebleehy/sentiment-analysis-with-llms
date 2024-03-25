@@ -9,17 +9,20 @@ const Navigation = () => {
             <Navbar expand="lg" className="navbar-dark position-absolute top-0">
                 <Container className="Container fs-5">
                     <Navbar.Brand href="/">
-                        <img src={logo} alt="logo" width="60" height="48" class="d-inline-block align-text-top" />
+                        <img src={logo} alt="logo" width="60" height="48" className="d-inline-block align-text-top" />
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="navbar-dark nav-underline">
                             <Nav.Link href="/">home</Nav.Link>
                             <Nav.Item className="dropdown">
-                                <Nav.Link classname="dropdown-toggle" href="/dashboard" role="button" data-bs-Toggle="dropdown" aria-expand="false">service</Nav.Link>
-                                <ul className="dropdown-menu bg-dark">
-                                    <li> <a className="dropdown-item text-light" href="/dashboard">dashboard</a></li>
-                                    <li><a className="dropdown-item text-light" href="/voting">voting</a></li>
+                                <Nav.Link className="dropdown-toggle" href="/dashboard" role="button" data-bs-toggle="dropdown" aria-expanded="false">service</Nav.Link>
+                                <ul className="dropdown-menu bg-light w-25">
+                                    <li> <a className="dropdown-item text-dark" href="/dashboard">NPS</a></li>
+                                    <li><a className="dropdown-item text-dark" href="/voting">Sample Statistics</a></li>
+                                    <li><a className="dropdown-item text-dark" >Bank Comparisions</a></li>
+                                    <li><a className="dropdown-item text-dark">Recommendations</a></li>
+                                    <li><a className="dropdown-item text-dark">Detailed</a></li>
                                 </ul>
                             </Nav.Item>
                             <Nav.Link href="/about">about</Nav.Link>

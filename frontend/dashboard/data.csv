@@ -1,4 +1,4 @@
-date,client,bank,rating,review,developer_response,Category,Sentiment,Intent,Recommendation
+date,client,bank,rating,review,developer_response,service,sentiment,intent,recommendation
 6/3/2024 8:36,Apple,GXS,4,Great banking app with attractive interest rates! Please allow us to add and/or save payees so we don’t have to keep typing out UEN numbers or account numbers. Would be nice to be able to add the debit card to Apple Pay too!!,"{'id': 42449861, 'body': ""Hi Eugene! We're thrilled to know that you like our app and our promotions! Rest assured, we're continuously working hard to enhance our features to improve your experience. We can't wait for you to try them out in the future. Thank you for your support! 🙏😊"", 'modified': '2024-03-08T02:53:35Z'}",C,Negative,Praise,H
 9/11/2022 3:13,Apple,GXS,5,"A bank like no other, no bank have such amazing feature to separate your money into different “pockets” to keep track of your goals. Moreover the interest rate they give is the highest for the no effort! Interest are being deposit daily and it’s amazing to see 💵 coming in to the bank daily! 
 

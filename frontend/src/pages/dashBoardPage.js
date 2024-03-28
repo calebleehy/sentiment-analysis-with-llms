@@ -9,9 +9,8 @@ const DashBoardPage = () => {
 
             <Navigation />
             <h1>Dashboard</h1>
-        </div><div classname="dashboard">
-                <Navigation />
-                <h1>Dashboard</h1>
+        </div>
+        <div classname="dashboard">
                 <div classname="row">
                     <Plot
                         data={[

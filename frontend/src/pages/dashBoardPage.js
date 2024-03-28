@@ -4,9 +4,10 @@ import '../styles/App.css';
 import Plot from 'react-plotly.js';
 
 const DashBoardPage = () => {
+    
+
     return (
         <><div>
-
             <Navigation />
             <h1>Dashboard</h1>
         </div>

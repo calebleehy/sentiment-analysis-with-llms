@@ -17,6 +17,7 @@
 ./frontend/.env.development.local
 ./frontend/.env.test.local
 ./frontend/.env.production.local
+.eslintcache
 
 ./frontend/npm-debug.log*
 ./frontend/yarn-debug.log*

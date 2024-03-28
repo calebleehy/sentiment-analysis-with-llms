@@ -18,3 +18,7 @@ h1 {
 .app {
   padding: 4rem;
 }
+.dashboard {
+  display: flex;
+  justify-content: center;
+}

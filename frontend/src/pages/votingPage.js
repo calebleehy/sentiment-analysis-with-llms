@@ -7,7 +7,7 @@ const VotingPage = () => {
     return (
         <div>
             <Navigation/>
-            <h1>Voting</h1>
+            <h1>Sample Statistics</h1>
         </div>
 
     )

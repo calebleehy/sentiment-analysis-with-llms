@@ -3,14 +3,14 @@ import Navigation from "../compoents/navigation";
 import '../styles/App.css';
 
 
-const VotingPage = () => {
+const StatisticsPage = () => {
     return (
         <div>
             <Navigation/>
-            <h1>Voting</h1>
+            <h1>Statistics</h1>
         </div>
 
     )
 }
 
-export default VotingPage;
+export default StatisticsPage;

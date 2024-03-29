@@ -2,8 +2,7 @@ import React from "react";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
 
-
-const VotingPage = () => {
+const statisticsPage = () => {
     return (
         <div>
             <Navigation/>
@@ -13,4 +12,4 @@ const VotingPage = () => {
     )
 }
 
-export default VotingPage;
+export default statisticsPage;

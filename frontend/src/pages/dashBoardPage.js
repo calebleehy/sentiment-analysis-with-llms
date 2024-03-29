@@ -2,13 +2,31 @@ import React from "react";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
 import Plot from 'react-plotly.js';
+import data from '../data.json'
 
 const DashBoardPage = () => {
+  const date = data.map(data => data.date);
+  const rating = data.map(data => data.rating);
+  const clientTypeCount = data.reduce((acc, data) => {
+    const client = data.client;
+    acc[client] = (acc[client] || 0) + 1;
+    return acc;
+  }, {});
+  const clientTypes = Object.keys(clientTypeCount);
+  const counts = Object.values(clientTypeCount);
+  const ratingsTypeCount = data.reduce((acc, data) => {
+    const rating = data.rating;
+    acc[rating] = (acc[rating] || 0) + 1;
+    return acc;
+  }, {});
+  const ratings = Object.keys(ratingsTypeCount);
+  const ratingCounts = Object.values(ratingsTypeCount);
     return (
         <><div>
 
             <Navigation />
             <h1>Dashboard</h1>
+            <p>{data.client}</p>
         </div>
         <div classname="dashboard">
                 <div classname="row">
@@ -33,10 +51,9 @@ const DashBoardPage = () => {
                     <Plot
                         data={[
                             {
-                                x: ['2013-10-04 22:23:00', '2013-11-04 22:23:00', '2013-12-04 22:23:00', '2014-01-04 22:23:00', '2014-02-04 22:23:00'],
-                                y: [75, 79, 71, 83, 76],
-                                type: 'scatter',
-                                mode: "lines",
+                                x: date,
+                                y: rating,
+                                mode: "bar",
                                 line: { color: '#7F7F7F' }
                             }
                         ]}
@@ -44,7 +61,7 @@ const DashBoardPage = () => {
                             width: 370, height: 300,
                             title: 'NPS Score over time',
                             yaxis: {
-                                range: [0, 100] // Limit the range of the y-axis to 5 to 20
+                                range: [0, 5]
                             }
                         }} />
                     <Plot
@@ -67,8 +84,8 @@ const DashBoardPage = () => {
                     <Plot
                         data={[
                             {
-                                x: [120, 275],
-                                y: ['Andriod', 'Apple'],
+                                x: counts,
+                                y: clientTypes,
                                 type: 'bar',
                                 orientation: 'h',
                                 marker: {
@@ -83,8 +100,8 @@ const DashBoardPage = () => {
                     <Plot
                         data={[
                             {
-                                x: [64, 36, 88, 130, 77],
-                                y: ['1 star', '2 stars', '3 stars', '4 stars', '5 stars'],
+                                x: ratingCounts,
+                                y: ratings,
                                 type: 'bar',
                                 orientation: 'h',
                                 marker: {
@@ -94,7 +111,15 @@ const DashBoardPage = () => {
                         ]}
                         layout={{
                             width: 400, height: 300,
-                            title: 'Samples by Rating',
+                            title: 'Breakdown of Ratings',
+                            yaxis: {
+                              title: 'Ratings',
+                              tickmode: 'array',
+                              tickvals: ratings,
+                            },
+                            xaxis: {
+                              title: 'Number of Ratings'
+                            }
                         }} />
 
                 </div>

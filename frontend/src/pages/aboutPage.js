@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
+import data from '../data.json'
 
 const AboutPage = () => {
     return (

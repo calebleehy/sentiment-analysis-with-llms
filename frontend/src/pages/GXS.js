@@ -21,12 +21,18 @@ const DashBoardPage = () => {
   }, {});
   const ratings = Object.keys(ratingsTypeCount);
   const ratingCounts = Object.values(ratingsTypeCount);
+  const recommendationTypeCount = data.reduce((acc, data) => {
+    const recommendation = data.recommendation;
+    acc[recommendation] = (acc[recommendation] || 0) + 1;
+    return acc;
+  }, {});
+  const recommendationTypes = Object.keys(recommendationTypeCount);
+  const recommendationCounts = Object.values(recommendationTypeCount);
     return (
         <><div>
 
             <Navigation />
             <h1>Dashboard</h1>
-            <p>{data.client}</p>
         </div>
         <div classname="dashboard">
                 <div classname="row">
@@ -40,14 +46,15 @@ const DashBoardPage = () => {
                                 mode: "gauge+number",
                                 delta: { reference: 100 },
                                 gauge: {
-                                    axis: { range: [null, 100] },
+                                    axis: { range: [-100, 100] },
                                     bar: { color: "purple" },
                                 }
                             },
                         ]}
                         layout={{
-                            width: 370, height: 300,
-                        }} />
+                          width: 370, height: 300
+                          }} 
+                        />
                     <Plot
                         data={[
                             {
@@ -63,7 +70,8 @@ const DashBoardPage = () => {
                             yaxis: {
                                 range: [0, 5]
                             }
-                        }} />
+                          }} 
+                        />
                     <Plot
                         data={[
                             {
@@ -71,14 +79,15 @@ const DashBoardPage = () => {
                                 y: [65, 72, 68, 70],
                                 type: 'bar',
                                 marker: {
-                                    color: 'purple' // Set the bar color to blue
+                                    color: 'purple' 
                                 }
                             }
                         ]}
                         layout={{
                             width: 370, height: 300,
-                            title: 'NPS Score by Service',
-                        }} />
+                            title: 'NPS Score by Service'
+                          }} 
+                        />
                 </div>
                 <div classname="row">
                     <Plot
@@ -89,13 +98,13 @@ const DashBoardPage = () => {
                                 type: 'bar',
                                 orientation: 'h',
                                 marker: {
-                                    color: 'purple' // Set the bar color to blue
+                                    color: 'purple' 
                                 }
                             }
                         ]}
                         layout={{
                             width: 400, height: 300,
-                            title: 'Samples by Device Brand',
+                            title: 'Samples by Device Brand'
                         }} />
                     <Plot
                         data={[
@@ -105,23 +114,43 @@ const DashBoardPage = () => {
                                 type: 'bar',
                                 orientation: 'h',
                                 marker: {
-                                    color: 'purple' // Set the bar color to blue
+                                    color: 'purple' 
                                 }
                             }
                         ]}
                         layout={{
-                            width: 400, height: 300,
-                            title: 'Breakdown of Ratings',
-                            yaxis: {
-                              title: 'Ratings',
-                              tickmode: 'array',
-                              tickvals: ratings,
-                            },
-                            xaxis: {
-                              title: 'Number of Ratings'
-                            }
+                          width: 400, height: 300,
+                          title: 'Breakdown of Ratings',
+                          yaxis: {
+                            title: 'Ratings',
+                            tickmode: 'array',
+                            tickvals: ratings,
+                          },
+                          xaxis: {
+                            title: 'Number of Ratings'
+                          }
                         }} />
 
+                </div>
+                <div>
+            <Plot
+              data={[
+                {
+                  x: recommendationCounts,
+                  y: recommendationTypes,
+                  type: 'funnel',
+                  hoverinfo: 'none',
+                  marker: {
+                    color: 'purple'
+                  }
+                }
+              ]}
+                layout={{
+                  width: 600, height: 500,
+                  title: 'Recommendations',
+                  margin: { t: 50, r: 0, b: 0, l: 100 }
+                }} 
+                />
                 </div>
 
             </div></>

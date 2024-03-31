@@ -1,57 +1,75 @@
-import React,{ useState } from "react";
+import React,{ useState, useEffect} from "react";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
 import Plot from 'react-plotly.js';
 import data from '../data.json'
 
 const DetailedPage = () => { 
-  const date = data.map(data => data.date);
-  const client = data.map(data => data.client);
-  const bank = data.map(data => data.bank);
-  const rating = data.map(data => data.rating);
-  const review = data.map(data => data.review);
-  const service = data.map(data => data.service);
-  const sentiment = data.map(data => data.sentiment);
-  const intent = data.map(data => data.intent);
-  const recommendation = data.map(data => data.recommendation);
-  const values = [
-    date,client,bank,rating,review,service,sentiment,intent,recommendation
-  ]
-  const [startIndex, setStartIndex] = useState(0);
-  const columnNames = Object.keys(data[0]);
-  const numRows = 5;
-  const visibleData = values.slice(startIndex, startIndex + numRows);
+  const [filters, setFilters] = useState({});
+    const [filteredData, setFilteredData] = useState(data);
+
+    const columns = Object.keys(data[0]);
+
+    const handleFilterChange = (e, column) => {
+        const value = e.target.value;
+        setFilters((prevFilters) => ({ ...prevFilters, [column]: value }));
+    };
+
+    useEffect(() => {
+        const filtered = data.filter((row) =>
+            Object.entries(filters).every(([column, value]) => {
+              if (!isNaN(value) && !isNaN(parseFloat(value))) {
+                    return String(row[column]) === parseInt(value);
+                }
+                return row[column].toLowerCase().includes(value.toLowerCase());
+            })
+
+        );
+        setFilteredData(filtered);
+    }, [data, filters]);
+
     return (
         <div>
             <Navigation/>
             <h1>Reviews</h1>
+            <tr>
+              {columns.map((column) => (
+                <th key={column}>
+                  <input
+                    type="text"
+                    value={filters[column] || ''}
+                    onChange={(e) => handleFilterChange(e, column)}
+                    placeholder={`Filter ${column}...`}
+                  />
+                </th>
+                ))}
+              </tr>
             <Plot
             data={[
               {
                 type: 'table',
                 header: {
-                  values: columnNames,
+                  values: columns.map((column) => column.toUpperCase()),
                   align: 'center',
                   fill: { color: 'purple' },
                   font: { color: 'white', family: 'Arial', size: 12 }
                 },
                 cells: {
-                  values: values,
-                  align: 'center',
+                  values: columns.map((column) =>
+                  filteredData.map((row) => row[column])),
                   font: { family: 'Arial', size: 11 },
                   height: 100,
                 },
               },
             ]}
             layout={{
-              width: 1500,
-              height: 1000,
+              width: 1720,
+              height: 1200,
               title: 'Table Plot',
-              margin: { t: 0, l: 0, r: 0, b: 0 }
+              margin: { t: 0, l: 0, r: 0, b: 0 },
+              columnwidth: [200, 200, 200,200,500,200,200,200,200] 
             }}
             />
-            <button onClick={() => setStartIndex(Math.max(0, startIndex - numRows))}>Previous</button>
-            <button onClick={() => setStartIndex(Math.min(data.length - numRows, startIndex + numRows))}>Next</button>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-./frontend/node_modules
+**/node_modules/
 ./frontend/.pnp
 ./frontend/.pnp.js
 
@@ -26,3 +26,4 @@
 ./backend/server/.dsa3101
 ./backend/server/__pycache__
 ./backend/model/
+

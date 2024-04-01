@@ -7,20 +7,6 @@ import data from '../data.json'
 const DashBoardPage = () => {
   const date = data.map(data => data.date);
   const rating = data.map(data => data.rating);
-  const clientTypeCount = data.reduce((acc, data) => {
-    const client = data.client;
-    acc[client] = (acc[client] || 0) + 1;
-    return acc;
-  }, {});
-  const clientTypes = Object.keys(clientTypeCount);
-  const counts = Object.values(clientTypeCount);
-  const ratingsTypeCount = data.reduce((acc, data) => {
-    const rating = data.rating;
-    acc[rating] = (acc[rating] || 0) + 1;
-    return acc;
-  }, {});
-  const ratings = Object.keys(ratingsTypeCount);
-  const ratingCounts = Object.values(ratingsTypeCount);
   const recommendationTypeCount = data.reduce((acc, data) => {
     const recommendation = data.recommendation;
     acc[recommendation] = (acc[recommendation] || 0) + 1;
@@ -32,7 +18,7 @@ const DashBoardPage = () => {
         <><div>
 
             <Navigation />
-            <h1>Dashboard</h1>
+            <h1>What are the most impactful areas to be addressed?</h1>
         </div>
         <div classname="dashboard">
                 <div classname="row">
@@ -60,7 +46,7 @@ const DashBoardPage = () => {
                             {
                                 x: date,
                                 y: rating,
-                                mode: "bar",
+                                mode: "line",
                                 line: { color: '#7F7F7F' }
                             }
                         ]}
@@ -88,49 +74,6 @@ const DashBoardPage = () => {
                             title: 'NPS Score by Service'
                           }} 
                         />
-                </div>
-                <div classname="row">
-                    <Plot
-                        data={[
-                            {
-                                x: counts,
-                                y: clientTypes,
-                                type: 'bar',
-                                orientation: 'h',
-                                marker: {
-                                    color: 'purple' 
-                                }
-                            }
-                        ]}
-                        layout={{
-                            width: 400, height: 300,
-                            title: 'Samples by Device Brand'
-                        }} />
-                    <Plot
-                        data={[
-                            {
-                                x: ratingCounts,
-                                y: ratings,
-                                type: 'bar',
-                                orientation: 'h',
-                                marker: {
-                                    color: 'purple' 
-                                }
-                            }
-                        ]}
-                        layout={{
-                          width: 400, height: 300,
-                          title: 'Breakdown of Ratings',
-                          yaxis: {
-                            title: 'Ratings',
-                            tickmode: 'array',
-                            tickvals: ratings,
-                          },
-                          xaxis: {
-                            title: 'Number of Ratings'
-                          }
-                        }} />
-
                 </div>
                 <div>
             <Plot

@@ -4,8 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import HomePage from './pages/homePage';
 import AboutPage from './pages/aboutPage';
-import DashBoardPage from './pages/dashBoardPage';
-import VotingPage from './pages/votingPage';
+import DashBoardPage from './pages/GXS';
+import DetailedPage from './pages/detailedPage';
+import ComparisonPage from './pages/comparisonsPage';
 import './styles/App.css';
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
           <Route exact path='/' element={<HomePage />} />
           <Route path='/about' element={<AboutPage />} />
           <Route path='/dashboard' element={<DashBoardPage />} />
-          <Route path='/voting' element={<VotingPage/>} />
+          <Route path='/detailed' element={<DetailedPage/>} />
+          <Route path='/comparisons' element={<ComparisonPage/>} />
         </Routes>
       </Router>
     </div>

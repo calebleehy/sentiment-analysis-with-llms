@@ -4,29 +4,26 @@ import '../styles/App.css';
 import Plot from 'react-plotly.js';
 import data from '../data.json'
 
-const DetailedPage = () => { 
+const DetailedPage = () => {
+  const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
   const [filters, setFilters] = useState({});
-    const [filteredData, setFilteredData] = useState(data);
-
-    const columns = Object.keys(data[0]);
-
-    const handleFilterChange = (e, column) => {
-        const value = e.target.value;
-        setFilters((prevFilters) => ({ ...prevFilters, [column]: value }));
-    };
-
-    useEffect(() => {
-        const filtered = data.filter((row) =>
-            Object.entries(filters).every(([column, value]) => {
-              if (!isNaN(value) && !isNaN(parseFloat(value))) {
-                    return String(row[column]) === parseInt(value);
-                }
-                return row[column].toLowerCase().includes(value.toLowerCase());
-            })
-
-        );
-        setFilteredData(filtered);
-    }, [data, filters]);
+  const [filteredData, setFilteredData] = useState(data);
+  const columns = Object.keys(data[0]);
+  const handleFilterChange = (e, column) => {
+    const value = e.target.value;
+    setFilters((prevFilters) => ({ ...prevFilters, [column]: value }));
+  };
+  useEffect(() => {
+    const filtered = gxs.filter((row) =>
+    Object.entries(filters).every(([column, value]) => {
+      if (!isNaN(value) && !isNaN(parseFloat(value))) {
+        return String(row[column]) === parseInt(value);
+      }
+      return row[column].toLowerCase().includes(value.toLowerCase());
+    })
+    );
+    setFilteredData(filtered);
+  }, [gxs, filters]);
 
     return (
         <div>
@@ -65,9 +62,7 @@ const DetailedPage = () => {
             layout={{
               width: 1720,
               height: 1200,
-              title: 'Table Plot',
               margin: { t: 0, l: 0, r: 0, b: 0 },
-              columnwidth: [200, 200, 200,200,500,200,200,200,200] 
             }}
             />
         </div>

@@ -16,9 +16,6 @@ const DetailedPage = () => {
   useEffect(() => {
     const filtered = gxs.filter((row) =>
     Object.entries(filters).every(([column, value]) => {
-      if (!isNaN(value) && !isNaN(parseFloat(value))) {
-        return String(row[column]) === parseInt(value);
-      }
       return row[column].toLowerCase().includes(value.toLowerCase());
     })
     );

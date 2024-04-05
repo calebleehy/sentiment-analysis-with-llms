@@ -1,5 +1,5 @@
 from llama_cpp import Llama
-import csv, json, os
+import csv, json, os, logging
 import pandas as pd
 
 def create_csv(filename, headers):
@@ -24,7 +24,7 @@ def generate_sentiment(model, datapath):
     final_data = pd.read_csv(datapath+'/final_data.csv')
     final_data["rowid"] = final_data.index
     reviews_data = final_data[['rowid', 'bank', 'review']]
-    subset = reviews_data.loc[:5]
+    subset = reviews_data.loc[218:]
     with open(os.path.join(datapath,".\\sent_derive.csv"), 'w') as file:
         file.write("rowid,bank,sentiment\n")
     history = [{"role": "system", "content": sent_prompt}]
@@ -32,6 +32,8 @@ def generate_sentiment(model, datapath):
         #row = ssi.iloc[i]
         print(row.to_string())
         history.append({"role":"user","content":row.to_string()})
+        with open('dest1.txt', 'w') as log_file:
+        print('hello world', file=log_file)
         completion = model.create_chat_completion(
             messages=history,
             temperature=0.7,
@@ -55,17 +57,15 @@ def generate_sentiment(model, datapath):
 def main():
     ## filepath fuckery:
     abscurrentpath = os.path.dirname(os.path.abspath(__file__)) # lives in backend\generation
-    relmodelpath = '..\\model\\mistral-7b-instruct-v0.2.Q5_K_M.gguf'
-    reldatapath='..\\data'
     # os.path.normpath(os.path.join(abspath, relpath))
     llm = Llama(
-        model_path=os.path.normpath(os.path.join(abscurrentpath, relmodelpath)),
+        model_path=os.path.normpath(os.path.join(abscurrentpath, '..\\model\\mistral-7b-instruct-v0.2.Q5_K_M.gguf')),
         n_gpu_layers=-1, # Uncomment to use GPU acceleration
         # seed=1337, # Uncomment to set a specific seed
         n_ctx=1000, # Uncomment to increase the context window
         chat_format="chatml"
     )
-    absdatapath=os.path.normpath(os.path.join(abscurrentpath, reldatapath))
+    absdatapath=os.path.normpath(os.path.join(abscurrentpath, '..\\data'))
     print(generate_sentiment(llm, absdatapath))
 
 if __name__=="__main__": 

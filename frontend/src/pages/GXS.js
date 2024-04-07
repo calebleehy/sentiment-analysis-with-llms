@@ -15,16 +15,19 @@ const DashBoardPage = () => {
       <div className="dashboard">
         <div className = "row">
         <NPSScorePlot />
-        <div style={{ marginTop: '50px' }}>
+        <div style={{ marginLeft:'100px',marginTop:'100px' }}>
         <ServiceCountsPlot />
         </div>   
         </div>      
           <div className = "row">
           <BankNPSPlot />
-          <IssueCountsPlot />     
+          <div style= {{marginLeft:'100px'}}>
+          <IssueCountsPlot />
+
+          </div>     
         </div>
       </div>
-      <div className = "row">
+      <div classname = "row" style = {{alignItems: 'center',justifyContent: 'center',display: 'flex'}}>
           <TopRecommendationsPlot />
         </div>
       </div>

@@ -25,24 +25,29 @@ const MaribankTable = () => {
   }, []);
   const maribank = data.filter(item => item.bank === 'MariBank') //filtering for only maribank data
   const columns = ["Review"];
-  const [filterCriteria, setFilterCriteria] = useState({ intent: '', service: '', issue: '' });
-  const filteredData = maribank.filter((item) =>
-    (!filterCriteria.intent || item.intent === filterCriteria.intent) &&
-    (!filterCriteria.service || item.service === filterCriteria.service) &&
-    (!filterCriteria.issue || item.issue === filterCriteria.issue)
-  );
+  const [sentimentFilter, setSentimentFilter] = useState('');
+  const [serviceFilter, setServiceFilter] = useState('');
+  const [issueFilter, setIssueFilter] = useState('');
+  const [intentFilter, setIntentFilter] = useState('');
+
+  const sentimentOptions = [...new Set(maribank.map(item => item.sentiment))];
+  const serviceOptions = [...new Set(maribank.map(item => item.service))];
+  const issueOptions = [...new Set(maribank.map(item => item.issue))];
+  const intentOptions = [...new Set(maribank.map(item => item.intent))];
+
+  const filteredData = maribank.filter(item => {
+    const sentimentMatch = sentimentFilter === '' || item.sentiment === sentimentFilter;
+    const serviceMatch = serviceFilter === '' || item.service === serviceFilter;
+    const issueMatch = issueFilter === '' || item.issue === issueFilter;
+    const intentMatch = intentFilter === '' || item.intent === intentFilter;
+    return sentimentMatch && serviceMatch && issueMatch && intentMatch;
+});
   function transposeArray(array) {
     if (!array || !Array.isArray(array) || array.length === 0) {
       return [];
     }
     return array[0].map((_, colIndex) => array.map(row => row[colIndex]));
   }
-
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilterCriteria({ ...filterCriteria, [name]: value });
-  
-  };
   const rows = filteredData.map((item) => [item.review]);
   const transposedRows = rows ? transposeArray(rows) : [];
 
@@ -52,34 +57,37 @@ const MaribankTable = () => {
 
   return (
     <div>
-      <div>
-        <label>
-          Intent:
-          <select name="intent" value={filterCriteria.intent} onChange={handleFilterChange}>
-            <option value="">All</option>
-            <option value="Praise">Praise</option>
-            <option value="Feedback">Feedback</option>
-            <option value="Complaint">Complaint</option>
-          </select>
-        </label>
-        <label>
-          Service:
-          <select name="service" value={filterCriteria.service} onChange={handleFilterChange}>
-            <option value="">All</option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-          </select>
-        </label>
-        <label>
-          Issue:
-          <select name="issue" value={filterCriteria.issue} onChange={handleFilterChange}>
-            <option value="">All</option>
-            <option value="C1">C1</option>
-            <option value="C2">C2</option>
-            <option value="C3">C3</option>
-          </select>
-        </label>
+    <div>
+        <label>Sentiment:</label>
+        <select value={sentimentFilter} onChange={e => setSentimentFilter(e.target.value)}>
+          <option value="">All</option>
+          {sentimentOptions.map(option => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+        <label>Service:</label>
+        <select value={serviceFilter} onChange={e => setServiceFilter(e.target.value)}>
+          <option value="">All</option>
+          {serviceOptions.map(option => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+        <label>Issue:</label>
+        <select value={issueFilter} onChange={e => setIssueFilter(e.target.value)}>
+          <option value="">All</option>
+          {issueOptions.map(option => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+        <div>
+        <label>Intent:</label>
+        <select value={intentFilter} onChange={e => setIntentFilter(e.target.value)}>
+          <option value="">All</option>
+          {intentOptions.map(option => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+        </div>
       </div>
       <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '400px'}}>
       <Plot

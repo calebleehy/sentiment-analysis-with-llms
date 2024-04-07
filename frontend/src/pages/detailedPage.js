@@ -46,42 +46,7 @@ const DetailedPage = () => {
         <div>
             <Navigation/>
             <h1>Reviews</h1>
-            <tr>
-              {columns.map((column) => (
-                <th key={column}>
-                  <input
-                    type="text"
-                    value={filters[column] || ''}
-                    onChange={(e) => handleFilterChange(e, column)}
-                    placeholder={`Filter ${column}...`}
-                  />
-                </th>
-                ))}
-              </tr>
-            <Plot
-            data={[
-              {
-                type: 'table',
-                header: {
-                  values: columns.map((column) => column.toUpperCase()),
-                  align: 'center',
-                  fill: { color: 'purple' },
-                  font: { color: 'white', family: 'Arial', size: 12 }
-                },
-                cells: {
-                  values: columns.map((column) =>
-                  filteredData.map((row) => row[column])),
-                  font: { family: 'Arial', size: 11 },
-                  height: 100,
-                },
-              },
-            ]}
-            layout={{
-              width: 1720,
-              height: 1200,
-              margin: { t: 0, l: 0, r: 0, b: 0 },
-            }}
-            />
+            <DetailedTable />
         </div>
     )
 }

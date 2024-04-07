@@ -1,7 +1,6 @@
 import React from "react";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
-import GXSTable from "../compoents/gxsTable";
 
 
 const HomePage = () => {

@@ -6,7 +6,7 @@ import json
 @app.route("/reviewData", methods=["GET"])
 def reviewData():
     try:
-        with open('../data/full.json', 'r') as file:
+        with open('./data/full.json', 'r') as file:
             # Load JSON data from the file
             json_data = json.load(file)
             data = {
@@ -22,7 +22,7 @@ def reviewData():
 @app.route("/bankNps", methods=["GET"])
 def bankNpsData():
     try:
-        with open('../data/bank_nps.json', 'r') as file:
+        with open('./data/bank_nps.json', 'r') as file:
             # Load JSON data from the file
             json_data = json.load(file)
             data = {
@@ -38,7 +38,7 @@ def bankNpsData():
 @app.route("/bankServieFreq", methods=["GET"])
 def bankServiceFreq():
     try:
-        with open('../data/bank_serv_freq.json', 'r') as file:
+        with open('./data/bank_serv_freq.json', 'r') as file:
             # Load JSON data from the file
             json_data = json.load(file)
             data = {
@@ -54,7 +54,7 @@ def bankServiceFreq():
 @app.route("/bankIssueFreq", methods=["GET"])
 def bankIssueFreq():
     try:
-        with open('../data/bank_issue_freq.json', 'r') as file:
+        with open('./data/bank_issue_freq.json', 'r') as file:
             # Load JSON data from the file
             json_data = json.load(file)
             data = {
@@ -70,7 +70,7 @@ def bankIssueFreq():
 @app.route("/monthNps", methods=["GET"])
 def monthNps():
     try:
-        with open('../data/month_nps.json', 'r') as file:
+        with open('./data/month_nps.json', 'r') as file:
             # Load JSON data from the file
             json_data = json.load(file)
             data = {
@@ -86,7 +86,7 @@ def monthNps():
 @app.route("/servIssueRec", methods=["GET"])
 def servIssueFreq():
     try:
-        with open('../data/serv_issue_rec.json', 'r') as file:
+        with open('./data/serv_issue_rec.json', 'r') as file:
             # Load JSON data from the file
             json_data = json.load(file)
             data = {

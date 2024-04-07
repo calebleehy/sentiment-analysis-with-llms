@@ -30,7 +30,7 @@ def generate_service(model):
     subset = reviews.loc[696:]
     # output file
     with open("problem_category.csv", 'w') as file:
-        file.write("rowid,bank,review,problem_category,summary\n")
+        file.write("rowid,bank,problem_category,summary\n")
     history = [{"role": "system", "content": service_prompt}]
     for index,row in subset.iterrows(): # change subset to reviews later
         # print(row)

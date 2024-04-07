@@ -1,5 +1,5 @@
 from llama_cpp import Llama
-import csv, json, os, logging
+import csv, json, os
 import pandas as pd
 
 def create_csv(filename, headers):
@@ -28,12 +28,11 @@ def generate_sentiment(model, datapath):
     with open(os.path.join(datapath,".\\sent_derive.csv"), 'w') as file:
         file.write("rowid,bank,sentiment\n")
     history = [{"role": "system", "content": sent_prompt}]
-    for index, row in subset.iterrows():
+    for index, row in reviews_data.iterrows():
         #row = ssi.iloc[i]
         print(row.to_string())
         history.append({"role":"user","content":row.to_string()})
-        with open('dest1.txt', 'w') as log_file:
-        print('hello world', file=log_file)
+        
         completion = model.create_chat_completion(
             messages=history,
             temperature=0.7,
@@ -50,7 +49,7 @@ def generate_sentiment(model, datapath):
         )
         answer = json.loads(completion['choices'][0]['message']['content'])["Sentiment"]
         with open(os.path.join(datapath,".\\sent_derive.csv"), 'a') as file:
-            file.write(f"{row['rowid']}, {row['bank']}, {answer}\n")
+            file.write(f"{row['rowid']},{row['bank']},{answer}\n")
         history.pop()
     return 1
 

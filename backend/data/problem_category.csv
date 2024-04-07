@@ -1,4 +1,4 @@
-rowid,bank,review,problem_category,summary
+rowid,bank,problem_category,summary
 0,GXS,app,"Attractive interest rate praise"
 1,GXS,banking,"Raves about bank"
 2,GXS,banking,"Customer upset about interest rate drop"

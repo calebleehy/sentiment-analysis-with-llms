@@ -193,8 +193,8 @@ def generate_issue_tagging(model, datapath, issue_list, service, df):
     return 1
 
 def main():
-    abscurrentpath = os.path.dirname(os.path.abspath(__file__)) # lives in backend\generation
-    absdatapath=os.path.normpath(os.path.join(abscurrentpath, '..\\data'))
+    here = os.path.dirname(os.path.abspath(__file__)) # lives in backend\generation
+    absdatapath=os.path.normpath(os.path.join(here, '..\\data'))
     
     ## loading, shaping data:
     final_data = pd.read_csv(absdatapath+'/final_data.csv')
@@ -247,21 +247,21 @@ def main():
     # llm, issue_gen_message = build_gen_message(banking)
     # bank_issues = generate_issues(llm, issue_gen_message, absdatapath)
     # print(bank_issues)
-    llm, issue_gen_message = build_gen_message(app) # final token count was right on the edge of what my RAM/VRAM could allow, about 30 000
-    app_issues = generate_issues(llm, issue_gen_message, absdatapath)
-    print(app_issues)
+    # llm, issue_gen_message = build_gen_message(app) # final token count was right on the edge of what my RAM/VRAM could allow, about 30 000
+    # app_issues = generate_issues(llm, issue_gen_message, absdatapath)
+    # print(app_issues)
     llm = Llama(
         model_path=os.path.normpath(os.path.join(abscurrentpath, '..\\model\\mistral-7b-instruct-v0.2.Q5_K_M.gguf')),
         n_gpu_layers=-1, # Uncomment to use GPU acceleration
         # seed=1337, # Uncomment to set a specific seed
-        n_ctx=512, # Uncomment to increase the context window
+        n_ctx=1500, # Uncomment to increase the context window
         chat_format="chatml",
         # use_mlock=True,
         # n_threads_batch=64,
         # n_batch=256,
     )
     print(generate_issue_tagging(llm, absdatapath, ['Account issues (e.g., account locking, difficulty opening accounts, application rejection)', 'Technical issues (e.g., login problems, app malfunction, incorrect information)', 'Interest rate concerns (e.g., decrease, dissatisfaction)', 'Transaction issues (e.g., delayed, failed, fraudulent)', 'Long waiting times (e.g., approval, resolution, onboarding)'], "banking",banking))
-    print(generate_issue_tagging(llm, absdatapath, app_issues, "app",app))
+    print(generate_issue_tagging(llm, absdatapath, ['Difficulty applying credit card, savings account', 'Login issues', 'Technical difficulties during registration and setup', 'User interface and design issues', 'Lack of expected features or functionality'], "app",app))
 
 if __name__=="__main__": 
     main() 

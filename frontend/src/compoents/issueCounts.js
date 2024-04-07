@@ -1,24 +1,29 @@
 import React, {useState, useEffect} from 'react';
 import Plot from 'react-plotly.js';
-import { getReviewData } from '../api/reviewData';
+import { getReviewData } from '../api/getData';
 
 const IssueCountsPlot = () => {
     //store review data into data
     const [data, setData] = useState([]);
     //fetch review data by getReviewData method
-    const fetchData = async() => {
-    try{
-        const data = await getReviewData();
-        const content = data.reviewData;
-        setData(content);
-
-      } catch (error){
-
-      };
-    };
-    //load data everytime
-    useEffect(() => {fetchData();}, []);
     
+    //load data everytime
+    useEffect(() => {
+      const fetchData = async() => {
+        try{
+            const data = await getReviewData();
+            const content = data.reviewData;
+            setData(content);
+    
+          } catch (error){
+    
+          };
+        };
+
+      fetchData();
+
+    }, []);
+    console.log(data);
     const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
     const issueTypeCount = gxs.reduce((acc, gxs) => { //gets frequency of each issue
     const issue = gxs.issue;

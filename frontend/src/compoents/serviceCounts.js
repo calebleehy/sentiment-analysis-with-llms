@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Plot from 'react-plotly.js';
-import { getReviewData } from '../api/reviewData';
+import { getReviewData } from '../api/getData';
 
 const ServiceCountsPlot = () => {
   

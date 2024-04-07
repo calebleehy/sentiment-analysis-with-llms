@@ -2,9 +2,29 @@ import React,{ useState, useEffect} from "react";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
 import Plot from 'react-plotly.js';
-import data from '../data.json'
+import { getReviewData } from "../api/getData";
 
 const DetailedPage = () => {
+  //store review data into data
+  const [data, setData] = useState([0]);
+  //fetch review data by getReviewData method
+  
+  //load data everytime
+  useEffect(() => {
+    const fetchData = async() => {
+      try{
+          const data = await getReviewData();
+          const content = data.reviewData;
+          setData(content);
+  
+        } catch (error){
+  
+        };
+      };
+
+    fetchData();
+
+  }, []);
   const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
   const [filters, setFilters] = useState({});
   const [filteredData, setFilteredData] = useState(data);

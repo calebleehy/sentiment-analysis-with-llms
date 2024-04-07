@@ -3,6 +3,7 @@ import Navigation from "../compoents/navigation";
 import { useEffect, useState } from "react";
 import { getMessage } from "../api/message";
 import '../styles/App.css';
+import GXSTable from "../compoents/gxsTable";
 
 
 const HomePage = () => {

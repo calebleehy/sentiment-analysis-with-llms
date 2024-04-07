@@ -2,7 +2,7 @@ import React,{ useState, useEffect} from "react";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
 import Plot from 'react-plotly.js';
-import data from '../data.json'
+import data from '../full.json'
 
 const DetailedPage = () => {
   const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data

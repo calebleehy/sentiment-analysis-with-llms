@@ -1,31 +1,25 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
-import data from '../full.json';
+import data from '../month_nps.json';
 
-const IssueCountsPlot = () => {
-    const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
-    const issueTypeCount = gxs.reduce((acc, gxs) => { //gets frequency of each issue
-    const issue = gxs.issue;
-    acc[issue] = (acc[issue] || 0) + 1;
-      return acc;
-    }, {});
-    const issueTypes = Object.keys(issueTypeCount); 
-    const issueCounts = Object.values(issueTypeCount);
-  const data2=[
+const BankNPSPlot = () => {
+  const month = data.map(data => data.month);
+  const nps = data.map(data => data.nps);
+  const data2= [
     {
-      x: issueTypes,
-      y: issueCounts,
-      type: 'bar',
-      orientation:'v',
-      marker: {
-      color: 'purple' 
+      x: month,
+      y: nps,
+      type: 'scatter',
+      line: {
+        color: 'rgb(140, 81, 201)',
+        width: 2
+      }
     }
-  }
 ];
 const layout={
   width: 500, height: 350,
   title: {
-    text:'Frequency of Issue',
+    text:'GXS Bank NPS Score over Time',
     font: {
       color: 'white', // Set title text color to white
     },
@@ -35,7 +29,7 @@ const layout={
   xaxis: {
     color: 'white',
     title: {
-      text: 'Issue',
+      text: 'Month-Year',
       font: {
         color: 'white', // Set x-axis text color to white
       },
@@ -46,7 +40,7 @@ const layout={
   },
   yaxis: {
     title: {
-      text: 'Count',
+      text: 'NPS Score',
       font: {
         color: 'white', // Set y-axis text color to white
       },
@@ -65,4 +59,4 @@ return (
   );
 };
 
-export default IssueCountsPlot;
+export default BankNPSPlot;

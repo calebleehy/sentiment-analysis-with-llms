@@ -2,7 +2,6 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
-import data from '../data.json'
 
 const AboutPage = () => {
     return (
@@ -20,7 +19,7 @@ const AboutPage = () => {
 
             <Container className="Container ">
                 <h2>
-                    Memebers
+                    Members
                 </h2>
 
                 <p className="px-3">

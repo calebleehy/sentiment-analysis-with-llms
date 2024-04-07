@@ -1,6 +1,6 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
-import data from '../data.json';
+import data from '../full.json';
 
 const ServiceCountsPlot = () => {
   const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data

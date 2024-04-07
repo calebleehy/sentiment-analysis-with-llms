@@ -1,11 +1,12 @@
 import React from "react";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
-import Plot from 'react-plotly.js';
-import data from '../data.json';
+import data from '../full.json';
 import ServiceCountsPlot from '../compoents/serviceCounts';
 import IssueCountsPlot from '../compoents/issueCounts';
-import NPSScorePlotPlot from '../compoents/npsScore';
+import NPSScorePlot from '../compoents/npsScore';
+import BankNPSPlot from '../compoents/bankNPS';
+import TopRecommendationsPlot from "../compoents/topRecommendations";
 
 const DashBoardPage = () => {
   return (
@@ -14,14 +15,18 @@ const DashBoardPage = () => {
       <h1>What are the most impactful areas to be addressed?</h1>
       <div className="dashboard">
         <div className = "row">
-        <NPSScorePlotPlot />
+        <NPSScorePlot />
+        <div style={{ marginTop: '50px' }}>
+        <ServiceCountsPlot />
+        </div>   
         </div>      
           <div className = "row">
-          <ServiceCountsPlot />
-          </div>
-          <div className = "row">
-          <IssueCountsPlot />
-          </div>       
+          <BankNPSPlot />
+          <IssueCountsPlot />     
+        </div>
+      </div>
+      <div classname = "row">
+          <TopRecommendationsPlot />
         </div>
       </div>
   );     

@@ -1,0 +1,47 @@
+[
+    {
+        "bank": "GXS",
+        "issue": "B3",
+        "frequency (%)": 29.5
+    },
+    {
+        "bank": "GXS",
+        "issue": "B1",
+        "frequency (%)": 29.5
+    },
+    {
+        "bank": "GXS",
+        "issue": "B2",
+        "frequency (%)": 41.0
+    },
+    {
+        "bank": "Trust",
+        "issue": "B3",
+        "frequency (%)": 39.6
+    },
+    {
+        "bank": "Trust",
+        "issue": "B1",
+        "frequency (%)": 27.4
+    },
+    {
+        "bank": "Trust",
+        "issue": "B2",
+        "frequency (%)": 32.9
+    },
+    {
+        "bank": "MariBank",
+        "issue": "B3",
+        "frequency (%)": 14.3
+    },
+    {
+        "bank": "MariBank",
+        "issue": "B1",
+        "frequency (%)": 42.9
+    },
+    {
+        "bank": "MariBank",
+        "issue": "B2",
+        "frequency (%)": 42.9
+    }
+]

@@ -3,7 +3,6 @@ import Navigation from "../compoents/navigation";
 import { useEffect, useState } from "react";
 import { getMessage } from "../api/message";
 import '../styles/App.css';
-import GXSTable from "../compoents/gxsTable";
 
 
 const HomePage = () => {
@@ -29,7 +28,6 @@ const HomePage = () => {
             <Navigation />
             <h1>HomePage</h1>
             <p>{message}</p>
-
         </div>
     );
 }

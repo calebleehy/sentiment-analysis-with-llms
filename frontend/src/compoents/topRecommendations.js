@@ -18,7 +18,7 @@ const TopRecommendationsPlot = () => {
           values: columns.map(column => column.title),
           align: ['center'],
           line: { width: 1, color: 'black' },
-          fill: { color: 'grey' },
+          fill: { color: 'purple' },
           font: { family: 'Arial', size: 12, color: 'white' }
         },
         cells: {

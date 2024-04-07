@@ -17,7 +17,7 @@ const BankNPSPlot = () => {
     }
 ];
 const layout={
-  width: 500, height: 350,
+  width: 750, height: 400,
   title: {
     text:'GXS Bank NPS Score over Time',
     font: {

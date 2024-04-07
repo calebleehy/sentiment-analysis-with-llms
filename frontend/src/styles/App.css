@@ -4,11 +4,11 @@ body {
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 2.5rem;
   letter-spacing: 1.2px;
   background: linear-gradient(40deg,
       rgb(166, 2, 247) 0%,
-      rgba(72, 7, 253, 0) 100%);
+      rgba(184, 105, 227, 0.717) 100%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
   display: flex;
@@ -17,4 +17,8 @@ h1 {
 
 .app {
   padding: 4rem;
+}
+.dashboard {
+  display: flex;
+  justify-content: center;
 }

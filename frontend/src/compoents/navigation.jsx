@@ -18,10 +18,8 @@ const Navigation = () => {
                             <Nav.Item className="dropdown">
                                 <Nav.Link className="dropdown-toggle" href="/dashboard" role="button" data-bs-toggle="dropdown" aria-expanded="false">service</Nav.Link>
                                 <ul className="dropdown-menu bg-light w-25">
-                                    <li> <a className="dropdown-item text-dark" href="/dashboard">NPS</a></li>
-                                    <li><a className="dropdown-item text-dark" href="/statistics">Sample Statistics</a></li>
-                                    <li><a className="dropdown-item text-dark" href="/comparisons" >Bank Comparisions</a></li>
-                                    <li><a className="dropdown-item text-dark" href="/recommendation">Recommendations</a></li>
+                                    <li> <a className="dropdown-item text-dark" href="/dashboard">GXS</a></li>
+                                    <li><a className="dropdown-item text-dark" href="/comparisons">Bank Comparisions</a></li>
                                     <li><a className="dropdown-item text-dark" href="/detailed">Detailed</a></li>
                                 </ul>
                             </Nav.Item>

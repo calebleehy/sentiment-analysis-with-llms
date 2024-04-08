@@ -3,6 +3,7 @@ import Navigation from "../compoents/navigation";
 import '../styles/App.css';
 import Plot from 'react-plotly.js';
 import { getReviewData } from "../api/getData";
+import DetailedTable from "../compoents/detailedTable";
 
 const DetailedPage = () => {
   //store review data into data

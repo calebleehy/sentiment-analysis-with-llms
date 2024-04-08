@@ -3,8 +3,9 @@ import Plot from 'react-plotly.js';
 import data from '../serv_issue_rec.json';
 
 const TopRecommendationsPlot = () => {
-  const columns = Object.keys(data[0]).map(name => ({ name, title: name.charAt(0).toUpperCase() + name.slice(1) }));
-  const rows = data.map((item, index) => ({
+  const firstTwoEntries = data.slice(0, 2);
+  const columns = Object.keys(firstTwoEntries[0]).map(name => ({ name, title: name.charAt(0).toUpperCase() + name.slice(1) }));
+  const rows = firstTwoEntries.map((item, index) => ({
     id: index,
     ...item,
 }));
@@ -33,7 +34,7 @@ const TopRecommendationsPlot = () => {
     ]}
     layout={{
       width: 600,
-      height: 400,
+      height: 250,
       plot_bgcolor: 'black',
       paper_bgcolor: 'black',
       font: { color: 'white' },

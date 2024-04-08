@@ -1,4 +1,4 @@
-import React,{ useState, useEffect} from 'react';
+import React from 'react';
 import Plot from 'react-plotly.js';
 import data from '../bank_nps.json';
 
@@ -19,7 +19,7 @@ const NPSScoreByBankPlot = () => {
   const layout={
     width: 400, height: 300,
     title: {
-      text:'NPS Score by Bank',
+      text:'NPS by Bank',
       font: {
         color: 'white', // Set title text color to white
       },

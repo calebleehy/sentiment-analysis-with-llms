@@ -40,7 +40,7 @@ const BankNPSPlot = () => {
 const layout={
   width: 750, height: 400,
   title: {
-    text:'GXS Bank NPS Score over Time',
+    text:'GXS Bank NPS over Time',
     font: {
       color: 'white', // Set title text color to white
     },
@@ -61,7 +61,7 @@ const layout={
   },
   yaxis: {
     title: {
-      text: 'NPS Score',
+      text: 'NPS',
       font: {
         color: 'white', // Set y-axis text color to white
       },

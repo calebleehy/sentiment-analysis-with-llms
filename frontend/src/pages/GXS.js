@@ -6,6 +6,7 @@ import IssueCountsPlot from '../compoents/issueCounts';
 import NPSScorePlot from '../compoents/npsScore';
 import BankNPSPlot from '../compoents/bankNPS';
 import TopRecommendationsPlot from "../compoents/topRecommendations";
+import GaugeChart from "../compoents/gauge";
 
 const DashBoardPage = () => {
   return (
@@ -14,7 +15,10 @@ const DashBoardPage = () => {
       <h1>What are the most impactful areas to be addressed?</h1>
       <div className="dashboard">
         <div className = "row">
-        <NPSScorePlot />
+          <div style= {{ marginLeft:'50px'}}>
+          <NPSScorePlot />
+          </div>
+        
         <div style={{ marginLeft:'100px',marginTop:'100px' }}>
         <ServiceCountsPlot />
         </div>   
@@ -27,10 +31,15 @@ const DashBoardPage = () => {
           </div>     
         </div>
       </div>
-      <div classname = "row" style = {{alignItems: 'center',justifyContent: 'center',display: 'flex'}}>
-          <TopRecommendationsPlot />
+      <div className="row" style={{ display: 'flex' }}>
+          <div style={{ flex: 1}}>
+            <TopRecommendationsPlot />
+          </div>
+          <div style={{ flex: 1,marginTop: '20px' }}>
+            <GaugeChart />
+          </div>
         </div>
-      </div>
+    </div>
   );     
 }
 

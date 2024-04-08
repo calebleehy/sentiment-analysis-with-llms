@@ -6,7 +6,7 @@ const NPSScorePlot = () => {
         {
           domain: { x: [0, 1], y: [0, 1] },
           value: 60,
-          title: { text: "NPS Score",
+          title: { text: "NPS",
           font: {
             color: 'white',
           },},
@@ -16,7 +16,7 @@ const NPSScorePlot = () => {
           delta: { reference: 100 },
           gauge: {
             axis: { range: [-100, 100],tickwidth: 1, tickcolor: 'white', tickfont: { color: 'white' }},
-            bar: { color: "purple" },
+            bar: { color: 'purple' },
             bgcolor: 'black',
             bordercolor: 'white',
             

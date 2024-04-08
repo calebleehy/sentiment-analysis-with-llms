@@ -93,14 +93,14 @@ const TrustTable = () => {
               values: columns,
               align: ['center'],
               line: { width: 1, color: 'black' },
-              fill: { color: 'grey' },
+              fill: { color: 'rgb(140, 81, 201)' },
               font: { family: 'Arial', size: 12, color: 'white' }
             },
             cells: {
               values: transposedRows,
               align: ['left'],
               line: { color: 'black', width: 1 },
-              fill: { color: ['lightgrey', 'white'] },
+              fill: { color: ['white'] },
               font: { family: 'Arial', size: 11, color: ['black'] },
               height: 100 // Set cell height for each review
             }

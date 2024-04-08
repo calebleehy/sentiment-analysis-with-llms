@@ -2,6 +2,7 @@ import React,{ useState, useEffect} from "react";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
 import Plot from 'react-plotly.js';
+import DetailedTable from "../compoents/detailedTable";
 import { getReviewData } from "../api/getData";
 import DetailedTable from "../compoents/detailedTable";
 

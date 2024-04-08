@@ -1,25 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
-import data from '../bank_nps.json';
+import { getBankNpsData } from '../api/getData';
 
 const NPSScoreByBankPlot = () => {
-    const bank = data.map(data => data.bank);
-    const nps = data.map(data => data.nps);
-    const data2= [
-      {
-        x: bank,
-        y: nps,
-        type: 'bar',
-        orientation:'v',
-        marker: {
-        color: 'rgb(77, 6, 150)' 
+
+  //store review data into data
+  const [data, setData] = useState([]);
+  //fetch review data by getReviewData method
+
+  //load data everytime
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getBankNpsData();
+        const content = data.bankNpsData;
+        setData(content);
+
+      } catch (error) {
+
+      };
+    };
+
+    fetchData();
+
+  }, []);
+  const bank = data.map(data => data.bank);
+  const nps = data.map(data => data.nps);
+  const data2 = [
+    {
+      x: bank,
+      y: nps,
+      type: 'bar',
+      orientation: 'v',
+      marker: {
+        color: 'rgb(77, 6, 150)'
       }
     }
   ];
-  const layout={
+  const layout = {
     width: 400, height: 300,
     title: {
-      text:'NPS by Bank',
+      text: 'NPS Score by Bank',
       font: {
         color: 'white', // Set title text color to white
       },
@@ -53,10 +74,10 @@ const NPSScoreByBankPlot = () => {
   }
   return (
     <Plot
-    data={data2}
-    layout={layout}
+      data={data2}
+      layout={layout}
     />
-    );
-  };
-  
-  export default NPSScoreByBankPlot;
+  );
+};
+
+export default NPSScoreByBankPlot;

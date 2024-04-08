@@ -1,7 +1,6 @@
 import React from "react";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
-import data from '../full.json';
 import ServiceCountsPlot from '../compoents/serviceCounts';
 import IssueCountsPlot from '../compoents/issueCounts';
 import NPSScorePlot from '../compoents/npsScore';

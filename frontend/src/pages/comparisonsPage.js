@@ -1,4 +1,5 @@
-import React from "react";
+
+import React,{ useState, useEffect} from "react";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
 import BankComparisonServicePlot from "../compoents/bankComparisonService";
@@ -30,16 +31,16 @@ const ComparisonPage = () => {
                     <BankComparisonIssuePlot />
                     </div>
                     </div>
-                    <div classname = "table-container" style={{display: "flex",marginTop:'-90px'}}>
-                      <div classname = "table" style={{ flex: 1,marginLeft:'-30px' }}>
+                    <div className = "table-container" style={{display: "flex",marginTop:'-90px'}}>
+                      <div className = "table" style={{ flex: 1,marginLeft:'-30px' }}>
                       <p>GXS</p>
                       <GXSTable />
                       </div>   
-                      <div classname = "table" style={{ flex: 1 }}>   
+                      <div className = "table" style={{ flex: 1 }}>   
                       <p>Trust</p> 
                       <TrustTable />     
                     </div>
-                    <div classname = "table" style={{ flex: 1 }}>   
+                    <div className = "table" style={{ flex: 1 }}>   
                       <p>Maribank</p> 
                       <MaribankTable />
                       <div style={{ display: 'flex', marginTop: '20px' }}>

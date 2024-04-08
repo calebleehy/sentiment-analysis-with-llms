@@ -1,0 +1,17 @@
+[
+    {
+        "service": "C",
+        "issue": "C1",
+        "recommendation": "Improve the user experience by allowing users to easily add and save payees to the banking app to streamline transactions."
+    },
+    {
+        "service": "D",
+        "issue": "D3",
+        "recommendation": "Communicate transparently with customers about changes in interest rates to build trust and avoid negative perceptions."
+    },
+    {
+        "service": "D",
+        "issue": "D3",
+        "recommendation": " Learn from Trust Bank's efficient onboarding process to enhance customer satisfaction and retention."
+    }
+]

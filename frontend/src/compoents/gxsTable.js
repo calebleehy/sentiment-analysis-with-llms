@@ -1,9 +1,29 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Plot from 'react-plotly.js';
-import data from '../full.json';
-
+import { getReviewData } from '../api/getData';
 const GXSTable = () => {
-  const gxs = data.filter(item => item.bank === 'GXS') //filtering for only trust data
+
+  //store review data into data
+  const [data, setData] = useState([]);
+  //fetch review data by getReviewData method
+  
+  //load data everytime
+  useEffect(() => {
+    const fetchData = async() => {
+      try{
+          const data = await getReviewData();
+          const content = data.reviewData;
+          setData(content);
+  
+        } catch (error){
+  
+        };
+      };
+
+    fetchData();
+
+  }, []);
+  const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
   const columns = ["Review"];
   const [sentimentFilter, setSentimentFilter] = useState('');
   const [serviceFilter, setServiceFilter] = useState('');
@@ -23,10 +43,13 @@ const GXSTable = () => {
     return sentimentMatch && serviceMatch && issueMatch && intentMatch;
 });
   function transposeArray(array) {
+    if (!array || !Array.isArray(array) || array.length === 0) {
+      return [];
+    }
     return array[0].map((_, colIndex) => array.map(row => row[colIndex]));
   }
   const rows = filteredData.map((item) => [item.review]);
-  const transposedRows = transposeArray(rows);
+  const transposedRows = rows ? transposeArray(rows) : [];
   return (
     <div>
     <div>

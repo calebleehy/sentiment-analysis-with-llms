@@ -1,8 +1,27 @@
 import React,{ useState, useEffect} from 'react';
 import Plot from 'react-plotly.js';
-import data from '../bank_issue_freq.json';
-
+import { getBankIssueFreq } from '../api/getData';
 const BankComparisonIssuePlot = () => {
+  //store review data into data
+  const [data, setData] = useState([]);
+  //fetch review data by getReviewData method
+  
+  //load data everytime
+  useEffect(() => {
+    const fetchData = async() => {
+      try{
+          const data = await getBankIssueFreq();
+          const content = data.bankIssueFreqData;
+          setData(content);
+  
+        } catch (error){
+  
+        };
+      };
+
+    fetchData();
+
+  }, []);
   const issues = Array.from(new Set(data.map(item => item.issue)));
   const banks = Array.from(new Set(data.map(item => item.bank)));
   const bankColors = {

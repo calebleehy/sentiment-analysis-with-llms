@@ -1,8 +1,28 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Plot from 'react-plotly.js';
-import data from '../full.json';
+import { getReviewData } from '../api/getData';
 
 const MaribankTable = () => {
+  //store review data into data
+  const [data, setData] = useState([]);
+  //fetch review data by getReviewData method
+  
+  //load data everytime
+  useEffect(() => {
+    const fetchData = async() => {
+      try{
+          const data = await getReviewData();
+          const content = data.reviewData;
+          setData(content);
+  
+        } catch (error){
+  
+        };
+      };
+
+    fetchData();
+
+  }, []);
   const maribank = data.filter(item => item.bank === 'MariBank') //filtering for only maribank data
   const columns = ["Review"];
   const [sentimentFilter, setSentimentFilter] = useState('');
@@ -23,10 +43,18 @@ const MaribankTable = () => {
     return sentimentMatch && serviceMatch && issueMatch && intentMatch;
 });
   function transposeArray(array) {
+    if (!array || !Array.isArray(array) || array.length === 0) {
+      return [];
+    }
     return array[0].map((_, colIndex) => array.map(row => row[colIndex]));
   }
   const rows = filteredData.map((item) => [item.review]);
-  const transposedRows = transposeArray(rows);
+  const transposedRows = rows ? transposeArray(rows) : [];
+
+  if (!filteredData.length) {
+    return <p>No data available.</p>;
+  }
+
   return (
     <div>
     <div>

@@ -1,8 +1,25 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Plot from 'react-plotly.js';
-import data from '../full.json';
+import { getReviewData } from '../api/getData';
 
 const ServiceCountsPlot = () => {
+  
+  //store review data into data
+  const [data, setData] = useState([]);
+  //fetch review data by getReviewData method
+  const fetchData = async() => {
+    try{
+        const data = await getReviewData();
+        const content = data.reviewData;
+        setData(content);
+
+    } catch (error){
+
+    };
+  };
+  //load data everytime
+  useEffect(() => {fetchData();}, []);
+  
   const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
   const serviceTypeCount = gxs.reduce((acc, gxs) => { //gets frequency of each service
   const service = gxs.service;

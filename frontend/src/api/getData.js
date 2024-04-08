@@ -98,7 +98,7 @@ export const getMonthNps = async () => {
 
 export const getServIssueRec = async () => {
     try {
-        const response = await axios.get('http://127.0.0.1:4000/serIssueRec');
+        const response = await axios.get('http://127.0.0.1:4000/servIssueRec');
         if (response.status === 200){
             console.log(response)
             const data = response.data;

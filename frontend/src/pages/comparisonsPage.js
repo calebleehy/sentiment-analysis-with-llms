@@ -31,21 +31,23 @@ const ComparisonPage = () => {
                     <BankComparisonIssuePlot />
                     </div>
                     </div>
-                    <div className = "table-container" style={{display: "flex",marginTop:'-90px'}}>
-                      <div className = "table" style={{ flex: 1,marginLeft:'-30px' }}>
-                      <p>GXS</p>
-                      <GXSTable />
-                      </div>   
-                      <div className = "table" style={{ flex: 1 }}>   
-                      <p>Trust</p> 
-                      <TrustTable />     
-                    </div>
-                    <div className = "table" style={{ flex: 1 }}>   
-                      <p>Maribank</p> 
-                      <MaribankTable />
-                      <div style={{ display: 'flex', marginTop: '20px' }}>
-                <div style={{ flex: 1,marginLeft:'-800px',marginTop:'30px' }}>
-                <Plot
+                    <div style={{ display: 'flex', justifyContent: 'space-between',marginLeft:'-30px' }}>
+        <div style={{ flex: 1 }}>
+          <p>GXS</p>
+          <GXSTable />
+        </div>
+        <div style={{ flex: 1 }}>
+          <p>Trust</p>
+          <TrustTable />
+        </div>
+        <div style={{ flex: 1 }}>
+          <p>Maribank</p>
+          <MaribankTable />
+        </div>
+      </div>
+      <div style={{marginTop:'30px'}}>
+        <div style = {{marginRight:'50px'}}>
+      <Plot
     data={[
       {
         type: 'table',
@@ -76,16 +78,10 @@ const ComparisonPage = () => {
       margin: { l: 0, r: 0, b: 0, t: 0 } // Set margin to 0
     }}
   />
-                  
-                </div>
-                <div style={{ flex: 1, marginLeft:'150px'}}>
-                    <WhatIfNPSPlot />
-                </div>
-            </div>
-                           
-                    </div>
-                    </div>
-                    </div>
-        )}
+  <WhatIfNPSPlot />
+  </div>
+  </div>
+  </div>
+)}
 
 export default ComparisonPage;

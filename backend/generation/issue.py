@@ -5,9 +5,6 @@ from typing import Sequence
 
 from tqdm import tqdm
 
-# from modules import shared
-# from modules.cache_utils import process_llamacpp_cache
-
 try:
     import llama_cpp
 except:

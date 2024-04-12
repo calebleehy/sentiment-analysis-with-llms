@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Plot from 'react-plotly.js';
-import { getReviewData } from '../api/getData';
+//import { getReviewData } from '../api/getData';
+import data from '../full.json';
 
 const DetailedTable = () => {
    //store review data into data
-   const [data, setData] = useState([0]);
+   /* const [data, setData] = useState([0]);
    //fetch review data by getReviewData method
    
    //load data everytime
@@ -22,28 +23,25 @@ const DetailedTable = () => {
 
      fetchData();
 
-   }, []);
+   }, []); */
   const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
   const columns = Object.keys(data[0]);
   const [sentimentFilter, setSentimentFilter] = useState('');
   const [serviceFilter, setServiceFilter] = useState('');
   const [issueFilter, setIssueFilter] = useState('');
-  const [intentFilter, setIntentFilter] = useState('');
   const [ratingFilter, setRatingFilter] = useState('');
 
   const sentimentOptions = [...new Set(gxs.map(item => item.sentiment))];
   const serviceOptions = [...new Set(gxs.map(item => item.service))];
   const issueOptions = [...new Set(gxs.map(item => item.issue))];
-  const intentOptions = [...new Set(gxs.map(item => item.intent))];
   const ratingOptions = [...new Set(gxs.map(item => item.rating))];
 
   const filteredData = gxs.filter(item => {
     const sentimentMatch = sentimentFilter === '' || item.sentiment === sentimentFilter;
     const serviceMatch = serviceFilter === '' || item.service === serviceFilter;
     const issueMatch = issueFilter === '' || item.issue === issueFilter;
-    const intentMatch = intentFilter === '' || item.intent === intentFilter;
     const ratingMatch = ratingFilter === '' || item.rating === ratingFilter;
-    return sentimentMatch && serviceMatch && issueMatch && intentMatch && ratingMatch;
+    return sentimentMatch && serviceMatch && issueMatch && ratingMatch;
 });
   return (
     <div>
@@ -69,13 +67,6 @@ const DetailedTable = () => {
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
-        <label>Intent:</label>
-        <select value={intentFilter} onChange={e => setIntentFilter(e.target.value)}>
-          <option value="">All</option>
-          {intentOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
         <label>Rating:</label>
         <select value={ratingFilter} onChange={e => setRatingFilter(e.target.value)}>
           <option value="">All</option>
@@ -84,12 +75,12 @@ const DetailedTable = () => {
           ))}
         </select>
       </div>
-      <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '400px'}}>
+      <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '500px'}}>
       <Plot
         data={[
           {
             type: 'table',
-            columnwidth: [50, 50, 50,50,50,50,50,50,200],
+            columnwidth: [40, 40, 40,40,40,40,40,40,200],
             header: {
               values: columns.map((column) => column.toUpperCase()),
               align: ['center'],
@@ -109,8 +100,7 @@ const DetailedTable = () => {
           }
         ]}
         layout={{
-          width: 1200,
-          height: 5000,
+          width: 1117,
           plot_bgcolor: 'black',
           paper_bgcolor: 'black',
           font: { color: 'white' },

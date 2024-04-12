@@ -8,7 +8,7 @@ const HomePage = () => {
     return (
         <div>
             <Navigation />
-            <h1>HomePage</h1>
+            <h1>Home</h1>
 
         </div>
     );

@@ -1,11 +1,12 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
-import { getMonthNps } from '../api/getData';
+//import { getMonthNps } from '../api/getData';
 import { useEffect, useState } from 'react';
+import data from '../month_nps.json';
 
 const BankNPSPlot = () => {
   //store review data into data
-  const [data, setData] = useState([]);
+  /* const [data, setData] = useState([]);
   //fetch review data by getReviewData method
   
   //load data everytime
@@ -23,9 +24,11 @@ const BankNPSPlot = () => {
 
     fetchData();
 
-  }, []);
+  }, []); */
   const month = data.map(data => data.month);
   const nps = data.map(data => data.nps);
+  var sum = nps.reduce((acc, val) => acc + val, 0);
+  var average = sum / nps.length;
   const data2= [
     {
       x: month,
@@ -34,11 +37,23 @@ const BankNPSPlot = () => {
       line: {
         color: 'rgb(140, 81, 201)',
         width: 2
+      },
+      name: 'NPS',
+    },
+    {
+      x: month,
+      y: Array(month.length).fill(average),
+      type: 'scatter',
+      mode: 'lines',
+      name: 'Average',
+      line: {
+        dash: 'dash'
       }
     }
 ];
+
 const layout={
-  width: 750, height: 400,
+  width: 700, height: 400,
   title: {
     text:'GXS Bank NPS over Time',
     font: {

@@ -22,3 +22,10 @@ h1 {
   display: flex;
   justify-content: center;
 }
+.plot-container {
+  width: 100%; /* Fill the entire width of the viewport */
+  height: 100%; /* Fill the entire height of the viewport */
+  display: flex; /* Use flexbox for easy alignment */
+  justify-content: center; /* Center the plots horizontally */
+  align-items: center; /* Center the plots vertically */
+}

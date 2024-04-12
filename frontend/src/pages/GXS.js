@@ -35,7 +35,7 @@ const DashBoardPage = () => {
           <div style={{ flex: 1}}>
             <TopRecommendationsPlot />
           </div>
-          <div style={{ flex: 1,marginTop: '20px' }}>
+          <div style={{ flex: 1}}>
             <GaugeChart />
           </div>
         </div>

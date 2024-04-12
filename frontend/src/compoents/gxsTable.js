@@ -1,10 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Plot from 'react-plotly.js';
-import { getReviewData } from '../api/getData';
+//import { getReviewData } from '../api/getData';
+import data from '../full.json';
+
 const GXSTable = () => {
 
   //store review data into data
-  const [data, setData] = useState([]);
+  /* const [data, setData] = useState([]);
   //fetch review data by getReviewData method
   
   //load data everytime
@@ -22,25 +24,22 @@ const GXSTable = () => {
 
     fetchData();
 
-  }, []);
+  }, []); */
   const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
   const columns = ["Review"];
   const [sentimentFilter, setSentimentFilter] = useState('');
   const [serviceFilter, setServiceFilter] = useState('');
   const [issueFilter, setIssueFilter] = useState('');
-  const [intentFilter, setIntentFilter] = useState('');
 
   const sentimentOptions = [...new Set(gxs.map(item => item.sentiment))];
   const serviceOptions = [...new Set(gxs.map(item => item.service))];
   const issueOptions = [...new Set(gxs.map(item => item.issue))];
-  const intentOptions = [...new Set(gxs.map(item => item.intent))];
 
   const filteredData = gxs.filter(item => {
     const sentimentMatch = sentimentFilter === '' || item.sentiment === sentimentFilter;
     const serviceMatch = serviceFilter === '' || item.service === serviceFilter;
     const issueMatch = issueFilter === '' || item.issue === issueFilter;
-    const intentMatch = intentFilter === '' || item.intent === intentFilter;
-    return sentimentMatch && serviceMatch && issueMatch && intentMatch;
+    return sentimentMatch && serviceMatch && issueMatch;
 });
   function transposeArray(array) {
     if (!array || !Array.isArray(array) || array.length === 0) {
@@ -74,15 +73,6 @@ const GXSTable = () => {
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
-        <div>
-        <label>Intent:</label>
-        <select value={intentFilter} onChange={e => setIntentFilter(e.target.value)}>
-          <option value="">All</option>
-          {intentOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
-        </div>
       </div>
       <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '400px'}}>
       <Plot
@@ -107,7 +97,7 @@ const GXSTable = () => {
           }
         ]}
         layout={{
-          width: 400,
+          width: 500,
           height: 300,
           plot_bgcolor: 'black',
           paper_bgcolor: 'black',

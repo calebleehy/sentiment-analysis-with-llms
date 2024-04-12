@@ -3,16 +3,16 @@ import Plot from 'react-plotly.js';
 import data from '../whatif_bank_nps.json';
 
 const WhatIfNPSPlot = () => {
-    const bank = data.map(data => data.bank);
+    const banks = data.map(data => data.bank);
     const nps = data.map(data => data.nps);
     const data2=[
     {
-      x: bank,
+      x: banks,
       y: nps,
       type: 'bar',
       orientation:'v',
       marker: {
-      color: 'rgb(140, 81, 201)' 
+      color: banks.map(bank => bank === 'GXS' ? 'rgb(77, 6, 150)' : 'rgb(213, 166, 237)')
     }
   }
 ];

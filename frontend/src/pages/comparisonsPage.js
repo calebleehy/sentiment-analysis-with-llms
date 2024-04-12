@@ -1,5 +1,5 @@
 
-import React,{ useState, useEffect} from "react";
+import React from "react";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
 import BankComparisonServicePlot from "../compoents/bankComparisonService";
@@ -7,7 +7,6 @@ import NPSScoreByBankPlot from "../compoents/npsScoreByBank";
 import BankComparisonIssuePlot from "../compoents/bankComparisonbyIssue";
 import GXSTable from "../compoents/gxsTable";
 import TrustTable from "../compoents/trustTable";
-import MaribankTable from "../compoents/mariBankTable";
 import WhatIfNPSPlot from "../compoents/whatIfBankNPS";
 import data from "../serv_issue_rec.json";
 import Plot from 'react-plotly.js';
@@ -19,20 +18,20 @@ const ComparisonPage = () => {
     return (
         <div>
             <Navigation/>
-            <h1>How does GXS stand against Trust and Maribank?</h1>
+            <h1>How does GXS stand against Trust?</h1>
             <div style={{ display: 'flex' }}>
               <div style={{ flex: 1,marginTop: '50px',marginLeft:'-30px' }}>
                 <NPSScoreByBankPlot />
                 </div>
-                <div style={{ flex: 1, marginTop: '-90px'}}>
+                <div style={{ flex: 1,marginTop: '-90px'}}>
                   <BankComparisonServicePlot />
                   </div>
                   <div style={{ flex: 1, marginTop: '-90px'}}>
                     <BankComparisonIssuePlot />
                     </div>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between',marginLeft:'-30px' }}>
-        <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between',marginLeft:'-30px',marginTop:'-50px'}}>
+        <div style={{ flex: 1,marginLeft:'70px' }}>
           <p>GXS</p>
           <GXSTable />
         </div>
@@ -40,12 +39,8 @@ const ComparisonPage = () => {
           <p>Trust</p>
           <TrustTable />
         </div>
-        <div style={{ flex: 1 }}>
-          <p>Maribank</p>
-          <MaribankTable />
-        </div>
       </div>
-      <div style={{marginTop:'30px'}}>
+      <div style={{marginTop:'10px'}}>
         <div style = {{marginRight:'50px'}}>
       <Plot
     data={[

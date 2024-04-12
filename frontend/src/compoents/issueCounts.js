@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Plot from 'react-plotly.js';
-import { getReviewData } from '../api/getData';
+import data from '../full.json';
+//import { getReviewData } from '../api/getData';
 
 const IssueCountsPlot = () => {
     //store review data into data
-    const [data, setData] = useState([]);
+    /* const [data, setData] = useState([]);
     //fetch review data by getReviewData method
     
     //load data everytime
@@ -23,30 +24,45 @@ const IssueCountsPlot = () => {
       fetchData();
 
     }, []);
-    console.log(data);
-    const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
-    const issueTypeCount = gxs.reduce((acc, gxs) => { //gets frequency of each issue
-    const issue = gxs.issue;
-    acc[issue] = (acc[issue] || 0) + 1;
-      return acc;
+    console.log(data); */
+    const [selectedService, setSelectedService] = useState("");
+    const gxs = data.filter(item => item.sentiment === "Negative" && item.bank === 'GXS' ) //filtering for only GXS and negative sentiment
+    const serviceCounts = gxs.reduce((acc, gxs) => { //gets frequency of each service
+      const service = gxs.service;
+      acc[service] = (acc[service] || 0) + 1;
+        return acc;
+      }, {});
+    var topServices = Object.keys(serviceCounts) //gets top 2 most common service
+                .sort(function(a, b) { return serviceCounts[b] - serviceCounts[a]; })
+                .slice(0, 2);
+    const filteredData = selectedService
+      ? gxs.filter(item => item.service === selectedService)
+      : gxs;
+    const issueCounts = filteredData.reduce((freq, item) => {
+      freq[item.issue] = (freq[item.issue] || 0) + 1;
+      return freq;
     }, {});
-    const issueTypes = Object.keys(issueTypeCount); 
-    const issueCounts = Object.values(issueTypeCount);
-  const data2=[
-    {
-      x: issueTypes,
-      y: issueCounts,
+    var topIssues = Object.keys(issueCounts) //gets the top 3 most common issues
+            .sort(function(a, b) { return issueCounts[b] - issueCounts[a]; })
+            .slice(0, 3);
+    const handleSelectChange = (e) => {
+      setSelectedService(e.target.value);
+    };
+    const data2 = topServices.map(service => ({
+      x: topIssues.map(issue => issueCounts[issue] || 0),
+      y: topIssues,
       type: 'bar',
-      orientation:'v',
+      name: service,
+      orientation:'h',
       marker: {
-      color: 'purple' 
-    }
-  }
-];
+        color: 'purple' 
+      },
+      showlegend: false,
+    }));
 const layout={
   width: 500, height: 350,
   title: {
-    text:'Frequency of Issue',
+    text:'Top 3 Most Frequent Issues based <br> on the 2 Most Frequent Services' ,
     font: {
       color: 'white', // Set title text color to white
     },
@@ -56,7 +72,7 @@ const layout={
   xaxis: {
     color: 'white',
     title: {
-      text: 'Issue',
+      text: 'Count',
       font: {
         color: 'white', // Set x-axis text color to white
       },
@@ -67,7 +83,7 @@ const layout={
   },
   yaxis: {
     title: {
-      text: 'Count',
+      text: 'Issue',
       font: {
         color: 'white', // Set y-axis text color to white
       },
@@ -75,14 +91,24 @@ const layout={
     tickfont: {
       color: 'white', // Set y-axis tick text color to white
     },
-    color: 'white',
+    color: 'white'
   },
 }
 return (
+  <div>
+    <div>
+    <select onChange={handleSelectChange}>
+        <option value="">All Services</option>
+          {topServices.map(service => (
+            <option key={service} value={service}>{service}</option>
+      ))}
+      </select>
+    </div>
   <Plot
   data={data2}
   layout={layout}
   />
+  </div>
   );
 };
 

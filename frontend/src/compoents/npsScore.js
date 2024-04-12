@@ -1,11 +1,13 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
+import data from '../bank_nps.json';
 
 const NPSScorePlot = () => {
-    const data2 =[
+  const gxs = data.find(item => item.bank === 'GXS');
+  const data2 =[
         {
           domain: { x: [0, 1], y: [0, 1] },
-          value: 60,
+          value: gxs ? gxs.nps : 0,
           title: { text: "NPS",
           font: {
             color: 'white',
@@ -16,7 +18,7 @@ const NPSScorePlot = () => {
           delta: { reference: 100 },
           gauge: {
             axis: { range: [-100, 100],tickwidth: 1, tickcolor: 'white', tickfont: { color: 'white' }},
-            bar: { color: 'purple' },
+            bar: { color: 'rgb(140, 81, 201)' },
             bgcolor: 'black',
             bordercolor: 'white',
             

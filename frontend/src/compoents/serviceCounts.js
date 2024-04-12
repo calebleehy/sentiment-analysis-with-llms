@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Plot from 'react-plotly.js';
-import { getReviewData } from '../api/getData';
+import data from '../full.json';
+//import { getReviewData } from '../api/getData';
 
 const ServiceCountsPlot = () => {
   
   //store review data into data
-  const [data, setData] = useState([]);
+  /* const [data, setData] = useState([]);
   //fetch review data by getReviewData method
   const fetchData = async() => {
     try{
@@ -18,22 +19,23 @@ const ServiceCountsPlot = () => {
     };
   };
   //load data everytime
-  useEffect(() => {fetchData();}, []);
+  useEffect(() => {fetchData();}, []); */
   
-  const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
-  const serviceTypeCount = gxs.reduce((acc, gxs) => { //gets frequency of each service
+  const gxs = data.filter(item => item.sentiment === "Negative" && item.bank === 'GXS') //filtering for only GXS and negative sentiment
+  const serviceCounts = gxs.reduce((acc, gxs) => { //gets frequency of each service
   const service = gxs.service;
   acc[service] = (acc[service] || 0) + 1;
     return acc;
   }, {});
-  const serviceTypes = Object.keys(serviceTypeCount); 
-  const serviceCounts = Object.values(serviceTypeCount);
+  var topServices = Object.keys(serviceCounts) //gets top 2 most common service
+            .sort(function(a, b) { return serviceCounts[b] - serviceCounts[a]; })
+            .slice(0, 2);
   const data2=[
     {
-      x: serviceTypes,
-      y: serviceCounts,
+      x: topServices.map(service => serviceCounts[service]),
+      y: topServices,
       type: 'bar',
-      orientation:'v',
+      orientation:'h',
       marker: {
       color: 'purple' 
     }
@@ -42,16 +44,16 @@ const ServiceCountsPlot = () => {
 const layout={
   width: 500, height: 350,
   title: {
-    text:'Frequency of Service',
+    text:'Top 2 Most Frequent Services from Reviews',
     font: {
-      color: 'white', // Set title text color to white
+      color: 'white', // Set title text color to white,
     },
   },
   plot_bgcolor: 'black', // Set plot background color to black
   paper_bgcolor: 'black', // Set paper background color to black,
   xaxis: {
     title: {
-      text: 'Service',
+      text: 'Count',
       font: {
         color: 'white', // Set x-axis text color to white
       },
@@ -64,7 +66,7 @@ const layout={
   yaxis: {
     color: 'white',
     title: {
-      text: 'Count',
+      text: 'Service',
       font: {
         color: 'white', // Set y-axis text color to white
       },

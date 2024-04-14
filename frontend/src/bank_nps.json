@@ -1,14 +1,10 @@
 [
     {
         "bank": "GXS",
-        "nps": 3.0
+        "nps": -10.6
     },
     {
         "bank": "Trust",
-        "nps": -5.3
-    },
-    {
-        "bank": "MariBank",
-        "nps": 9.5
+        "nps": -12.1
     }
 ]

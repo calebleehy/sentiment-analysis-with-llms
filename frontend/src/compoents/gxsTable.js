@@ -52,27 +52,29 @@ const GXSTable = () => {
   return (
     <div>
     <div>
-        <label>Sentiment:</label>
-        <select value={sentimentFilter} onChange={e => setSentimentFilter(e.target.value)}>
+        <label style = {{marginRight: '5px'}}>Sentiment:</label>
+        <select value={sentimentFilter} onChange={e => setSentimentFilter(e.target.value)} style={{ width: '150px' }}>
           <option value="">All</option>
           {sentimentOptions.map(option => (
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
-        <label>Service:</label>
-        <select value={serviceFilter} onChange={e => setServiceFilter(e.target.value)}>
+        <label style = {{marginRight: '5px', marginLeft: '5px'}}>Service:</label>
+        <select value={serviceFilter} onChange={e => setServiceFilter(e.target.value)} style={{ width: '150px' }}>
           <option value="">All</option>
           {serviceOptions.map(option => (
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
-        <label>Issue:</label>
-        <select value={issueFilter} onChange={e => setIssueFilter(e.target.value)}>
+        <div>
+        <label style = {{marginRight: '5px'}}>Issue:</label>
+        <select value={issueFilter} onChange={e => setIssueFilter(e.target.value)} style={{ width: '150px' }}>
           <option value="">All</option>
           {issueOptions.map(option => (
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
+        </div>
       </div>
       <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '400px'}}>
       <Plot

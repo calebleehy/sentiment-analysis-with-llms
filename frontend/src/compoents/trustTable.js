@@ -51,28 +51,29 @@ const TrustTable = () => {
   return (
     <div>
     <div>
-        <label>Sentiment:</label>
-        <select value={sentimentFilter} onChange={e => setSentimentFilter(e.target.value)}>
+        <label style = {{marginRight: '5px'}}>Sentiment:</label>
+        <select value={sentimentFilter} onChange={e => setSentimentFilter(e.target.value)} style={{ width: '150px' }}>
           <option value="">All</option>
           {sentimentOptions.map(option => (
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
-        <label>Service:</label>
-        <select value={serviceFilter} onChange={e => setServiceFilter(e.target.value)}>
+        <label style = {{marginRight: '5px', marginLeft: '5px'}}>Service:</label>
+        <select value={serviceFilter} onChange={e => setServiceFilter(e.target.value)} style={{ width: '150px' }}>
           <option value="">All</option>
           {serviceOptions.map(option => (
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
-        <label>Issue:</label>
-        <select value={issueFilter} onChange={e => setIssueFilter(e.target.value)}>
+        <div>
+        <label style = {{marginRight: '5px'}}>Issue:</label>
+        <select value={issueFilter} onChange={e => setIssueFilter(e.target.value)} style={{ width: '150px' }}>
           <option value="">All</option>
           {issueOptions.map(option => (
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
-
+        </div>
       </div>
       <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '400px'}}>
       <Plot
@@ -102,7 +103,7 @@ const TrustTable = () => {
           plot_bgcolor: 'black',
           paper_bgcolor: 'black',
           font: { color: 'white' },
-          margin: { l: 0, r: 0, b: 0, t: 0 } // Set margin to 0
+          margin: { l: 0, r: 0, b: 0, t: 0,pad: 0 } // Set margin to 0
         }}
       />
       </div>

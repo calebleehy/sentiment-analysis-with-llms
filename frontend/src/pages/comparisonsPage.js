@@ -31,11 +31,11 @@ const ComparisonPage = () => {
                     </div>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between',marginLeft:'-30px',marginTop:'-50px'}}>
-        <div style={{ flex: 1,marginLeft:'70px' }}>
+        <div style={{ flex: 1,marginLeft:'70px',marginTop:'-50px' }}>
           <p>GXS</p>
           <GXSTable />
         </div>
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, marginTop:'-50px'}}>
           <p>Trust</p>
           <TrustTable />
         </div>

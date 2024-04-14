@@ -38,7 +38,7 @@ const IssueCountsPlot = () => {
     const filteredData = selectedService
       ? gxs.filter(item => item.service === selectedService)
       : gxs;
-    const issueCounts = filteredData.reduce((freq, item) => {
+    const issueCounts = filteredData.reduce((freq, item) => { //get frequency of issues
       freq[item.issue] = (freq[item.issue] || 0) + 1;
       return freq;
     }, {});
@@ -48,11 +48,11 @@ const IssueCountsPlot = () => {
     const handleSelectChange = (e) => {
       setSelectedService(e.target.value);
     };
-    const data2 = topServices.map(service => ({
-      x: topIssues.map(issue => issueCounts[issue] || 0),
-      y: topIssues,
+    const data2 = topIssues.map(issue => ({
+      x: [issueCounts[issue] || 0],
+      y: [issue],
       type: 'bar',
-      name: service,
+      name: issue,
       orientation:'h',
       marker: {
         color: 'purple' 
@@ -82,8 +82,8 @@ const layout={
     },
   },
   yaxis: {
+    automargin: true, 
     title: {
-      text: 'Issue',
       font: {
         color: 'white', // Set y-axis text color to white
       },
@@ -98,7 +98,7 @@ return (
   <div>
     <div>
     <select onChange={handleSelectChange}>
-        <option value="">All Services</option>
+        <option value="">Top 2 Services</option>
           {topServices.map(service => (
             <option key={service} value={service}>{service}</option>
       ))}

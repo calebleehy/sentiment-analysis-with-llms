@@ -25,7 +25,7 @@ const DetailedTable = () => {
 
    }, []); */
   const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
-  const columns = Object.keys(data[0]);
+  const columns = ["Review","Service","Issue","Rating","Sentiment"];
   const [sentimentFilter, setSentimentFilter] = useState('');
   const [serviceFilter, setServiceFilter] = useState('');
   const [issueFilter, setIssueFilter] = useState('');
@@ -46,29 +46,29 @@ const DetailedTable = () => {
   return (
     <div>
     <div>
-        <label>Sentiment:</label>
-        <select value={sentimentFilter} onChange={e => setSentimentFilter(e.target.value)}>
+        <label style={{marginRight:'5px'}}>Sentiment:</label>
+        <select value={sentimentFilter} onChange={e => setSentimentFilter(e.target.value)} style={{ width: '150px' }}>
           <option value="">All</option>
           {sentimentOptions.map(option => (
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
-        <label>Service:</label>
-        <select value={serviceFilter} onChange={e => setServiceFilter(e.target.value)}>
+        <label style={{marginLeft:'5px',marginRight:'5px'}}>Service:</label>
+        <select value={serviceFilter} onChange={e => setServiceFilter(e.target.value)} style={{ width: '150px' }}>
           <option value="">All</option>
           {serviceOptions.map(option => (
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
-        <label>Issue:</label>
-        <select value={issueFilter} onChange={e => setIssueFilter(e.target.value)}>
+        <label style={{marginLeft:'5px',marginRight:'5px'}}>Issue:</label>
+        <select value={issueFilter} onChange={e => setIssueFilter(e.target.value)} style={{ width: '150px' }}>
           <option value="">All</option>
           {issueOptions.map(option => (
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
-        <label>Rating:</label>
-        <select value={ratingFilter} onChange={e => setRatingFilter(e.target.value)}>
+        <label style={{marginLeft:'5px',marginRight:'5px'}}>Rating:</label>
+        <select value={ratingFilter} onChange={e => setRatingFilter(e.target.value)} style={{ width: '150px' }}>
           <option value="">All</option>
           {ratingOptions.map(option => (
             <option key={option} value={option}>{option}</option>
@@ -80,7 +80,7 @@ const DetailedTable = () => {
         data={[
           {
             type: 'table',
-            columnwidth: [40, 40, 40,40,40,40,40,40,200],
+            columnwidth: [150,45,45,45,45],
             header: {
               values: columns.map((column) => column.toUpperCase()),
               align: ['center'],
@@ -89,8 +89,11 @@ const DetailedTable = () => {
               font: { family: 'Arial', size: 12, color: 'white' }
             },
             cells: {
-              values: columns.map((column) =>
-              filteredData.map((row) => row[column])),
+              values: [filteredData.map(item => item.review),
+                filteredData.map(item => item.service),
+                filteredData.map(item => item.issue),
+                filteredData.map(item => item.rating),
+                filteredData.map(item => item.sentiment)],
               align: ['left'],
               line: { color: 'black', width: 1 },
               fill: { color: ['white'] },

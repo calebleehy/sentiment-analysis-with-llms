@@ -19,7 +19,7 @@ const WhatIfNPSPlot = () => {
 const layout={
   width: 450, height: 350,
   title: {
-    text:'What-if NPS for Each Bank',
+    text:'Projected NPS if Recommendations <br>were Implemented',
     font: {
       color: 'white', // Set title text color to white
     },

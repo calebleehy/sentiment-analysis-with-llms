@@ -15,7 +15,7 @@ const GaugeChart = () => {
   
     return (
       <div>
-        <select value={selectedRecommendation} onChange={handleChange}>
+        <select value={selectedRecommendation} onChange={handleChange} style={{ width: '300px' }}>
           <option value="">Select Recommendation</option>
           {recommendations.map((recommendation, index) => (
             <option key={index} value={recommendation}>{recommendation}</option>

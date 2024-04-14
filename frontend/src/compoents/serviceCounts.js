@@ -66,7 +66,6 @@ const layout={
   yaxis: {
     color: 'white',
     title: {
-      text: 'Service',
       font: {
         color: 'white', // Set y-axis text color to white
       },

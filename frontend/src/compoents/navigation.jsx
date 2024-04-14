@@ -20,7 +20,6 @@ const Navigation = () => {
                                 <ul className="dropdown-menu bg-light w-25">
                                     <li> <a className="dropdown-item text-dark" href="/dashboard">GXS</a></li>
                                     <li><a className="dropdown-item text-dark" href="/comparisons">Bank Comparisions</a></li>
-                                    <li><a className="dropdown-item text-dark" href="/detailed">Detailed</a></li>
                                 </ul>
                             </Nav.Item>
                             <Nav.Link href="/about">about</Nav.Link>

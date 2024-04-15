@@ -8,9 +8,10 @@ const NPSScorePlot = () => {
         {
           domain: { x: [0, 1], y: [0, 1] },
           value: gxs ? gxs.nps : 0,
-          title: { text: "NPS",
+          title: { text: "Overall NPS",
           font: {
             color: 'white',
+            size: 20
           },},
           number: { font: { color: 'white' } },
           type: "indicator",

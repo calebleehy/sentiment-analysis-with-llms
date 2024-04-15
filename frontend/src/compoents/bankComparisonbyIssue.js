@@ -24,8 +24,23 @@ const BankComparisonIssuePlot = () => {
     fetchData();
 
   }, []); */
-  const issues = Array.from(new Set(data.map(item => item.issue)));
+  const [selectedService, setSelectedService] = useState("Banking"); // State to store the selected service
+
+  // Your existing code for fetching and processing data...
+
+  // Filter the data based on the selected service
+  const filteredData = selectedService
+    ? data.filter(item => item.service === selectedService)
+    : data;
+
+  // Your existing code for generating traces...
+
+  const handleSelectChange = (e) => {
+    setSelectedService(e.target.value); // Update the selected service
+  };
+  const issues = Array.from(new Set(filteredData.map(item => item.issue)));
   const banks = Array.from(new Set(data.map(item => item.bank)));
+  const services = Array.from(new Set(data.map(item => item.service)));
   const bankColors = {
     "GXS": 'rgb(77, 6, 150)',
     "Trust": 'rgb(140, 81, 201)',
@@ -33,7 +48,7 @@ const BankComparisonIssuePlot = () => {
   const traces = banks.map(bank => ({
     x: issues,
     y: issues.map(issue => {
-      const dataPoint = data.find(item => item.bank === bank && item.issue === issue);
+      const dataPoint = filteredData.find(item => item.bank === bank && item.issue === issue); // Use filteredData here
       return dataPoint ? dataPoint['frequency (%)'] : 0;
     }),
     name: bank,
@@ -81,6 +96,13 @@ const BankComparisonIssuePlot = () => {
   }
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div style={{marginTop:'-300px'}}>
+      <select value={selectedService} onChange={handleSelectChange}>
+        {services.map(service => (
+          <option key={service} value={service}>{service}</option>
+        ))}
+      </select>
+      </div>
       <Plot data={traces} layout={layout}/>
 
     </div> 

@@ -5,15 +5,15 @@ import bankData from  '../bank_nps.json'
 
 const GaugeChart = () => {
     const [selectedRecommendation, setSelectedRecommendation] = useState('');
-  
-    const recommendations = data.map(item => item.recommendation);
+    const firstTwoRec =  data.slice(0, 2);
+    const recommendations = firstTwoRec.map(item => item.recommendation);
     const gxs = bankData.find(item => item.bank === 'GXS');
     const gxsNPS = gxs ? gxs.nps : null;
     const handleChange = (event) => {
       setSelectedRecommendation(event.target.value);
     };
   
-    const filteredData = data.find(item => item.recommendation === selectedRecommendation);
+    const filteredData = firstTwoRec.find(item => item.recommendation === selectedRecommendation);
   
     return (
       <div>

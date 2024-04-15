@@ -98,7 +98,6 @@ return (
   <div>
     <div>
     <select onChange={handleSelectChange}>
-        <option value="">Top 2 Services</option>
           {topServices.map(service => (
             <option key={service} value={service}>{service}</option>
       ))}

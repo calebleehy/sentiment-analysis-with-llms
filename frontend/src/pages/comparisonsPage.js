@@ -13,8 +13,7 @@ import Plot from 'react-plotly.js';
 
 const ComparisonPage = () => {
   const lastEntry = data[data.length - 1];
-  const columns = Object.keys(lastEntry).map(name => ({ name, title: name.charAt(0).toUpperCase() + name.slice(1) }));
-  const rows = [{ id: 0, ...lastEntry }];
+  const columns = ["Service", "Issue", "Recommendation"];
     return (
         <div>
             <Navigation/>
@@ -48,14 +47,14 @@ const ComparisonPage = () => {
         type: 'table',
         columnwidth: [50, 50, 200],
         header: {
-          values: columns.map(column => column.title),
+          values: columns.map(col => col.toUpperCase()),
           align: ['center'],
           line: { width: 1, color: 'black' },
-          fill: { color: 'purple' },
+          fill: { color: 'rgb(77, 6, 150)' },
           font: { family: 'Arial', size: 12, color: 'white' }
         },
         cells: {
-          values: columns.map(column => rows.map(row => row[column.name])),
+          values:  columns.map((column) => lastEntry[column.toLowerCase()]),
           align: ['left'],
           line: { color: 'black', width: 1 },
           fill: { color: ['white', 'white', 'white']},

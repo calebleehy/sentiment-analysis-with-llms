@@ -34,7 +34,7 @@ const NPSScoreByBankPlot = () => {
       type: 'bar',
       orientation: 'v',
       marker: {
-        color: banks.map(bank => bank === 'GXS' ? 'rgb(77, 6, 150)' : 'rgb(213, 166, 237)')
+        color: banks.map(bank => bank === 'GXS' ? 'rgb(77, 6, 150)' : 'rgb(140, 81, 201)')
       },
       responsive: false
     }

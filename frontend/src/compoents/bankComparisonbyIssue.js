@@ -1,7 +1,7 @@
 import React,{ useState, useEffect} from 'react';
 import Plot from 'react-plotly.js';
 //import { getBankIssueFreq } from '../api/getData';
-import data from '../bank_issue_freq.json';
+import data from '../bank_serv_issue_freq.json';
 
 const BankComparisonIssuePlot = () => {
   //store review data into data
@@ -29,7 +29,6 @@ const BankComparisonIssuePlot = () => {
   const bankColors = {
     "GXS": 'rgb(77, 6, 150)',
     "Trust": 'rgb(140, 81, 201)',
-    "MariBank":'rgb(213, 166, 237)'
   };
   const traces = banks.map(bank => ({
     x: issues,
@@ -39,13 +38,14 @@ const BankComparisonIssuePlot = () => {
     }),
     name: bank,
     type: 'bar',
-    marker: { color: bankColors[bank] }
+    marker: { color: bankColors[bank] },
+    orientation: 'v'
   }));
   const layout = {
-    width: 400, height: 300,
+    width: 500, height: 400,
     barmode: 'group',
     title: {
-      text: 'Proportion of Issue for Each Bank' ,
+      text: 'Proportion of Issue (%) for Each Bank' ,
       font: {
         color: 'white', // Set title text color to white
       },
@@ -54,7 +54,6 @@ const BankComparisonIssuePlot = () => {
     paper_bgcolor: 'black', // Set paper background color to black,
     xaxis: {
       title: {
-        text: 'Issue',
         font: {
           color: 'white', // Set x-axis text color to white
         },

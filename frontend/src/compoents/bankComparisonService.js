@@ -29,7 +29,6 @@ const BankComparisonServicePlot = () => {
   const bankColors = {
     "GXS": 'rgb(77, 6, 150)',
     "Trust": 'rgb(140, 81, 201)',
-    "MariBank":'rgb(213, 166, 237)'
   };
   const data2 = banks.map(bank => ({
     x: services,
@@ -45,7 +44,7 @@ const BankComparisonServicePlot = () => {
     width: 400, height: 300,
     barmode: 'group',
     title: {
-      text: 'Proportion of Service for Each Bank' ,
+      text: 'Proportion of Service (%) for Each Bank' ,
       font: {
         color: 'white', // Set title text color to white
       },

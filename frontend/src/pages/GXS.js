@@ -48,9 +48,11 @@ const DashBoardPage = () => {
             <TopRecommendationsPlot />
             </div>           
           </div>
-          <div style={{ flex: 1,justifyContent: 'center' }}>
-            <h1>Projected NPS if Recommendations were Implemented</h1>
+          <div style={{ flex: 1,justifyContent: 'center',marginBottom:'100px'}}>
+            <h1>Projected NPS Score</h1>
+            <div style = {{marginLeft:'50px'}}>
             <GaugeChart />
+            </div>
           </div>
         </div>
     </div>

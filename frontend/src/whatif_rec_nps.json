@@ -1,10 +1,18 @@
 [
     {
-        "recommendation": "Improve the user experience by allowing users to easily add and save payees to the banking app to streamline transactions.",
-        "nps": 6.2
+        "recommendation": "Improve app stability & accessibility, prioritize fixing 'technical glitches' for seamless user experience.",
+        "nps": -0.7
     },
     {
-        "recommendation": "Communicate transparently with customers about changes in interest rates to build trust and avoid negative perceptions.",
-        "nps": 7.2
+        "recommendation": "Streamline registration process, address errors, ensure compatibility with devices & Singpass for smoother onboarding.",
+        "nps": -4.8
+    },
+    {
+        "recommendation": "Enhance application process transparency and resolve recurring technical issues promptly.",
+        "nps": -9.8
+    },
+    {
+        "recommendation": "Combined",
+        "nps": 7.6
     }
 ]

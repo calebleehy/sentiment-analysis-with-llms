@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import Plot from 'react-plotly.js';
 import data from '../whatif_rec_nps.json';
+import bankData from  '../bank_nps.json'
 
 const GaugeChart = () => {
     const [selectedRecommendation, setSelectedRecommendation] = useState('');
   
     const recommendations = data.map(item => item.recommendation);
-  
+    const gxs = bankData.find(item => item.bank === 'GXS');
+    const gxsNPS = gxs ? gxs.nps : null;
     const handleChange = (event) => {
       setSelectedRecommendation(event.target.value);
     };
@@ -26,8 +28,9 @@ const GaugeChart = () => {
             data={[
               {
                 type: 'indicator',
-                mode: 'gauge+number',
+                mode: 'gauge+number+delta',
                 value: filteredData.nps,
+                delta: { reference: gxsNPS },
                 title: { text: "What-if NPS",
                 font: {
                   color: 'white',

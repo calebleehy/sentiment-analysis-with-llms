@@ -21,11 +21,7 @@ const TopRecommendationsPlot = () => {
   //load data everytime
   useEffect(() => {fetchData();}, []); */
   const firstTwoEntries = data.slice(0, 2);
-  const columns = Object.keys(firstTwoEntries[0]).map(name => ({ name, title: name.charAt(0).toUpperCase() + name.slice(1) }));
-  const rows = firstTwoEntries.map((item, index) => ({
-    id: index,
-    ...item,
-}));
+  const columns = ["Service", "Issue", "Recommendation"];
   return (
     <Plot
     data={[
@@ -33,15 +29,15 @@ const TopRecommendationsPlot = () => {
         type: 'table',
         columnwidth: [50,50,200],
         header: {
-          values: columns.map(column => column.title),
+          values: columns.map(col => col.toUpperCase()),
           align: ['center'],
           line: { width: 1, color: 'black' },
           fill: { color: 'purple' },
           font: { family: 'Arial', size: 12, color: 'white' }
         },
         cells: {
-          values: columns.map(column => rows.map(row => row[column.name])),
-          align: ['left'],
+          values:columns.map((column) =>
+          firstTwoEntries.map((row) => row[column.toLowerCase()])),
           line: { color: 'black', width: 1 },
           fill: { color: ['white', 'white', 'white']},
           font: { family: 'Arial', size: 11, color: ['black'] },

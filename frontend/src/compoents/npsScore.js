@@ -15,7 +15,6 @@ const NPSScorePlot = () => {
           number: { font: { color: 'white' } },
           type: "indicator",
           mode: "gauge+number",
-          delta: { reference: 100 },
           gauge: {
             axis: { range: [-100, 100],tickwidth: 1, tickcolor: 'white', tickfont: { color: 'white' }},
             bar: { color: 'rgb(140, 81, 201)' },

@@ -26,9 +26,9 @@ const TrustTable = () => {
   }, []); */
   const trust = data.filter(item => item.bank === 'Trust') //filtering for only trust data
   const columns = ["Review"];
-  const [sentimentFilter, setSentimentFilter] = useState('');
-  const [serviceFilter, setServiceFilter] = useState('');
-  const [issueFilter, setIssueFilter] = useState('');
+  const [sentimentFilter, setSentimentFilter] = useState('Negative');
+  const [serviceFilter, setServiceFilter] = useState('Banking');
+  const [issueFilter, setIssueFilter] = useState('Application rejection');
 
   const sentimentOptions = [...new Set(trust.map(item => item.sentiment))];
   const serviceOptions = [...new Set(trust.map(item => item.service))];

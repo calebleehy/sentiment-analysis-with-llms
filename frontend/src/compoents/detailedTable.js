@@ -26,9 +26,9 @@ const DetailedTable = () => {
    }, []); */
   const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
   const columns = ["Review","Service","Issue","Rating","Sentiment"];
-  const [sentimentFilter, setSentimentFilter] = useState('');
-  const [serviceFilter, setServiceFilter] = useState('');
-  const [issueFilter, setIssueFilter] = useState('');
+  const [sentimentFilter, setSentimentFilter] = useState('Negative');
+  const [serviceFilter, setServiceFilter] = useState('App');
+  const [issueFilter, setIssueFilter] = useState('Technical glitches');
   const [ratingFilter, setRatingFilter] = useState('');
 
   const sentimentOptions = [...new Set(gxs.map(item => item.sentiment))];

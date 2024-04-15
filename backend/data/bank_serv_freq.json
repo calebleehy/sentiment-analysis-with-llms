@@ -1,62 +1,22 @@
 [
     {
         "bank": "GXS",
-        "service": "C",
-        "frequency (%)": 23.6
+        "service": "App",
+        "frequency (%)": 34.7
+    },
+    {
+        "bank": "Trust",
+        "service": "App",
+        "frequency (%)": 29.0
+    },
+    {
+        "bank": "Trust",
+        "service": "Banking",
+        "frequency (%)": 14.7
     },
     {
         "bank": "GXS",
-        "service": "D",
-        "frequency (%)": 25.7
-    },
-    {
-        "bank": "GXS",
-        "service": "A",
-        "frequency (%)": 27.2
-    },
-    {
-        "bank": "GXS",
-        "service": "B",
-        "frequency (%)": 23.6
-    },
-    {
-        "bank": "Trust",
-        "service": "C",
-        "frequency (%)": 23.0
-    },
-    {
-        "bank": "Trust",
-        "service": "D",
-        "frequency (%)": 27.5
-    },
-    {
-        "bank": "Trust",
-        "service": "A",
-        "frequency (%)": 27.4
-    },
-    {
-        "bank": "Trust",
-        "service": "B",
-        "frequency (%)": 22.1
-    },
-    {
-        "bank": "MariBank",
-        "service": "C",
-        "frequency (%)": 19.0
-    },
-    {
-        "bank": "MariBank",
-        "service": "D",
-        "frequency (%)": 19.0
-    },
-    {
-        "bank": "MariBank",
-        "service": "A",
-        "frequency (%)": 28.6
-    },
-    {
-        "bank": "MariBank",
-        "service": "B",
-        "frequency (%)": 33.3
+        "service": "Banking",
+        "frequency (%)": 11.5
     }
 ]

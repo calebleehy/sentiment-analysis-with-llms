@@ -11,15 +11,14 @@ import '../styles/App.css';
 const SummaryPage = () => {
     const columns = ["Service", "Issue", "Recommendation"];
     const [selectedRecommendation, setSelectedRecommendation] = useState('');
-    const lastTwoRec =  data.slice(-2);
-    const recommendations = lastTwoRec.map(item => item.recommendation);
+    const recommendations = data.map(item => item.recommendation);
     const gxs = bankData.find(item => item.bank === 'GXS');
     const gxsNPS = gxs ? gxs.nps : null;
     const handleChange = (event) => {
       setSelectedRecommendation(event.target.value);
     };
   
-    const filteredData = lastTwoRec.find(item => item.recommendation === selectedRecommendation);
+    const filteredData = data.find(item => item.recommendation === selectedRecommendation);
     return (
         <div>
             <Navigation />

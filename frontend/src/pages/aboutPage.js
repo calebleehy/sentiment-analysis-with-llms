@@ -51,19 +51,8 @@ const AboutPage = () => {
                         Ng Elangel <br />
                         Ng Keen Yung <br />
                         Sarah Goh Yue En <br />
-                        Shi Shuanqi <br />
+                        Shi Shuangqi <br />
                         Wang Jianing <br />
-                    </em>
-                </p>
-            </Container>
-
-            <Container>
-                <h2>
-                    Contact
-                </h2>
-                <p className="px-3">
-                    <em>
-                        contact person and contact details
                     </em>
                 </p>
             </Container>

@@ -57,7 +57,7 @@ const BankComparisonIssuePlot = () => {
     orientation: 'v'
   }));
   const layout = {
-    width: 500, height: 400,
+    width: 450, height: 350,
     barmode: 'group',
     title: {
       text: 'Proportion of Issue (%) with Negative Sentiments' ,

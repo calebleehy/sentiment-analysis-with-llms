@@ -18,7 +18,7 @@ const AboutPage = () => {
                     We are a group of students taking DSA3101 doing a customer feedback sentiment analysis 
                     project for GXS Bank. Using advanced Natural Language Processing (NLP) techniques such as 
                     Large Language Models (LLMs), we analyzed customer reviews from Google Play Store and Apple to 
-                    help GXS understand and improve customr satisfaction.
+                    help GXS understand and improve customer satisfaction.
                 </p>
             </Container>
             <Container className="Container">

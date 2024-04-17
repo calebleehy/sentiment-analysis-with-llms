@@ -1,5 +1,5 @@
 # Use Python image as base
-FROM python:3.10-slim
+FROM --platform=linux/x86-64 python:3.10-slim
 
 # Set working directory
 WORKDIR /app

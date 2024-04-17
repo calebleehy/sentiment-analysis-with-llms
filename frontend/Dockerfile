@@ -1,5 +1,5 @@
 # Use Node.js image as base
-FROM node:alpine as build
+FROM --platform=linux/x86-64 node:alpine as build
 
 # Set working directory
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Use Nginx as base
-FROM nginx:alpine
+FROM --platform=linux/x86-64 nginx:alpine
 
 # Copy build files from the previous stage to Nginx's default public directory
 COPY --from=build /app/build /usr/share/nginx/html

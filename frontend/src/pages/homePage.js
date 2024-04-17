@@ -10,7 +10,7 @@ const HomePage = () => {
         <div>
             <Navigation />
             <h1>Home</h1>
-            <img src={image} alt="Example image" class = "image"></img>
+            <img src={image} alt="image" class = "image"></img>
             <h2 style={{fontSize: '40px', marginTop:'30px'}}>How to navigate the webapp?</h2>
             <ul class="my-list">
               <li>Home Page</li>

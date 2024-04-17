@@ -44,7 +44,7 @@ const BankComparisonServicePlot = () => {
     width: 400, height: 300,
     barmode: 'group',
     title: {
-      text: 'Proportion of Service (%) for Each Bank' ,
+      text: 'Proportion of Service (%) with <br /> Negative Sentiments' ,
       font: {
         color: 'white', // Set title text color to white
       },

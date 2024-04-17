@@ -60,7 +60,7 @@ const BankComparisonIssuePlot = () => {
     width: 500, height: 400,
     barmode: 'group',
     title: {
-      text: 'Proportion of Issue (%) for Each Bank' ,
+      text: 'Proportion of Issue (%) with Negative Sentiments' ,
       font: {
         color: 'white', // Set title text color to white
       },

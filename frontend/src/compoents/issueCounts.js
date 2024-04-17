@@ -62,7 +62,7 @@ const IssueCountsPlot = () => {
 const layout={
   width: 500, height: 350,
   title: {
-    text:'Top 3 Most Frequent Issues based <br> on the 2 Most Frequent Services' ,
+    text:'Top 3 Most Frequent Issues based <br> on the 2 Most Frequent Services with Negative Sentiments' ,
     font: {
       color: 'white', // Set title text color to white
     },

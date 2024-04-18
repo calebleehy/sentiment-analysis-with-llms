@@ -158,7 +158,8 @@ def recom_derive(model):
     return 1
 
 def main():
-
+    here = os.path.dirname(os.path.abspath(__file__)) # lives in backend\generation
+    absdatapath=os.path.normpath(os.path.join(here, '..\\data'))
     llm = Llama(
         model_path="C:/Users/shish/gxs-sentiment-analysis/backend/.model/mistral-7b-instruct-v0.2.Q5_K_M.gguf",
         n_gpu_layers=-1, # Uncomment to use GPU acceleration

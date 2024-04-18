@@ -1,0 +1,4 @@
+['Inability to use Trust Key or Face ID login', 'Issues with SingPass login', 'Difficulty in opening certain account types', 'App navigation and user interface', 'Face recognition login not working']
+['Interest rate issues', 'Account access and opening issues', 'Technical issues during transactions', 'Waiting times and lengthy onboarding', 'Security concerns']
+['Account issues (e.g., account locking, difficulty opening accounts, application rejection)', 'Technical issues (e.g., login problems, app malfunction, incorrect information)', 'Interest rate concerns (e.g., decrease, dissatisfaction)', 'Transaction issues (e.g., delayed, failed, fraudulent)', 'Long waiting times (e.g., approval, resolution, onboarding)']
+['Difficulty applying credit card, savings account', 'Login issues', 'Technical difficulties during registration and setup', 'User interface and design issues', 'Lack of expected features or functionality']

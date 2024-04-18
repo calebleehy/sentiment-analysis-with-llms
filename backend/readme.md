@@ -1,11 +1,8 @@
-1. cd to venv folder within backend
-> cd venv
-2. create venv for project
-> python -m venv mistral_prototype
-3. activate virtual environment
-> .\mistral_prototype\Scripts\activate
-4. install required libraries within venv
-> pip install -r ..\requirements.txt
+0. ensure pipenv is installed: https://pipenv.pypa.io/en/stable/index.html
+> pip install --user pipenv
+1. install requirements
+> pipenv install
+2. download model
 5. download model
 > cd ..
 > mkdir model

@@ -43,6 +43,19 @@ const DetailedTable = () => {
     const ratingMatch = ratingFilter === '' || item.rating === ratingFilter;
     return sentimentMatch && serviceMatch && issueMatch && ratingMatch;
 });
+const downloadCSV = () => {
+  const headers = columns.map(col => col.toUpperCase());
+  const rows = [headers,...filteredData.map(item => columns.map(col => (col === 'Review' ? `"${item[col.toLowerCase()] || ''}"` : item[col.toLowerCase()] || '')))];
+  const csvContent = rows.map(row => row.join(',')).join('\n');
+  const blob = new Blob([csvContent], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.setAttribute('download', 'data.csv');
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
   return (
     <div>
     <div>
@@ -74,8 +87,9 @@ const DetailedTable = () => {
             <option key={option} value={option}>{option}</option>
           ))}
         </select>
+        <button onClick={downloadCSV} className="download-csv">Download CSV</button>
       </div>
-      <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '500px'}}>
+      <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '400px'}}>
       <Plot
         data={[
           {
@@ -84,8 +98,8 @@ const DetailedTable = () => {
             header: {
               values: columns.map((column) => column.toUpperCase()),
               align: ['center'],
-              line: { width: 1, color: 'black' },
-              fill: { color: 'purple' },
+              line: { width: 1, color: 'white' },
+              fill: { color: '#28104E' },
               font: { family: 'Arial', size: 12, color: 'white' }
             },
             cells: {
@@ -95,10 +109,10 @@ const DetailedTable = () => {
                 filteredData.map(item => item.rating),
                 filteredData.map(item => item.sentiment)],
               align: ['left'],
-              line: { color: 'black', width: 1 },
-              fill: { color: ['white'] },
-              font: { family: 'Arial', size: 11, color: ['black'] },
-              height: 100 // Set cell height for each review
+              line: { color: 'white', width: 1 },
+              fill: { color: ['rgb(25,25,26)'] },
+              font: { family: 'Arial', size: 11, color: ['white'] },
+              height: 80 // Set cell height for each review
             }
           }
         ]}

@@ -55,20 +55,20 @@ const IssueCountsPlot = () => {
       name: issue,
       orientation:'h',
       marker: {
-        color: 'purple' 
+        color: '#9754CB' 
       },
       showlegend: false,
     }));
 const layout={
-  width: 500, height: 350,
+  width: 605, height: 300,
   title: {
-    text:'Top 3 Most Frequent Issues based <br> on the 2 Most Frequent Services with Negative Sentiments' ,
+    text:'Top 3 Issues with Negative Sentiments' ,
     font: {
       color: 'white', // Set title text color to white
     },
   },
-  plot_bgcolor: 'black', // Set plot background color to black
-  paper_bgcolor: 'black', // Set paper background color to black
+  plot_bgcolor: 'rgb(25,25,26)', // Set plot background color to black
+  paper_bgcolor: 'rgb(25,25,26)', // Set paper background color to black
   xaxis: {
     color: 'white',
     title: {

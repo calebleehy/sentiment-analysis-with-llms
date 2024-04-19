@@ -53,15 +53,15 @@ const BankNPSPlot = () => {
 ];
 
 const layout={
-  width: 700, height: 400,
+  width: 1220, height: 400,
   title: {
     text:'GXS Bank NPS over Time',
     font: {
       color: 'white', // Set title text color to white
     },
   },
-  plot_bgcolor: 'black', // Set plot background color to black
-  paper_bgcolor: 'black', // Set paper background color to black
+  plot_bgcolor: 'rgb(25, 25, 26)', // Set plot background color to black
+  paper_bgcolor: 'rgb(25, 25, 26)', // Set paper background color to black
   xaxis: {
     color: 'white',
     title: {

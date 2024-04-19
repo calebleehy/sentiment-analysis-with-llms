@@ -1,40 +1,41 @@
 import React from "react";
 import Navigation from "../compoents/navigation";
 import '../styles/App.css';
-import image from '../asset/image.jpg'; // import the image
-
+import { Container } from "react-bootstrap";
+import trustImage from '../asset/gxsvstrust.jpg';
+import recommendationImage from  '../asset/recommendations.jpg';
+import gxsImage from '../asset/gxs.jpg';
 
 const HomePage = () => {
 
     return (
         <div>
             <Navigation />
-            <h1>Home</h1>
-            <img src={image} alt="image" class = "image"></img>
-            <h2 style={{fontSize: '40px', marginTop:'30px'}}>How to navigate the webapp?</h2>
-            <ul class="my-list">
-              <li>Home Page</li>
-              <li>Dashboard Page</li>
-                <ul class="my-list">
-                  <li><a href="/dashboard">GXS Page</a></li>
-                  <p>This page shows the sentiment analysis results of GXS bank.</p>
-                  <li><a href="/comparisons">Bank Comparisons Page</a></li>
-                  <p>This page compares GXS with Trust bank.</p>
-                  <li><a href="/summary">Summary Page</a></li>
-                  <p>
-                    This page gives a summary of the recommendations and the projected NPS if the recommendations
-                    are implemented.
-                  </p>
-                </ul>
-              <li><a href = "/about">About Page</a></li>
-              <p>
-                  This page gives an introduction of our project and the key features of the webapp. The team members' names
-                  and contact details can be found here.
-                  </p>
-              </ul>
-
-
-        </div>
+            <div className="plain-background">
+                    <div className="overlay-text">
+                        Welcome to GXS Sentiment Analysis!
+                    </div>
+            </div>
+            <Container className = "Container">
+            <div className="gxs-content Container" style={{ marginTop: '30px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div className="content-box">
+                    <img src={gxsImage} alt="GXS" className="image" />
+                    <div className="in-box-text">View the most pressing issues for GXS here.</div>
+                    <a href="/dashboard"><button className="action-button">Click here</button></a>
+                </div>
+                <div className="content-box">
+                    <img src={trustImage} alt="GXS vs Trust" className="image" />
+                    <div className="in-box-text">See how we perform against Trust!</div>
+                    <a href="/comparisons"><button className="action-button">Click here</button></a>
+                </div>
+                <div className="content-box">
+                    <img src={recommendationImage} alt="Recommendation" className="image" />
+                    <div  className="in-box-text">View all our recommendations here!</div>
+                    <a href="/summary"><button className="action-button">Click here</button></a>
+                </div>
+                </div>
+            </Container>
+          </div>
     );
 }
 

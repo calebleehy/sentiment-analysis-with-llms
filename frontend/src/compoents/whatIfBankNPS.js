@@ -12,20 +12,20 @@ const WhatIfNPSPlot = () => {
       type: 'bar',
       orientation:'v',
       marker: {
-      color: banks.map(bank => bank === 'GXS' ? 'rgb(77, 6, 150)' : 'rgb(140, 81, 201)')
+      color: banks.map(bank => bank === 'GXS' ? '#6237A0' : '#DEACF5')
     }
   }
 ];
 const layout={
-  width: 450, height: 350,
+  width: 400, height: 300,
   title: {
     text:'Projected GXS NPS if Recommendations <br>were Implemented',
     font: {
       color: 'white', // Set title text color to white
     },
   },
-  plot_bgcolor: 'black', // Set plot background color to black
-  paper_bgcolor: 'black', // Set paper background color to black,
+  plot_bgcolor: 'rgb(25,25,26)', // Set plot background color to black
+  paper_bgcolor: 'rgb(25,25,26)', // Set paper background color to black,
   xaxis: {
     title: {
       text: 'Bank',

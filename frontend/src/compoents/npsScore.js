@@ -26,9 +26,10 @@ const NPSScorePlot = () => {
         },
       ];
     const layout={
-        width: 500, height: 300,
-        plot_bgcolor: 'black', // Set plot background color to black
-        paper_bgcolor: 'black', // Set paper background color to black
+        width: 400, height: 300,
+        plot_bgcolor: 'rgb(25, 25, 26)', // Set plot background color to black
+        paper_bgcolor: 'rgb(25, 25, 26)', // Set paper background color to black,
+        margin: { t: 80, b: 80, l: 50, r: 50 }
       }
 return (
   <Plot

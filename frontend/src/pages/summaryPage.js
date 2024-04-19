@@ -32,18 +32,18 @@ const SummaryPage = () => {
         header: {
           values: columns.map(col => col.toUpperCase()),
           align: ['center'],
-          line: { width: 1, color: 'black' },
-          fill: { color: 'purple' },
+          line: { width: 1, color: 'white' },
+          fill: { color: '#28104E' },
           font: { family: 'Arial', size: 12, color: 'white' }
         },
         cells: {
           values: columns.map((column) =>
           recommendation.map((row) => row[column.toLowerCase()])),
           align: ['left'],
-          line: { color: 'black', width: 1 },
-          fill: { color: ['white', 'white', 'white']},
-          font: { family: 'Arial', size: 11, color: ['black'] },
-          height: 100 // Set cell height for each review
+          line: { color: 'white', width: 1 },
+          fill: { color: ['rgb(25,25,26)']},
+          font: { family: 'Arial', size: 11, color: ['white'] },
+          height: 80 // Set cell height for each review
         }
       }
     ]}
@@ -57,9 +57,9 @@ const SummaryPage = () => {
     }}
   />
   </div>
-  <div style={{ display: 'flex',flexDirection: 'column',justifyContent: 'space-between',marginTop:'50px',marginRight:'500px'}}>
+  <div style={{ display: 'flex',flexDirection: 'column',justifyContent: 'space-between',marginTop:'40px',marginRight:'500px',marginLeft:'100px'}}>
     <NPSScorePlot />
-  <div style ={{marginRight:'200px',flexDirection: 'column',marginLeft:'600px',marginTop:'-315px'}}>
+  <div style ={{marginRight:'200px',flexDirection: 'column',marginLeft:'500px',marginTop:'-322px'}}>
   <select value={selectedRecommendation} onChange={handleChange} style={{ width: '400px' }}>
   <option value="">Select Recommendation</option>
           {recommendations.map((recommendation, index) => (
@@ -81,7 +81,7 @@ const SummaryPage = () => {
                             number: { font: { color: 'white' } },
                             gauge: {
                                 axis: { range: [-100, 100],tickwidth: 1, tickcolor: 'white', tickfont: { color: 'white' }},
-                                bar: { color: 'purple' },
+                                bar: { color: '#9754CB' },
                                 bgcolor: 'black',
                                 bordercolor: 'white',
                             }
@@ -90,8 +90,8 @@ const SummaryPage = () => {
                     layout={{
                         width: 400, height: 300,
                         margin: { t: 0, b: 0},
-                        plot_bgcolor: 'black', // Set plot background color to black
-                        paper_bgcolor: 'black', // Set paper background color to black
+                        plot_bgcolor: 'rgb(25,25,26)', // Set plot background color to black
+                        paper_bgcolor: 'rgb(25,25,26)', // Set paper background color to black
                     }}
                 />
                   )}

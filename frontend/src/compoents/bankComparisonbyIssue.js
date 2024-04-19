@@ -42,8 +42,8 @@ const BankComparisonIssuePlot = () => {
   const banks = Array.from(new Set(data.map(item => item.bank)));
   const services = Array.from(new Set(data.map(item => item.service)));
   const bankColors = {
-    "GXS": 'rgb(77, 6, 150)',
-    "Trust": 'rgb(140, 81, 201)',
+    "GXS": '#6237A0',
+    "Trust": '#DEACF5',
   };
   const traces = banks.map(bank => ({
     x: issues,
@@ -57,16 +57,16 @@ const BankComparisonIssuePlot = () => {
     orientation: 'v'
   }));
   const layout = {
-    width: 450, height: 350,
+    width: 400, height: 300,
     barmode: 'group',
     title: {
-      text: 'Proportion of Issue (%) with Negative Sentiments' ,
+      text: 'Proportion of Issue (%) <br /> with Negative Sentiments' ,
       font: {
         color: 'white', // Set title text color to white
       },
     },
-    plot_bgcolor: 'black', // Set plot background color to black
-    paper_bgcolor: 'black', // Set paper background color to black,
+    plot_bgcolor: 'rgb(25,25,26)', // Set plot background color to black
+    paper_bgcolor: 'rgb(25,25,26)', // Set paper background color to black,
     xaxis: {
       title: {
         font: {
@@ -95,17 +95,18 @@ const BankComparisonIssuePlot = () => {
     },
   }
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <div style={{marginTop:'-300px'}}>
-      <select value={selectedService} onChange={handleSelectChange}>
-        {services.map(service => (
-          <option key={service} value={service}>{service}</option>
-        ))}
-      </select>
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'center',marginBottom:'20px'}}>
+        <div style={{marginBottom:'-20px',marginLeft:'-320px'}}>
+        <select value={selectedService} onChange={handleSelectChange}>
+          {services.map(service => (
+            <option key={service} value={service}>{service}</option>
+          ))}
+        </select>
+        </div>
       </div>
-      <Plot data={traces} layout={layout}/>
-
-    </div> 
+      <Plot data={traces} layout={layout} />
+    </div>
 );
 };    
 

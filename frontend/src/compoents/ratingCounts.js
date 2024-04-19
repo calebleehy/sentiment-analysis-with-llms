@@ -3,7 +3,7 @@ import Plot from 'react-plotly.js';
 //import { getReviewData } from '../api/getData';
 import data from '../full.json';
 
-const SentimentAnalysisPlot = () => {
+const RatingsPlot = () => {
   
     //store review data into data
     /* const [data, setData] = useState([]);
@@ -21,16 +21,16 @@ const SentimentAnalysisPlot = () => {
     //load data everytime
     useEffect(() => {fetchData();}, []); */
     
-    const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS and negative sentiment
-    const sentimentCounts = gxs.reduce((acc, gxs) => { //gets frequency of each service
-    const sentiment = gxs.sentiment;
-    acc[sentiment] = (acc[sentiment] || 0) + 1;
+    const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS
+    const ratingCounts = gxs.reduce((acc, gxs) => { //gets frequency of each rating
+    const rating = gxs.rating;
+    acc[rating] = (acc[rating] || 0) + 1;
       return acc;
     }, {});
     const data2=[
       {
-        x: Object.keys(sentimentCounts),
-        y: Object.values(sentimentCounts),
+        x: Object.keys(ratingCounts),
+        y: Object.values(ratingCounts),
         type: 'bar',
         orientation:'v',
         marker: {
@@ -41,7 +41,7 @@ const SentimentAnalysisPlot = () => {
   const layout={
     width: 400, height: 300,
     title: {
-      text:'Sentiment Analysis',
+      text:'Count of Ratings',
       font: {
         color: 'white', // Set title text color to white,
       },
@@ -57,10 +57,13 @@ const SentimentAnalysisPlot = () => {
         tickfont: {
           color: 'white', // Set x-axis tick text color to white
         },
-        color: 'white'
+        color: 'white',
+        automargin: true,
+        range: [1, 5],
       },
       yaxis: {
         color: 'white',
+        automargin: true,
         title: {
           font: {
             color: 'white', // Set y-axis text color to white
@@ -79,4 +82,4 @@ const SentimentAnalysisPlot = () => {
     );
   };
   
-  export default SentimentAnalysisPlot;
+  export default RatingsPlot;

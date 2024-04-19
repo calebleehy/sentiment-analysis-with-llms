@@ -24,12 +24,110 @@ h1 {
 }
 
 .image {
-  width: 1100px;
-  height: 600px;
-  margin-top:20px;
-  margin-left:10px
+  background-size: cover;
+  background-attachment: fixed;
+  height: 34vh;
+  width: 30vw;
+  display:block;
+}
+.gxs-content {
+  position: relative;
+  text-align: left;
+}
+.in-box-text{
+  font-weight:bold;
+  margin-top: 2vh;
+  font-size:3vh;
 }
 
-.my-list {
-  font-size: 18px;;
+.plain-background {
+  background-color: #28104E; /* Plain background color */
+  height: 30vh; /* Set the height of the background */
+  position: relative; /* Position relative for absolute positioning of text */
+  width:98vw;
+  margin-left:-55px;
+  margin-top:10px
+}
+.content-box{
+  background-color: #28104E; /* Plain background color */
+  height:55vh; /* Set the height of the background */
+  position: relative; /* Position relative for absolute positioning of text */
+  width:40vw;
+  padding: 2vh;
+  margin: 1vh;
+  margin-top:0.1vh;
+}
+
+.overlay-text {
+  position: absolute; /* Position absolute to overlay the text */
+  top: 15vh; /* Position the text at the vertical center */
+  left: 49vw; /* Position the text at the horizontal center */
+  transform: translate(-50%, -50%); /* Center the text both horizontally and vertically */
+  font-size: 5vh; /* Set the font size of the text */
+  font-weight: bold; /* Set the font weight of the text */
+  color: white; /* Text color */
+}
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+.download-csv {
+  background-color: white; /* Background color */
+  color: black; /* Text color */
+  padding: 5px 10px; /* Padding inside the button */
+  border-radius: 5px; /* Rounded corners */
+  border: none; /* No border */
+  cursor: pointer; /* Cursor style on hover */
+  font-size: 16px; /* Font size */
+  font-weight: bold; /* Font weight */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+  transition: background-color 0.3s ease; /* Transition effect */
+  margin-left:130px;
+  margin-bottom:5px
+}
+
+/* Define hover effect */
+.download-csv:hover {
+  background-color: #6237A0; /* Change background color on hover */
+}
+
+.action-button {
+  margin-top: 2vh;
+  padding: 1vw 3vh;
+  font-size: 3vh;
+  border: none;
+  border-radius: 1vh;
+  background-color: #6237A0;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.action-button:hover {
+  background-color: #9754CB; /* Change background color on hover */
+}
+
+.about-us{
+  background-size: cover;
+  background-attachment: fixed;
+  height: 55vh;
+  width: 45vw;
+  display:block;
+  margin-top:5vh;
+  margin-left:-2vw;
+}
+.key-features-container {
+  display: flex;
+  justify-content: space-between; /* Adjust this property as needed */
+  margin-top: 20px;
+}
+
+.key-feature {
+  width: 25vw;
+  height: 15vh;
+  border-radius: 10px;
+  background-color: #28104E;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4vh;
 }

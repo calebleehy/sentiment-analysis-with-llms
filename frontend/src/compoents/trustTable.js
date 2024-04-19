@@ -83,16 +83,16 @@ const TrustTable = () => {
             header: {
               values: columns,
               align: ['center'],
-              line: { width: 1, color: 'black' },
-              fill: { color: 'rgb(140, 81, 201)' },
+              line: { width: 1, color: 'white' },
+              fill: { color: 'DEACF5' },
               font: { family: 'Arial', size: 12, color: 'white' }
             },
             cells: {
               values: transposedRows,
               align: ['left'],
-              line: { color: 'black', width: 1 },
-              fill: { color: ['white'] },
-              font: { family: 'Arial', size: 11, color: ['black'] },
+              line: { color: 'white', width: 1 },
+              fill: { color: ['rgb(25,25,26)'] },
+              font: { family: 'Arial', size: 11, color: ['white'] },
               height: 100 // Set cell height for each review
             }
           }

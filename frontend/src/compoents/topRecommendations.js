@@ -31,16 +31,16 @@ const TopRecommendationsPlot = () => {
         header: {
           values: columns.map(col => col.toUpperCase()),
           align: ['center'],
-          line: { width: 1, color: 'black' },
-          fill: { color: 'purple' },
+          line: { width: 1, color: 'white' },
+          fill: { color: '#28104E' },
           font: { family: 'Arial', size: 12, color: 'white' }
         },
         cells: {
           values:columns.map((column) =>
           firstTwoEntries.map((row) => row[column.toLowerCase()])),
-          line: { color: 'black', width: 1 },
-          fill: { color: ['white', 'white', 'white']},
-          font: { family: 'Arial', size: 11, color: ['black'] },
+          line: { color: 'white', width: 1 },
+          fill: { color: ['rgb(25,25,26)']},
+          font: { family: 'Arial', size: 12, color: ['white'] },
           height: 100 // Set cell height for each review
         }
       }

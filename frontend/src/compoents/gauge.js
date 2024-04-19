@@ -31,24 +31,24 @@ const GaugeChart = () => {
                 mode: 'gauge+number+delta',
                 value: filteredData.nps,
                 delta: { reference: gxsNPS },
-                title: { text: "What-if NPS",
+                title: { text: "What-if NPS",align: 'center',
                 font: {
                   color: 'white',
                 },},
-                number: { font: { color: 'white' } },
+                number: { font: { color: 'white' },align: 'center' },
                 gauge: {
                   axis: { range: [-100, 100],tickwidth: 1, tickcolor: 'white', tickfont: { color: 'white' }},
-                  bar: { color: 'purple' },
+                  bar: { color: '#6237A0' },
                   bgcolor: 'black',
                   bordercolor: 'white',        
                 }
               }
             ]}
             layout={{ 
-              width: 400, height: 300,
-              margin: { t: 0, b: 0},
-              plot_bgcolor: 'black', // Set plot background color to black
-        paper_bgcolor: 'black', // Set paper background color to black
+              width: 500, height: 300,
+              margin: { t: -100, b: -100, l: -50, r: -50 },
+              plot_bgcolor: 'rgb(25,25,26)', // Set plot background color to black
+        paper_bgcolor: 'rgb(25,25,26)', // Set paper background color to black
              }}
           />
         )}

@@ -27,8 +27,8 @@ const BankComparisonServicePlot = () => {
   const services = Array.from(new Set(data.map(item => item.service)));
   const banks = Array.from(new Set(data.map(item => item.bank)));
   const bankColors = {
-    "GXS": 'rgb(77, 6, 150)',
-    "Trust": 'rgb(140, 81, 201)',
+    "GXS": '#6237A0',
+    "Trust": '#DEACF5',
   };
   const data2 = banks.map(bank => ({
     x: services,
@@ -49,8 +49,8 @@ const BankComparisonServicePlot = () => {
         color: 'white', // Set title text color to white
       },
     },
-    plot_bgcolor: 'black', // Set plot background color to black
-    paper_bgcolor: 'black', // Set paper background color to black,
+    plot_bgcolor: 'rgb(25,25,26)', // Set plot background color to black
+    paper_bgcolor: 'rgb(25,25,26)', // Set paper background color to black,
     xaxis: {
       title: {
         text: 'Service',

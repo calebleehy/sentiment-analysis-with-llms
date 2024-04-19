@@ -9,54 +9,51 @@ import TopRecommendationsPlot from "../compoents/topRecommendations";
 import GaugeChart from "../compoents/gauge";
 import SentimentAnalysisPlot from "../compoents/sentimentAnalysis";
 import DetailedTable from "../compoents/detailedTable";
+import RatingsPlot from "../compoents/ratingCounts";
 
 const DashBoardPage = () => {
   return (
     <div>
       <Navigation />
       <h1>What are the most impactful areas to be addressed?</h1>
-      <div className="dashboard">
-        <div className = "row">
-          <div style= {{ marginLeft:'60px'}}>
+      <div className="dashboard" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '50px' }}>
+        <div style={{marginTop:'45px',marginLeft:'-20px'}}>
+          <h2 style={{ color: '#6237A0', fontSize: '30px' }}>Our Recommendations</h2>
+          <TopRecommendationsPlot />
+        </div>
+        <div style={{marginLeft:'60px'}}>
+          <GaugeChart />
+        </div>
+      </div>
+      <h2 style={{ color: '#6237A0', fontSize: '30px',marginBottom:'30px',marginLeft:'-30px'}}>Your Bank Analysis</h2>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px',marginTop:'-10px' }}>
+        <div style={{marginLeft:'-40px'}}>
           <NPSScorePlot />
-          </div>
-          <div className = "row" style = {{marginTop:'-30px',marginLeft: '20px'}}>
+        </div>
+        <div style={{marginLeft:'-10px'}}>
           <SentimentAnalysisPlot />
-          </div>
-        
-        <div style={{ marginLeft:'100px',marginTop:'-20px' }}>
-        <ServiceCountsPlot />
-        </div>   
-        </div>      
-          <div className = "row" style = {{marginTop:'50px'}}>
-          <BankNPSPlot />
-          <div style= {{marginLeft:'100px',marginTop:'130px'}}>
+        </div>
+        <div  style={{marginLeft:'-10px'}}>
+          <RatingsPlot />
+        </div>
+      </div>
+      <div style={{marginTop:'20px',marginLeft:'-40px'}}>
+        <BankNPSPlot/>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px',marginTop:'20px'}}>
+        <div style={{marginLeft:'-40px',marginTop:'24px'}}>
+          <ServiceCountsPlot />
+        </div>
+        <div style={{marginLeft:'-10px'}}>
           <IssueCountsPlot />
-          </div>     
-        </div>
-      </div>
-      <div>
-        <h1>All Reviews </h1>
-        <div style={{marginTop:'20px'}}>
-        <DetailedTable />
-        </div>
-      </div>
-      <div className="row" style={{ display: 'flex',marginTop:'50px' }}>
-          <div style={{ flex: 1}}>
-            <h1> Our Recommendations</h1>
-            <div style = {{marginLeft:'250px'}}>
-            <TopRecommendationsPlot />
-            </div>           
-          </div>
-          <div style={{ flex: 1,justifyContent: 'center',marginBottom:'100px'}}>
-            <h1>Projected NPS Score</h1>
-            <div style = {{marginLeft:'50px'}}>
-            <GaugeChart />
-            </div>
-          </div>
         </div>
     </div>
-  );     
+    <div style={{marginTop:'30px'}}>
+      <h2 style={{ color: '#6237A0', fontSize: '30px',marginBottom:'30px',marginLeft:'-5px'}}>GXS Reviews</h2>
+      <DetailedTable />
+    </div>
+    </div>
+  );
 }
 
 export default DashBoardPage;

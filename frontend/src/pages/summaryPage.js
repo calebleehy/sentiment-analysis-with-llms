@@ -10,7 +10,7 @@ import '../styles/App.css';
 
 const SummaryPage = () => {
     const columns = ["Service", "Issue", "Recommendation"];
-    const [selectedRecommendation, setSelectedRecommendation] = useState('');
+    const [selectedRecommendation, setSelectedRecommendation] = useState(data[3]["recommendation"]);
     const recommendations = data.map(item => item.recommendation);
     const gxs = bankData.find(item => item.bank === 'GXS');
     const gxsNPS = gxs ? gxs.nps : null;
@@ -22,7 +22,7 @@ const SummaryPage = () => {
     return (
         <div>
             <Navigation />
-            <h1>Summary of Recommendations</h1>
+            <h1 style={{marginTop:'60px'}}>Summary of Recommendations</h1>
             <div style={{ display: 'flex',flexDirection: 'row',justifyContent: 'center',marginTop:'50px'}}>
             <Plot
     data={[
@@ -59,9 +59,8 @@ const SummaryPage = () => {
   </div>
   <div style={{ display: 'flex',flexDirection: 'column',justifyContent: 'space-between',marginTop:'40px',marginRight:'500px',marginLeft:'100px'}}>
     <NPSScorePlot />
-  <div style ={{marginRight:'200px',flexDirection: 'column',marginLeft:'500px',marginTop:'-322px'}}>
-  <select value={selectedRecommendation} onChange={handleChange} style={{ width: '400px' }}>
-  <option value="">Select Recommendation</option>
+  <div style ={{marginRight:'200px',flexDirection: 'column',marginLeft:'500px',marginTop:'-330px'}}>
+  <select className="custom-select" value={selectedRecommendation} onChange={handleChange} style={{ width: '400px' }}>
           {recommendations.map((recommendation, index) => (
             <option key={index} value={recommendation}>{recommendation}</option>
           ))}

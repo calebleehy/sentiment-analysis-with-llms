@@ -97,7 +97,7 @@ const layout={
 return (
   <div>
     <div>
-    <select onChange={handleSelectChange}>
+    <select className="custom-select" style={{marginBottom:'5px'}} onChange={handleSelectChange}>
           {topServices.map(service => (
             <option key={service} value={service}>{service}</option>
       ))}

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Plot from 'react-plotly.js';
 //import { getReviewData } from '../api/getData';
 import data from '../full.json';
+import Select from 'react-select';
 
 const GXSTable = () => {
 
@@ -27,18 +28,18 @@ const GXSTable = () => {
   }, []); */
   const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
   const columns = ["Review"];
-  const [sentimentFilter, setSentimentFilter] = useState('Negative');
-  const [serviceFilter, setServiceFilter] = useState('Banking');
-  const [issueFilter, setIssueFilter] = useState('Application rejection');
+  const [sentimentFilter, setSentimentFilter] = useState([]);
+  const [serviceFilter, setServiceFilter] = useState([]);
+  const [issueFilter, setIssueFilter] = useState([]);
 
   const sentimentOptions = [...new Set(gxs.map(item => item.sentiment))];
   const serviceOptions = [...new Set(gxs.map(item => item.service))];
   const issueOptions = [...new Set(gxs.map(item => item.issue))];
 
   const filteredData = gxs.filter(item => {
-    const sentimentMatch = sentimentFilter === '' || item.sentiment === sentimentFilter;
-    const serviceMatch = serviceFilter === '' || item.service === serviceFilter;
-    const issueMatch = issueFilter === '' || item.issue === issueFilter;
+    const sentimentMatch = sentimentFilter.length === 0 || sentimentFilter.includes(item.sentiment);
+    const serviceMatch = serviceFilter.length === 0 || serviceFilter.includes(item.service);
+    const issueMatch = issueFilter.length === 0 || issueFilter.includes(item.issue);
     return sentimentMatch && serviceMatch && issueMatch;
 });
   function transposeArray(array) {
@@ -52,31 +53,61 @@ const GXSTable = () => {
   return (
     <div>
     <div>
-        <label style = {{marginRight: '5px'}}>Sentiment:</label>
-        <select value={sentimentFilter} onChange={e => setSentimentFilter(e.target.value)} style={{ width: '150px' }}>
-          <option value="">All</option>
-          {sentimentOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
-        <label style = {{marginRight: '5px', marginLeft: '5px'}}>Service:</label>
-        <select value={serviceFilter} onChange={e => setServiceFilter(e.target.value)} style={{ width: '150px' }}>
-          <option value="">All</option>
-          {serviceOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
+    <Select className = "select-container"
+          isMulti
+          placeholder="Select sentiment..."
+          options={sentimentOptions.map(option => ({ value: option, label: option }))}
+          value={sentimentFilter.map(option => ({ value: option, label: option }))}
+          onChange={(selectedOptions) => setSentimentFilter(selectedOptions.map(option => option.value))}
+          styles={{
+            control: (provided) => ({
+              ...provided,
+              backgroundColor: '#deacf5', // Set your desired background color
+            }),
+            option: (provided) => ({
+              ...provided,
+              color: 'black', // Set your desired text color
+            }),
+          }}
+        />
+         <Select className = "select-container"
+          isMulti
+          placeholder="Select service..."
+          options={serviceOptions.map(option => ({ value: option, label: option }))}
+          value={serviceFilter.map(option => ({ value: option, label: option }))}
+          onChange={(selectedOptions) => setServiceFilter(selectedOptions.map(option => option.value))}
+          styles={{
+            control: (provided,state) => ({
+              ...provided,
+              backgroundColor: '#deacf5', // Set your desired background color
+            }),
+            option: (provided) => ({
+              ...provided,
+              color: 'black', // Set your desired text color
+            }),
+          }}
+        />
         <div>
-        <label style = {{marginRight: '5px'}}>Issue:</label>
-        <select value={issueFilter} onChange={e => setIssueFilter(e.target.value)} style={{ width: '150px' }}>
-          <option value="">All</option>
-          {issueOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
+        <Select className = "select-container"
+          isMulti
+          placeholder="Select issue..."
+          options={issueOptions.map(option => ({ value: option, label: option }))}
+          value={issueFilter.map(option => ({ value: option, label: option }))}
+          onChange={(selectedOptions) => setIssueFilter(selectedOptions.map(option => option.value))}
+          styles={{
+            control: (provided) => ({
+              ...provided,
+              backgroundColor: '#deacf5', // Set your desired background color
+            }),
+            option: (provided) => ({
+              ...provided,
+              color: 'black', // Set your desired text color
+            }),
+          }}
+        />
         </div>
       </div>
-      <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '400px'}}>
+      <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '400px',marginTop:'10px'}}>
       <Plot
         data={[
           {

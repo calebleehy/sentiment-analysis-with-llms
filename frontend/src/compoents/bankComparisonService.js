@@ -28,7 +28,7 @@ const BankComparisonServicePlot = () => {
   const banks = Array.from(new Set(data.map(item => item.bank)));
   const bankColors = {
     "GXS": '#6237A0',
-    "Trust": '#DEACF5',
+    "Trust": '#9754CB',
   };
   const data2 = banks.map(bank => ({
     x: services,

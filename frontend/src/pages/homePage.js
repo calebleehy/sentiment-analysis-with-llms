@@ -12,7 +12,7 @@ const HomePage = () => {
         <div>
             <Navigation />
             <div className="plain-background">
-                    <div className="overlay-text">
+                    <div className="overlay-text roboto-bold">
                         Welcome to GXS Sentiment Analysis!
                     </div>
             </div>

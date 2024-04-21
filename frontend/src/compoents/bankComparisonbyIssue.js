@@ -43,7 +43,7 @@ const BankComparisonIssuePlot = () => {
   const services = Array.from(new Set(data.map(item => item.service)));
   const bankColors = {
     "GXS": '#6237A0',
-    "Trust": '#DEACF5',
+    "Trust": '#9754CB',
   };
   const traces = banks.map(bank => ({
     x: issues,
@@ -96,9 +96,9 @@ const BankComparisonIssuePlot = () => {
   }
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'center',marginBottom:'20px'}}>
-        <div style={{marginBottom:'-20px',marginLeft:'-320px'}}>
-        <select value={selectedService} onChange={handleSelectChange}>
+      <div style={{ display: 'flex', justifyContent: 'center',marginBottom:'10px'}}>
+        <div style={{marginBottom:'-25px',marginLeft:'-125px'}}>
+        <select className="custom-select" style={{marginBottom:'15px'}} value={selectedService} onChange={handleSelectChange}>
           {services.map(service => (
             <option key={service} value={service}>{service}</option>
           ))}

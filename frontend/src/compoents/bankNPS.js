@@ -35,7 +35,7 @@ const BankNPSPlot = () => {
       y: nps,
       type: 'scatter',
       line: {
-        color: 'rgb(140, 81, 201)',
+        color: '#6237A0',
         width: 2
       },
       name: 'NPS',

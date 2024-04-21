@@ -15,13 +15,13 @@ const DashBoardPage = () => {
   return (
     <div>
       <Navigation />
-      <h1>What are the most impactful areas to be addressed?</h1>
+      <h1 style={{marginTop:'60px',color:'#28104E'}}>What are the most impactful areas to be addressed?</h1>
       <div className="dashboard" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: '50px' }}>
-        <div style={{marginTop:'45px',marginLeft:'-20px'}}>
-          <h2 style={{ color: '#6237A0', fontSize: '30px' }}>Our Recommendations</h2>
+        <div style={{marginTop:'35px',marginLeft:'8px'}}>
+          <h2 style={{ color: '#6237A0', fontSize: '30px',marginBottom:'20px'}}>Our Recommendations</h2>
           <TopRecommendationsPlot />
         </div>
-        <div style={{marginLeft:'60px'}}>
+        <div style={{marginLeft:'100px',marginTop:'40px'}}>
           <GaugeChart />
         </div>
       </div>
@@ -41,10 +41,10 @@ const DashBoardPage = () => {
         <BankNPSPlot/>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px',marginTop:'20px'}}>
-        <div style={{marginLeft:'-40px',marginTop:'24px'}}>
+        <div style={{marginLeft:'-40px',marginTop:'35px'}}>
           <ServiceCountsPlot />
         </div>
-        <div style={{marginLeft:'-10px'}}>
+        <div style={{marginLeft:'-10px',marginTop:'-11px'}}>
           <IssueCountsPlot />
         </div>
     </div>

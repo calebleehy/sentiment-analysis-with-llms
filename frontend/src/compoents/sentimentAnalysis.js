@@ -34,7 +34,7 @@ const SentimentAnalysisPlot = () => {
         type: 'bar',
         orientation:'v',
         marker: {
-        color: 'rgb(140, 81, 201)' 
+        color: '#6238A0' 
       }
     }
   ];

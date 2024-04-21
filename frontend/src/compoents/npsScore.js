@@ -18,7 +18,7 @@ const NPSScorePlot = () => {
           mode: "gauge+number",
           gauge: {
             axis: { range: [-100, 100],tickwidth: 1, tickcolor: 'white', tickfont: { color: 'white' }},
-            bar: { color: 'rgb(140, 81, 201)' },
+            bar: { color: '#6237A0' },
             bgcolor: 'black',
             bordercolor: 'white',
             

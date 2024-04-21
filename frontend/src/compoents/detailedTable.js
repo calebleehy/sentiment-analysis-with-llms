@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Plot from 'react-plotly.js';
 //import { getReviewData } from '../api/getData';
 import data from '../full.json';
+import Select from 'react-select';
 
 const DetailedTable = () => {
    //store review data into data
@@ -26,23 +27,40 @@ const DetailedTable = () => {
    }, []); */
   const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
   const columns = ["Review","Service","Issue","Rating","Sentiment"];
-  const [sentimentFilter, setSentimentFilter] = useState('Negative');
-  const [serviceFilter, setServiceFilter] = useState('App');
-  const [issueFilter, setIssueFilter] = useState('Technical glitches');
-  const [ratingFilter, setRatingFilter] = useState('');
+  const [sentimentFilter, setSentimentFilter] = useState([]);
+  const [serviceFilter, setServiceFilter] = useState([]);
+  const [issueFilter, setIssueFilter] = useState([]);
+  const [ratingFilter, setRatingFilter] = useState([]);
+  const [filterWords, setFilterWords] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(5); // Change this to set the number of rows per page
+  // Calculate the indexes of the first and last rows to display
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
 
+  // Function to change the current page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const handleFilterChange = (e) => {
+      setFilterWords(e.target.value);
+  };
+  const MAX_PAGE_NUMBERS = 5; // Maximum number of page numbers to show
   const sentimentOptions = [...new Set(gxs.map(item => item.sentiment))];
   const serviceOptions = [...new Set(gxs.map(item => item.service))];
   const issueOptions = [...new Set(gxs.map(item => item.issue))];
   const ratingOptions = [...new Set(gxs.map(item => item.rating))];
 
   const filteredData = gxs.filter(item => {
-    const sentimentMatch = sentimentFilter === '' || item.sentiment === sentimentFilter;
-    const serviceMatch = serviceFilter === '' || item.service === serviceFilter;
-    const issueMatch = issueFilter === '' || item.issue === issueFilter;
-    const ratingMatch = ratingFilter === '' || item.rating === ratingFilter;
-    return sentimentMatch && serviceMatch && issueMatch && ratingMatch;
+    const sentimentMatch = sentimentFilter.length === 0 || sentimentFilter.includes(item.sentiment);
+    const serviceMatch = serviceFilter.length === 0 || serviceFilter.includes(item.service);
+    const issueMatch = issueFilter.length === 0 || issueFilter.includes(item.issue);
+    const ratingMatch = ratingFilter.length === 0 || ratingFilter.includes(item.rating);
+    const reviewText = item.review.toLowerCase();
+    const wordsToFilter = filterWords.toLowerCase().split(' ');
+    return sentimentMatch && serviceMatch && issueMatch && ratingMatch && wordsToFilter.every(word => reviewText.includes(word));
 });
+const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
+const startPage = Math.max(1, currentPage - Math.floor(MAX_PAGE_NUMBERS / 2));
+const endPage = Math.min(Math.ceil(filteredData.length / rowsPerPage), startPage + MAX_PAGE_NUMBERS - 1);
 const downloadCSV = () => {
   const headers = columns.map(col => col.toUpperCase());
   const rows = [headers,...filteredData.map(item => columns.map(col => (col === 'Review' ? `"${item[col.toLowerCase()] || ''}"` : item[col.toLowerCase()] || '')))];
@@ -59,37 +77,85 @@ const downloadCSV = () => {
   return (
     <div>
     <div>
-        <label style={{marginRight:'5px'}}>Sentiment:</label>
-        <select value={sentimentFilter} onChange={e => setSentimentFilter(e.target.value)} style={{ width: '150px' }}>
-          <option value="">All</option>
-          {sentimentOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
-        <label style={{marginLeft:'5px',marginRight:'5px'}}>Service:</label>
-        <select value={serviceFilter} onChange={e => setServiceFilter(e.target.value)} style={{ width: '150px' }}>
-          <option value="">All</option>
-          {serviceOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
-        <label style={{marginLeft:'5px',marginRight:'5px'}}>Issue:</label>
-        <select value={issueFilter} onChange={e => setIssueFilter(e.target.value)} style={{ width: '150px' }}>
-          <option value="">All</option>
-          {issueOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
-        <label style={{marginLeft:'5px',marginRight:'5px'}}>Rating:</label>
-        <select value={ratingFilter} onChange={e => setRatingFilter(e.target.value)} style={{ width: '150px' }}>
-          <option value="">All</option>
-          {ratingOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
-        <button onClick={downloadCSV} className="download-csv">Download CSV</button>
+    <input className="custom-select"
+      type="text"
+      value={filterWords}
+      onChange={handleFilterChange}
+      placeholder="Enter words to filter"
+      />
+      <button onClick={downloadCSV} className="download-csv">Download CSV</button>
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <Select className = "select-container"
+          isMulti
+          placeholder="Select sentiment..."
+          options={sentimentOptions.map(option => ({ value: option, label: option }))}
+          value={sentimentFilter.map(option => ({ value: option, label: option }))}
+          onChange={(selectedOptions) => setSentimentFilter(selectedOptions.map(option => option.value))}
+          styles={{
+            control: (provided) => ({
+              ...provided,
+              backgroundColor: '#deacf5', // Set your desired background color
+            }),
+            option: (provided) => ({
+              ...provided,
+              color: 'black', // Set your desired text color
+            }),
+          }}
+        />
+        <Select className = "select-container"
+          isMulti
+          placeholder="Select service..."
+          options={serviceOptions.map(option => ({ value: option, label: option }))}
+          value={serviceFilter.map(option => ({ value: option, label: option }))}
+          onChange={(selectedOptions) => setServiceFilter(selectedOptions.map(option => option.value))}
+          styles={{
+            control: (provided,state) => ({
+              ...provided,
+              backgroundColor: '#deacf5', // Set your desired background color
+            }),
+            option: (provided) => ({
+              ...provided,
+              color: 'black', // Set your desired text color
+            }),
+          }}
+        />
+        <Select className = "select-container"
+          isMulti
+          placeholder="Select issue..."
+          options={issueOptions.map(option => ({ value: option, label: option }))}
+          value={issueFilter.map(option => ({ value: option, label: option }))}
+          onChange={(selectedOptions) => setIssueFilter(selectedOptions.map(option => option.value))}
+          styles={{
+            control: (provided) => ({
+              ...provided,
+              backgroundColor: '#deacf5', // Set your desired background color
+            }),
+            option: (provided) => ({
+              ...provided,
+              color: 'black', // Set your desired text color
+            }),
+          }}
+        />
+        <Select className = "select-container"
+          isMulti
+          placeholder="Select rating.."
+          options={ratingOptions.map(option => ({ value: option, label: option }))}
+          value={ratingFilter.map(option => ({ value: option, label: option }))}
+          onChange={(selectedOptions) => setRatingFilter(selectedOptions.map(option => option.value))}
+          styles={{
+            control: (provided) => ({
+              ...provided,
+              backgroundColor: '#deacf5', // Set your desired background color
+            }),
+            option: (provided) => ({
+              ...provided,
+              color: 'black', // Set your desired text color
+            }),
+          }}
+        />
+        </div>
       </div>
-      <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '400px'}}>
+      <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '470px'}}>
       <Plot
         data={[
           {
@@ -103,11 +169,11 @@ const downloadCSV = () => {
               font: { family: 'Arial', size: 12, color: 'white' }
             },
             cells: {
-              values: [filteredData.map(item => item.review),
-                filteredData.map(item => item.service),
-                filteredData.map(item => item.issue),
-                filteredData.map(item => item.rating),
-                filteredData.map(item => item.sentiment)],
+              values: [currentRows.map(item => item.review),
+                currentRows.map(item => item.service),
+                currentRows.map(item => item.issue),
+                currentRows.map(item => item.rating),
+                currentRows.map(item => item.sentiment)],
               align: ['left'],
               line: { color: 'white', width: 1 },
               fill: { color: ['rgb(25,25,26)'] },
@@ -125,6 +191,13 @@ const downloadCSV = () => {
         }}
       />
       </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>&lt;</button>
+    {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
+      <button key={startPage + index} onClick={() => paginate(startPage + index)} disabled={currentPage === startPage + index}>{startPage + index}</button>
+    ))}
+    <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(filteredData.length / rowsPerPage)}>&gt;</button>
+         </div>
     </div>
   );
   };

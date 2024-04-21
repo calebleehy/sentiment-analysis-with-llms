@@ -6,9 +6,7 @@ body {
 h1 {
   font-size: 2.5rem;
   letter-spacing: 1.2px;
-  background: linear-gradient(40deg,
-      rgb(166, 2, 247) 0%,
-      rgba(184, 105, 227, 0.717) 100%);
+  background: #6237A0;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   display: flex;
@@ -29,6 +27,7 @@ h1 {
   height: 34vh;
   width: 30vw;
   display:block;
+  border-radius: 1vh;
 }
 .gxs-content {
   position: relative;
@@ -44,7 +43,15 @@ h1 {
   background-color: #28104E; /* Plain background color */
   height: 30vh; /* Set the height of the background */
   position: relative; /* Position relative for absolute positioning of text */
-  width:98vw;
+  width:98.5vw;
+  margin-left:-5vw;
+  margin-top:10px
+}
+.key-features-background{
+  background-color: #28104E; /* Plain background color */
+  height: 30vh; /* Set the height of the background */
+  position: relative; /* Position relative for absolute positioning of text */
+  width:30vw;
   margin-left:-55px;
   margin-top:10px
 }
@@ -56,6 +63,7 @@ h1 {
   padding: 2vh;
   margin: 1vh;
   margin-top:0.1vh;
+  border-radius: 2vh; 
 }
 
 .overlay-text {
@@ -72,18 +80,20 @@ h1 {
   justify-content: center;
 }
 .download-csv {
-  background-color: white; /* Background color */
+  background-color: #deacf5; /* Background color */
   color: black; /* Text color */
   padding: 5px 10px; /* Padding inside the button */
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 10px; /* Rounded corners */
   border: none; /* No border */
   cursor: pointer; /* Cursor style on hover */
   font-size: 16px; /* Font size */
   font-weight: bold; /* Font weight */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
   transition: background-color 0.3s ease; /* Transition effect */
-  margin-left:130px;
-  margin-bottom:5px
+  margin-left:0.5vw;
+  margin-bottom:10px;
+  width:21vw;
+  height:7vh;
 }
 
 /* Define hover effect */
@@ -96,7 +106,7 @@ h1 {
   padding: 1vw 3vh;
   font-size: 3vh;
   border: none;
-  border-radius: 1vh;
+  border-radius: 2vh;
   background-color: #6237A0;
   color: white;
   cursor: pointer;
@@ -130,4 +140,62 @@ h1 {
   justify-content: center;
   align-items: center;
   font-size: 4vh;
+}
+
+.custom-select {
+  padding: 2px;
+  font-size: 16px;
+  border: 2px solid #28104e;
+  border-radius: 8px;
+  background-color: #deacf5;
+  color: #28104e;
+  margin-right:5px;
+  width:21vw;
+  height:7vh;
+}
+
+.custom-select:hover {
+  border-color: #28104e;
+}
+
+.custom-select:focus {
+  border-color: #deacf5; /* Change focus color */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Add focus effect */
+}
+
+/* Style the dropdown arrow */
+.custom-select::after {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+/* Style selected option */
+.custom-select option:checked {
+  background-color: #007bff;
+  color: #fff;
+}
+/* Styles for the container of the multi-select */
+.select-container {
+  width: 21vw; /* Set the width of the container */
+  height: 3vh;
+  margin-right:1vw;
+  margin-bottom: 5vh;
+}
+
+.roboto-regular{
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.roboto-regular-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }

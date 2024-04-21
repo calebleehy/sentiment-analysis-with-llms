@@ -4,7 +4,7 @@ import data from '../whatif_rec_nps.json';
 import bankData from  '../bank_nps.json'
 
 const GaugeChart = () => {
-    const [selectedRecommendation, setSelectedRecommendation] = useState('');
+    const [selectedRecommendation, setSelectedRecommendation] = useState(data[0].recommendation);
     const firstTwoRec =  data.slice(0, 2);
     const recommendations = firstTwoRec.map(item => item.recommendation);
     const gxs = bankData.find(item => item.bank === 'GXS');
@@ -17,8 +17,7 @@ const GaugeChart = () => {
   
     return (
       <div>
-        <select value={selectedRecommendation} onChange={handleChange} style={{ width: '300px' }}>
-          <option value="">Select Recommendation</option>
+        <select className="custom-select" value={selectedRecommendation} onChange={handleChange} style={{ width: '500px' }}>
           {recommendations.map((recommendation, index) => (
             <option key={index} value={recommendation}>{recommendation}</option>
           ))}
@@ -45,8 +44,8 @@ const GaugeChart = () => {
               }
             ]}
             layout={{ 
-              width: 500, height: 300,
-              margin: { t: -100, b: -100, l: -50, r: -50 },
+              width: 500, height: 250,
+              margin: { t:70, b: 40, l: 25, r: 25 },
               plot_bgcolor: 'rgb(25,25,26)', // Set plot background color to black
         paper_bgcolor: 'rgb(25,25,26)', // Set paper background color to black
              }}

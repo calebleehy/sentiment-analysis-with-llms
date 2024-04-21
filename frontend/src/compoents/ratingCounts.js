@@ -34,7 +34,7 @@ const RatingsPlot = () => {
         type: 'bar',
         orientation:'v',
         marker: {
-        color: 'rgb(140, 81, 201)' 
+        color: '#6237A0' 
       }
     }
   ];
@@ -53,6 +53,7 @@ const RatingsPlot = () => {
           font: {
             color: 'white', // Set x-axis text color to white
           },
+          text:'Rating'
         },
         tickfont: {
           color: 'white', // Set x-axis tick text color to white

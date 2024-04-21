@@ -17,10 +17,10 @@ const ComparisonPage = () => {
     return (
         <div>
             <Navigation/>
-            <h1 style = {{marginTop:'60px'}}>How does GXS stand against Trust?</h1>
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '10px', marginTop: '20px' }}>
-        <div style={{marginTop:'40px',marginLeft:'10px'}}>
-          <h2 style={{ color: '#6237A0', fontSize: '30px' }}>Our Recommedation</h2>
+            <h1 style = {{marginTop:'15vh'}}>How does GXS stand against Trust?</h1>
+            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1vw', marginTop: '7vh' }}>
+        <div style={{marginTop:'8vh',marginLeft:'0.5vw'}}>
+          <h2 style={{ color: '#6237A0', fontSize: '2.5vw',marginTop:'2vh' }}>Our Recommedation</h2>
           <Plot
             data={[
               {
@@ -53,28 +53,28 @@ const ComparisonPage = () => {
             }}
           />
         </div>
-        <div style={{marginLeft:'160px'}}>
+        <div style={{marginLeft:'12vw'}}>
           <WhatIfNPSPlot />
         </div>
       </div>
-  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px',marginTop:'20px' }}>
-    <div style={{marginLeft:'-40px',marginTop:'30px'}}>
+  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1vw',marginTop:'7vh',marginLeft:'-4vw'}}>
+    <div>
       <NPSScoreByBankPlot />
     </div>
-    <div style={{marginLeft:'-10px',marginTop:'-112px'}}>
+    <div style={{marginTop:'-24vh'}}>
       <BankComparisonServicePlot />
     </div>
-      <div  style={{marginLeft:'-10px',marginTop:'-10px'}}>
+      <div style={{marginTop:'-6.5vh'}}>
     <BankComparisonIssuePlot/>
     </div>
     </div>
-    <div style={{ display: 'flex', justifyContent: 'space-between',marginLeft:'-30px',marginTop:'-50px'}}>
-      <div style={{ flex: 1,marginLeft:'70px',marginTop:'-40px' }}>
-        <p style={{color:'#6237A0',fontSize:'30px'}}><strong>GXS</strong></p>
+    <div style={{ display: 'flex', justifyContent: 'space-between',marginLeft:'2vw',marginTop:'-10vh'}}>
+      <div style={{ flex: 1}}>
+        <p style={{color:'#6237A0',fontSize:'2.5vw'}}><strong>GXS</strong></p>
         <GXSTable />
       </div>
-      <div style={{ flex: 1, marginTop:'-40px'}}>
-        <p style={{color:'#9754CB',fontSize:'30px'}}><strong>Trust</strong></p>
+      <div style={{ flex: 1}}>
+        <p style={{color:'#9754CB',fontSize:'2.5vw'}}><strong>Trust</strong></p>
         <TrustTable />
       </div>
     </div>

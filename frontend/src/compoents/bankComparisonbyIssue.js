@@ -96,9 +96,9 @@ const BankComparisonIssuePlot = () => {
   }
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'center',marginBottom:'10px'}}>
-        <div style={{marginBottom:'-25px',marginLeft:'-125px'}}>
-        <select className="custom-select" style={{marginBottom:'15px'}} value={selectedService} onChange={handleSelectChange}>
+      <div style={{ display: 'flex', justifyContent: 'center',marginTop:'0.4vh'}}>
+        <div style={{marginLeft:'-10vw'}}>
+        <select className="custom-select" value={selectedService} onChange={handleSelectChange}>
           {services.map(service => (
             <option key={service} value={service}>{service}</option>
           ))}

@@ -23,7 +23,7 @@ const SummaryPage = () => {
         <div>
             <Navigation />
             <h1 style={{marginTop:'60px'}}>Summary of Recommendations</h1>
-            <div style={{ display: 'flex',flexDirection: 'row',justifyContent: 'center',marginTop:'50px'}}>
+            <div style={{ display: 'flex',flexDirection: 'row',justifyContent: 'center',marginTop:'5vh'}}>
             <Plot
     data={[
       {
@@ -57,10 +57,10 @@ const SummaryPage = () => {
     }}
   />
   </div>
-  <div style={{ display: 'flex',flexDirection: 'column',justifyContent: 'space-between',marginTop:'40px',marginRight:'500px',marginLeft:'100px'}}>
+  <div style={{ display: 'flex',flexDirection: 'row',justifyContent: 'space-between',marginTop:'7vh',marginLeft:'10vw'}}>
     <NPSScorePlot />
-  <div style ={{marginRight:'200px',flexDirection: 'column',marginLeft:'500px',marginTop:'-330px'}}>
-  <select className="custom-select" value={selectedRecommendation} onChange={handleChange} style={{ width: '400px' }}>
+  <div style ={{flexDirection: 'row',marginLeft:'5vw',marginTop:'-6.5svh'}}>
+  <select className="custom-select" value={selectedRecommendation} onChange={handleChange} style={{ width: '31vw' }}>
           {recommendations.map((recommendation, index) => (
             <option key={index} value={recommendation}>{recommendation}</option>
           ))}

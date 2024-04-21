@@ -17,7 +17,7 @@ const HomePage = () => {
                     </div>
             </div>
             <Container className = "Container">
-            <div className="gxs-content Container" style={{ marginTop: '30px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div className="gxs-content Container" style={{ marginTop: '7vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div className="content-box">
                     <img src={gxsImage} alt="GXS" className="image" />
                     <div className="in-box-text">View the most pressing issues for GXS here.</div>

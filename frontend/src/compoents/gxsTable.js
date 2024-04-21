@@ -107,7 +107,7 @@ const GXSTable = () => {
         />
         </div>
       </div>
-      <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '400px',marginTop:'10px'}}>
+      <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '400px'}}>
       <Plot
         data={[
           {

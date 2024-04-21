@@ -45,15 +45,15 @@ h1 {
   position: relative; /* Position relative for absolute positioning of text */
   width:98.5vw;
   margin-left:-5vw;
-  margin-top:10px
+  margin-top:1vh;
 }
 .key-features-background{
   background-color: #28104E; /* Plain background color */
   height: 30vh; /* Set the height of the background */
   position: relative; /* Position relative for absolute positioning of text */
   width:30vw;
-  margin-left:-55px;
-  margin-top:10px
+  margin-left:-5vw;
+  margin-top:1vh;
 }
 .content-box{
   background-color: #28104E; /* Plain background color */
@@ -86,12 +86,12 @@ h1 {
   border-radius: 10px; /* Rounded corners */
   border: none; /* No border */
   cursor: pointer; /* Cursor style on hover */
-  font-size: 16px; /* Font size */
+  font-size: 1.3vw; /* Font size */
   font-weight: bold; /* Font weight */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
   transition: background-color 0.3s ease; /* Transition effect */
   margin-left:0.5vw;
-  margin-bottom:10px;
+  margin-bottom:1vh;
   width:21vw;
   height:7vh;
 }
@@ -128,7 +128,7 @@ h1 {
 .key-features-container {
   display: flex;
   justify-content: space-between; /* Adjust this property as needed */
-  margin-top: 20px;
+  margin-top: 3vh;
 }
 
 .key-feature {

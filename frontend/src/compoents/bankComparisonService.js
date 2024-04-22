@@ -1,10 +1,11 @@
 import React,{ useState, useEffect} from 'react';
 import Plot from 'react-plotly.js';
-import { getBankServiceFreq } from '../api/getData';
+//import { getBankServiceFreq } from '../api/getData';
+import data from '../bank_serv_freq.json';
 
 const BankComparisonServicePlot = () => {
   //store review data into data
-  const [data, setData] = useState([]);
+  /* const [data, setData] = useState([]);
   //fetch review data by getReviewData method
   
   //load data everytime
@@ -22,13 +23,12 @@ const BankComparisonServicePlot = () => {
 
     fetchData();
 
-  }, []);
+  }, []); */
   const services = Array.from(new Set(data.map(item => item.service)));
   const banks = Array.from(new Set(data.map(item => item.bank)));
   const bankColors = {
-    "GXS": 'rgb(77, 6, 150)',
-    "Trust": 'rgb(140, 81, 201)',
-    "MariBank":'rgb(213, 166, 237)'
+    "GXS": '#6237A0',
+    "Trust": '#9754CB',
   };
   const data2 = banks.map(bank => ({
     x: services,
@@ -44,13 +44,13 @@ const BankComparisonServicePlot = () => {
     width: 400, height: 300,
     barmode: 'group',
     title: {
-      text: 'Proportion of Service for Each Bank' ,
+      text: 'Proportion of Service (%) with <br /> Negative Sentiments' ,
       font: {
         color: 'white', // Set title text color to white
       },
     },
-    plot_bgcolor: 'black', // Set plot background color to black
-    paper_bgcolor: 'black', // Set paper background color to black,
+    plot_bgcolor: 'rgb(25,25,26)', // Set plot background color to black
+    paper_bgcolor: 'rgb(25,25,26)', // Set paper background color to black,
     xaxis: {
       title: {
         text: 'Service',
@@ -78,11 +78,14 @@ const BankComparisonServicePlot = () => {
     legend: {
       font: { color: 'white' } // Set legend text color to white
     },
-  }
+  };
+  var config ={
+    responsive:true
+  };
 
   return (
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <Plot data={data2} layout={layout} />
+      <Plot data={data2} layout={layout} config={config}/>
       </div>
     )}
   

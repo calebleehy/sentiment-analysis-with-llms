@@ -1,11 +1,12 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
-import { getMonthNps } from '../api/getData';
+//import { getMonthNps } from '../api/getData';
 import { useEffect, useState } from 'react';
+import data from '../month_nps.json';
 
 const BankNPSPlot = () => {
   //store review data into data
-  const [data, setData] = useState([]);
+  /* const [data, setData] = useState([]);
   //fetch review data by getReviewData method
   
   //load data everytime
@@ -23,32 +24,47 @@ const BankNPSPlot = () => {
 
     fetchData();
 
-  }, []);
+  }, []); */
   const month = data.map(data => data.month);
   const nps = data.map(data => data.nps);
+  var sum = nps.reduce((acc, val) => acc + val, 0);
+  var average = sum / nps.length;
   const data2= [
     {
       x: month,
       y: nps,
       type: 'scatter',
       line: {
-        color: 'rgb(140, 81, 201)',
+        color: '#6237A0',
         width: 2
+      },
+      name: 'NPS',
+    },
+    {
+      x: month,
+      y: Array(month.length).fill(average),
+      type: 'scatter',
+      mode: 'lines',
+      name: 'Average',
+      line: {
+        dash: 'dash'
       }
     }
 ];
+
 const layout={
-  width: 750, height: 400,
+  width: 1225, height: 400,
   title: {
     text:'GXS Bank NPS over Time',
     font: {
       color: 'white', // Set title text color to white
     },
   },
-  plot_bgcolor: 'black', // Set plot background color to black
-  paper_bgcolor: 'black', // Set paper background color to black
+  plot_bgcolor: 'rgb(25, 25, 26)', // Set plot background color to black
+  paper_bgcolor: 'rgb(25, 25, 26)', // Set paper background color to black
   xaxis: {
     color: 'white',
+    tickangle: -45,
     title: {
       text: 'Month-Year',
       font: {
@@ -71,11 +87,15 @@ const layout={
     },
     color: 'white',
   },
-}
+};
+var config ={
+  responsive:true
+};
 return (
   <Plot
   data={data2}
   layout={layout}
+  config={config}
   />
   );
 };

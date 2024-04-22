@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
 import Plot from 'react-plotly.js';
 import data from '../whatif_rec_nps.json';
+import bankData from  '../bank_nps.json'
 
 const GaugeChart = () => {
-    const [selectedRecommendation, setSelectedRecommendation] = useState('');
-  
-    const recommendations = data.map(item => item.recommendation);
-  
+    const [selectedIssue, setSelectedIssue] = useState(data[0].issue);
+    const firstTwoIssue =  data.slice(0, 2);
+    const issues = firstTwoIssue.map(item => item.issue);
+    const gxs = bankData.find(item => item.bank === 'GXS');
+    const gxsNPS = gxs ? gxs.nps : null;
     const handleChange = (event) => {
-      setSelectedRecommendation(event.target.value);
+      setSelectedIssue(event.target.value);
     };
   
-    const filteredData = data.find(item => item.recommendation === selectedRecommendation);
+    const filteredData = firstTwoIssue.find(item => item.issue === selectedIssue);
   
     return (
       <div>
-        <select value={selectedRecommendation} onChange={handleChange}>
-          <option value="">Select Recommendation</option>
-          {recommendations.map((recommendation, index) => (
-            <option key={index} value={recommendation}>{recommendation}</option>
+        <select className="custom-select" value={selectedIssue} onChange={handleChange} style={{ width: '39vw' }}>
+          {issues.map((issue, index) => (
+            <option key={index} value={issue}>{issue}</option>
           ))}
         </select>
         {filteredData && (
@@ -26,27 +27,31 @@ const GaugeChart = () => {
             data={[
               {
                 type: 'indicator',
-                mode: 'gauge+number',
+                mode: 'gauge+number+delta',
                 value: filteredData.nps,
-                title: { text: "What-if NPS",
+                delta: { reference: gxsNPS },
+                title: { text: "Projected NPS",align: 'center',
                 font: {
                   color: 'white',
                 },},
-                number: { font: { color: 'white' } },
+                number: { font: { color: 'white' },align: 'center' },
                 gauge: {
                   axis: { range: [-100, 100],tickwidth: 1, tickcolor: 'white', tickfont: { color: 'white' }},
-                  bar: { color: 'purple' },
+                  bar: { color: '#6237A0' },
                   bgcolor: 'black',
                   bordercolor: 'white',        
                 }
               }
             ]}
             layout={{ 
-              width: 400, height: 300,
-              margin: { t: 0, b: 0},
-              plot_bgcolor: 'black', // Set plot background color to black
-        paper_bgcolor: 'black', // Set paper background color to black
+              width: 500, height: 250,
+              margin: { t:70, b: 40, l: 25, r: 25 },
+              plot_bgcolor: 'rgb(25,25,26)', // Set plot background color to black
+        paper_bgcolor: 'rgb(25,25,26)', // Set paper background color to black
              }}
+             config ={{
+              responsive:true
+            }}
           />
         )}
       </div>

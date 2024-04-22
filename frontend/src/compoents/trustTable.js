@@ -1,10 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Plot from 'react-plotly.js';
-import { getReviewData } from '../api/getData';
+import data from '../full.json';
+import Select from 'react-select';
+//import { getReviewData } from '../api/getData';
 
 const TrustTable = () => {
   //store review data into data
-  const [data, setData] = useState([]);
+  /* const [data, setData] = useState([]);
   //fetch review data by getReviewData method
   
   //load data everytime
@@ -22,25 +24,22 @@ const TrustTable = () => {
 
     fetchData();
 
-  }, []);
+  }, []); */
   const trust = data.filter(item => item.bank === 'Trust') //filtering for only trust data
   const columns = ["Review"];
-  const [sentimentFilter, setSentimentFilter] = useState('');
-  const [serviceFilter, setServiceFilter] = useState('');
-  const [issueFilter, setIssueFilter] = useState('');
-  const [intentFilter, setIntentFilter] = useState('');
+  const [sentimentFilter, setSentimentFilter] = useState([]);
+  const [serviceFilter, setServiceFilter] = useState([]);
+  const [issueFilter, setIssueFilter] = useState([]);
 
   const sentimentOptions = [...new Set(trust.map(item => item.sentiment))];
   const serviceOptions = [...new Set(trust.map(item => item.service))];
   const issueOptions = [...new Set(trust.map(item => item.issue))];
-  const intentOptions = [...new Set(trust.map(item => item.intent))];
 
   const filteredData = trust.filter(item => {
-    const sentimentMatch = sentimentFilter === '' || item.sentiment === sentimentFilter;
-    const serviceMatch = serviceFilter === '' || item.service === serviceFilter;
-    const issueMatch = issueFilter === '' || item.issue === issueFilter;
-    const intentMatch = intentFilter === '' || item.intent === intentFilter;
-    return sentimentMatch && serviceMatch && issueMatch && intentMatch;
+    const sentimentMatch = sentimentFilter.length === 0 || sentimentFilter.includes(item.sentiment);
+    const serviceMatch = serviceFilter.length === 0 || serviceFilter.includes(item.service);
+    const issueMatch = issueFilter.length === 0 || issueFilter.includes(item.issue);
+    return sentimentMatch && serviceMatch && issueMatch;
 });
   function transposeArray(array) {
     if (!array || !Array.isArray(array) || array.length === 0) {
@@ -53,35 +52,58 @@ const TrustTable = () => {
   return (
     <div>
     <div>
-        <label>Sentiment:</label>
-        <select value={sentimentFilter} onChange={e => setSentimentFilter(e.target.value)}>
-          <option value="">All</option>
-          {sentimentOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
-        <label>Service:</label>
-        <select value={serviceFilter} onChange={e => setServiceFilter(e.target.value)}>
-          <option value="">All</option>
-          {serviceOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
-        <label>Issue:</label>
-        <select value={issueFilter} onChange={e => setIssueFilter(e.target.value)}>
-          <option value="">All</option>
-          {issueOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
+    <Select className = "select-container"
+          isMulti
+          placeholder="Select sentiment..."
+          options={sentimentOptions.map(option => ({ value: option, label: option }))}
+          value={sentimentFilter.map(option => ({ value: option, label: option }))}
+          onChange={(selectedOptions) => setSentimentFilter(selectedOptions.map(option => option.value))}
+          styles={{
+            control: (provided) => ({
+              ...provided,
+              backgroundColor: '#deacf5', // Set your desired background color
+            }),
+            option: (provided) => ({
+              ...provided,
+              color: 'black', // Set your desired text color
+            }),
+          }}
+        />
+        <Select className = "select-container"
+          isMulti
+          placeholder="Select service..."
+          options={serviceOptions.map(option => ({ value: option, label: option }))}
+          value={serviceFilter.map(option => ({ value: option, label: option }))}
+          onChange={(selectedOptions) => setServiceFilter(selectedOptions.map(option => option.value))}
+          styles={{
+            control: (provided,state) => ({
+              ...provided,
+              backgroundColor: '#deacf5', // Set your desired background color
+            }),
+            option: (provided) => ({
+              ...provided,
+              color: 'black', // Set your desired text color
+            }),
+          }}
+        />
         <div>
-        <label>Intent:</label>
-        <select value={intentFilter} onChange={e => setIntentFilter(e.target.value)}>
-          <option value="">All</option>
-          {intentOptions.map(option => (
-            <option key={option} value={option}>{option}</option>
-          ))}
-        </select>
+        <Select className = "select-container"
+          isMulti
+          placeholder="Select issue..."
+          options={issueOptions.map(option => ({ value: option, label: option }))}
+          value={issueFilter.map(option => ({ value: option, label: option }))}
+          onChange={(selectedOptions) => setIssueFilter(selectedOptions.map(option => option.value))}
+          styles={{
+            control: (provided) => ({
+              ...provided,
+              backgroundColor: '#deacf5', // Set your desired background color
+            }),
+            option: (provided) => ({
+              ...provided,
+              color: 'black', // Set your desired text color
+            }),
+          }}
+        />
         </div>
       </div>
       <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '400px'}}>
@@ -92,27 +114,30 @@ const TrustTable = () => {
             header: {
               values: columns,
               align: ['center'],
-              line: { width: 1, color: 'black' },
-              fill: { color: 'rgb(140, 81, 201)' },
+              line: { width: 1, color: 'white' },
+              fill: { color: '#9765cb' },
               font: { family: 'Arial', size: 12, color: 'white' }
             },
             cells: {
               values: transposedRows,
               align: ['left'],
-              line: { color: 'black', width: 1 },
-              fill: { color: ['white'] },
-              font: { family: 'Arial', size: 11, color: ['black'] },
+              line: { color: 'white', width: 1 },
+              fill: { color: ['rgb(25,25,26)'] },
+              font: { family: 'Arial', size: 11, color: ['white'] },
               height: 100 // Set cell height for each review
             }
           }
         ]}
         layout={{
-          width: 400,
+          width: 500,
           height: 300,
           plot_bgcolor: 'black',
           paper_bgcolor: 'black',
           font: { color: 'white' },
-          margin: { l: 0, r: 0, b: 0, t: 0 } // Set margin to 0
+          margin: { l: 0, r: 0, b: 0, t: 0,pad: 0 } // Set margin to 0
+        }}
+        config ={{
+          responsive:true
         }}
       />
       </div>

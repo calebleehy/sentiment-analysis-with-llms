@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
-import { getBankNpsData } from '../api/getData';
+import data from '../bank_nps.json';
+//import { getBankNpsData } from '../api/getData';
 
 const NPSScoreByBankPlot = () => {
 
   //store review data into data
-  const [data, setData] = useState([]);
+  /* const [data, setData] = useState([]);
   //fetch review data by getReviewData method
 
   //load data everytime
@@ -23,18 +24,19 @@ const NPSScoreByBankPlot = () => {
 
     fetchData();
 
-  }, []);
-  const bank = data.map(data => data.bank);
+  }, []); */
+  const banks = data.map(data => data.bank);
   const nps = data.map(data => data.nps);
   const data2 = [
     {
-      x: bank,
+      x: banks,
       y: nps,
       type: 'bar',
       orientation: 'v',
       marker: {
-        color: 'rgb(77, 6, 150)'
-      }
+        color: banks.map(bank => bank === 'GXS' ? '#6237A0' : '#9754CB')
+      },
+      responsive: false
     }
   ];
   const layout = {
@@ -45,8 +47,8 @@ const NPSScoreByBankPlot = () => {
         color: 'white', // Set title text color to white
       },
     },
-    plot_bgcolor: 'black', // Set plot background color to black
-    paper_bgcolor: 'black', // Set paper background color to black,
+    plot_bgcolor: 'rgb(25,25,26)', // Set plot background color to black
+    paper_bgcolor: 'rgb(25,25,26)', // Set paper background color to black,
     xaxis: {
       title: {
         text: 'Bank',
@@ -71,11 +73,15 @@ const NPSScoreByBankPlot = () => {
         color: 'white', // Set y-axis tick text color to white
       },
     },
-  }
+  };
+  var config ={
+    responsive:true
+  };
   return (
     <Plot
       data={data2}
       layout={layout}
+      config={config}
     />
   );
 };

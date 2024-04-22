@@ -1,21 +1,17 @@
 [
     {
-        "issue": "Technical glitches",
         "recommendation": "Improve app stability & accessibility, prioritize fixing 'technical glitches' for seamless user experience.",
         "nps": -0.7
     },
     {
-        "issue": "Registration and setup",
         "recommendation": "Streamline registration process, address errors, ensure compatibility with devices & Singpass for smoother onboarding.",
         "nps": -4.8
     },
     {
-        "issue": "Application rejection",
         "recommendation": "Enhance application process transparency and resolve recurring technical issues promptly.",
         "nps": -9.8
     },
     {
-        "issue": "All issues",
         "recommendation": "Combined",
         "nps": 7.6
     }

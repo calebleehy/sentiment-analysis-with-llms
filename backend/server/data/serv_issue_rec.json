@@ -1,17 +1,20 @@
 [
     {
-        "service": "C",
-        "issue": "C1",
-        "recommendation": "Improve the user experience by allowing users to easily add and save payees to the banking app to streamline transactions."
+        "service": "App",
+        "issue": "Technical glitches",
+        "recommendation_no": "R1",
+        "recommendation": "Improve app stability & accessibility, prioritize fixing 'technical glitches' for seamless user experience."
     },
     {
-        "service": "D",
-        "issue": "D3",
-        "recommendation": "Communicate transparently with customers about changes in interest rates to build trust and avoid negative perceptions."
+        "service": "App",
+        "issue": "Registration and setup",
+        "recommendation_no": "R2",
+        "recommendation": "Streamline registration process, address errors, ensure compatibility with devices & Singpass for smoother onboarding."
     },
     {
-        "service": "D",
-        "issue": "D3",
-        "recommendation": " Learn from Trust Bank's efficient onboarding process to enhance customer satisfaction and retention."
+        "service": "Banking",
+        "issue": "Application rejection",
+        "recommendation_no": "R3",
+        "recommendation": "Enhance application process transparency and resolve recurring technical issues promptly."
     }
 ]

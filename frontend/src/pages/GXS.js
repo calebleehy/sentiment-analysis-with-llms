@@ -7,40 +7,64 @@ import NPSScorePlot from '../compoents/npsScore';
 import BankNPSPlot from '../compoents/bankNPS';
 import TopRecommendationsPlot from "../compoents/topRecommendations";
 import GaugeChart from "../compoents/gauge";
+import SentimentAnalysisPlot from "../compoents/sentimentAnalysis";
+import DetailedTable from "../compoents/detailedTable";
+import RatingsPlot from "../compoents/ratingCounts";
+import { Container } from "react-bootstrap";
 
 const DashBoardPage = () => {
   return (
     <div>
       <Navigation />
-      <h1>What are the most impactful areas to be addressed?</h1>
-      <div className="dashboard">
-        <div className = "row">
-          <div style= {{ marginLeft:'50px'}}>
-          <NPSScorePlot />
-          </div>
-        
-        <div style={{ marginLeft:'100px',marginTop:'100px' }}>
-        <ServiceCountsPlot />
-        </div>   
-        </div>      
-          <div className = "row">
-          <BankNPSPlot />
-          <div style= {{marginLeft:'100px'}}>
-          <IssueCountsPlot />
-
-          </div>     
+      <Container>
+      <h1 style={{marginTop:'15vh',color:'#28104E'}}>What are the most impactful areas to be addressed?</h1>
+      <Container>
+      <div className="dashboard" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1vw', marginTop: '5vh' }}>
+        <div style={{marginTop:'7vh',marginLeft:'2vw'}}>
+          <h2 style={{ color: '#6237A0', fontSize: '2.5vw',marginBottom:'3.5vh'}}>Our Recommendations</h2>
+          <TopRecommendationsPlot />
+        </div>
+        <div style={{marginLeft:'7vw',marginTop:'7vh'}}>
+          <GaugeChart />
         </div>
       </div>
-      <div className="row" style={{ display: 'flex' }}>
-          <div style={{ flex: 1}}>
-            <TopRecommendationsPlot />
-          </div>
-          <div style={{ flex: 1,marginTop: '20px' }}>
-            <GaugeChart />
-          </div>
+      </Container>
+      <Container>
+      <h2 style={{ color: '#6237A0', fontSize: '2.5vw',marginBottom:'4vh',marginLeft:'-4vw'}}>Your Bank Analysis</h2>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1vw',marginTop:'-1vh',marginLeft:'-5.5vw' }}>
+        <div>
+          <NPSScorePlot />
+        </div>
+        <div>
+          <SentimentAnalysisPlot />
+        </div>
+        <div>
+          <RatingsPlot />
+        </div>
+      </div>
+      </Container>
+      <Container>
+      <div style={{marginTop:'2vh',marginLeft:'-5.5vw'}}>
+        <BankNPSPlot/>
+      </div>
+      </Container>
+      <Container>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1vw',marginTop:'1vh',marginLeft:'-5.5vw'}}>
+        <div style={{marginTop:'8vh'}}>
+          <ServiceCountsPlot />
+        </div>
+        <div>
+          <IssueCountsPlot />
         </div>
     </div>
-  );     
+    </Container>
+    <div style={{marginTop:'5vh'}}>
+      <h2 style={{ color: '#6237A0', fontSize: '2.5vw'}}>GXS Reviews</h2>
+      <DetailedTable />
+    </div>
+    </Container>
+    </div>
+  );
 }
 
 export default DashBoardPage;

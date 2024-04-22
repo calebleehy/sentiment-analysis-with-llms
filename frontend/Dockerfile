@@ -1,5 +1,5 @@
 # Use Node.js image as base
-FROM --platform=linux/x86-64 node:alpine as build
+FROM --platform=linux/x86-64 node:latest as build
 
 # Set working directory
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install -g npm@latest
 
 # Copy the rest of the files
 COPY . .

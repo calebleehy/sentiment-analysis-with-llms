@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
-import data from '../bank_nps.json';
-//import { getBankNpsData } from '../api/getData';
+import { getBankNpsData } from '../api/getData';
 
 const NPSScoreByBankPlot = () => {
 
   //store review data into data
-  /* const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
   //fetch review data by getReviewData method
 
   //load data everytime
@@ -24,7 +23,7 @@ const NPSScoreByBankPlot = () => {
 
     fetchData();
 
-  }, []); */
+  }, []);
   const banks = data.map(data => data.bank);
   const nps = data.map(data => data.nps);
   const data2 = [

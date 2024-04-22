@@ -1,11 +1,10 @@
 import React,{ useState, useEffect} from 'react';
 import Plot from 'react-plotly.js';
-//import { getBankIssueFreq } from '../api/getData';
-import data from '../bank_serv_issue_freq.json';
+import { getBankIssueFreq } from '../api/getData';
 
 const BankComparisonIssuePlot = () => {
   //store review data into data
-  /* const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
   //fetch review data by getReviewData method
   
   //load data everytime
@@ -23,7 +22,7 @@ const BankComparisonIssuePlot = () => {
 
     fetchData();
 
-  }, []); */
+  }, []);
   const [selectedService, setSelectedService] = useState("Banking"); // State to store the selected service
 
   // Your existing code for fetching and processing data...

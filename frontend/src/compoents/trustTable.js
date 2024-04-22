@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Plot from 'react-plotly.js';
-import data from '../full.json';
 import Select from 'react-select';
-//import { getReviewData } from '../api/getData';
+import { getReviewData } from '../api/getData';
 
 const TrustTable = () => {
   //store review data into data
-  /* const [data, setData] = useState([]);
+   const [data, setData] = useState([]);
   //fetch review data by getReviewData method
   
   //load data everytime
@@ -24,7 +23,7 @@ const TrustTable = () => {
 
     fetchData();
 
-  }, []); */
+  }, []); 
   const trust = data.filter(item => item.bank === 'Trust') //filtering for only trust data
   const columns = ["Review"];
   const [sentimentFilter, setSentimentFilter] = useState([]);

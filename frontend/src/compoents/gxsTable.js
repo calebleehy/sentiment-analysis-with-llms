@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Plot from 'react-plotly.js';
-//import { getReviewData } from '../api/getData';
-import data from '../full.json';
+import { getReviewData } from '../api/getData';
 import Select from 'react-select';
 
 const GXSTable = () => {
 
   //store review data into data
-  /* const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
   //fetch review data by getReviewData method
   
   //load data everytime
@@ -25,7 +24,7 @@ const GXSTable = () => {
 
     fetchData();
 
-  }, []); */
+  }, []); 
   const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
   const columns = ["Review"];
   const [sentimentFilter, setSentimentFilter] = useState([]);

@@ -70,11 +70,15 @@ const SentimentAnalysisPlot = () => {
           color: 'white', // Set y-axis tick text color to white
         },
       },
-  }
+  };
+  var config ={
+    responsive:true
+  };
   return (
     <Plot
     data={data2}
     layout={layout}
+    config={config}
     />
     );
   };

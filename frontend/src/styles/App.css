@@ -199,3 +199,7 @@ h1 {
   font-weight: 700;
   font-style: normal;
 }
+.selected-page {
+  background-color: #6237A0; /* Set your desired background color */
+  color: white; /* Set your desired text color */
+}

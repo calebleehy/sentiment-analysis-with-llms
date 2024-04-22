@@ -10,15 +10,15 @@ import '../styles/App.css';
 
 const SummaryPage = () => {
     const columns = ["Service", "Issue", "Recommendation"];
-    const [selectedRecommendation, setSelectedRecommendation] = useState(data[3]["recommendation"]);
-    const recommendations = data.map(item => item.recommendation);
+    const [selectedIssue, setSelectedIssue] = useState(data[3]["issue"]);
+    const issues = data.map(item => item.issue);
     const gxs = bankData.find(item => item.bank === 'GXS');
     const gxsNPS = gxs ? gxs.nps : null;
     const handleChange = (event) => {
-      setSelectedRecommendation(event.target.value);
+      setSelectedIssue(event.target.value);
     };
   
-    const filteredData = data.find(item => item.recommendation === selectedRecommendation);
+    const filteredData = data.find(item => item.issue === selectedIssue);
     return (
         <div>
             <Navigation />
@@ -55,14 +55,17 @@ const SummaryPage = () => {
       font: { color: 'white' },
       margin: { l: 0, r: 0, b: 0, t: 0 } // Set margin to 0
     }}
+    config ={{
+      responsive:true
+    }}
   />
   </div>
   <div style={{ display: 'flex',flexDirection: 'row',justifyContent: 'space-between',marginTop:'7vh',marginLeft:'10vw'}}>
     <NPSScorePlot />
   <div style ={{flexDirection: 'row',marginLeft:'5vw',marginTop:'-6.5svh'}}>
-  <select className="custom-select" value={selectedRecommendation} onChange={handleChange} style={{ width: '31vw' }}>
-          {recommendations.map((recommendation, index) => (
-            <option key={index} value={recommendation}>{recommendation}</option>
+  <select className="custom-select" value={selectedIssue} onChange={handleChange} style={{ width: '31vw' }}>
+          {issues.map((issue, index) => (
+            <option key={index} value={issue}>{issue}</option>
           ))}
         </select>
         {filteredData && (
@@ -73,7 +76,7 @@ const SummaryPage = () => {
                             mode: 'gauge+number+delta',
                             value: filteredData.nps,
                             delta: { reference: gxsNPS },
-                            title: { text: "What-if NPS",
+                            title: { text: "Projected NPS",
                                 font: {
                                     color: 'white',
                                 },},
@@ -91,6 +94,9 @@ const SummaryPage = () => {
                         margin: { t: 0, b: 0},
                         plot_bgcolor: 'rgb(25,25,26)', // Set plot background color to black
                         paper_bgcolor: 'rgb(25,25,26)', // Set paper background color to black
+                    }}
+                    config ={{
+                      responsive:true
                     }}
                 />
                   )}

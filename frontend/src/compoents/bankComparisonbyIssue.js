@@ -94,6 +94,9 @@ const BankComparisonIssuePlot = () => {
       font: { color: 'white' } // Set legend text color to white
     },
   }
+  var config ={
+    responsive:true
+  };
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'center',marginTop:'0.4vh'}}>
@@ -105,7 +108,7 @@ const BankComparisonIssuePlot = () => {
         </select>
         </div>
       </div>
-      <Plot data={traces} layout={layout} />
+      <Plot data={traces} layout={layout} config={config}/>
     </div>
 );
 };    

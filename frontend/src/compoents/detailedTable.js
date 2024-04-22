@@ -35,11 +35,15 @@ const DetailedTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5); // Change this to set the number of rows per page
   // Calculate the indexes of the first and last rows to display
+  const [selectedPage, setSelectedPage] = useState(1);
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
 
   // Function to change the current page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    setSelectedPage(pageNumber);
+  };
   const handleFilterChange = (e) => {
       setFilterWords(e.target.value);
   };
@@ -61,6 +65,7 @@ const DetailedTable = () => {
 const currentRows = filteredData.slice(indexOfFirstRow, indexOfLastRow);
 const startPage = Math.max(1, currentPage - Math.floor(MAX_PAGE_NUMBERS / 2));
 const endPage = Math.min(Math.ceil(filteredData.length / rowsPerPage), startPage + MAX_PAGE_NUMBERS - 1);
+
 const downloadCSV = () => {
   const headers = columns.map(col => col.toUpperCase());
   const rows = [headers,...filteredData.map(item => columns.map(col => (col === 'Review' ? `"${item[col.toLowerCase()] || ''}"` : item[col.toLowerCase()] || '')))];
@@ -183,18 +188,24 @@ const downloadCSV = () => {
           }
         ]}
         layout={{
-          width: 1117,
+          width: 1100,
           plot_bgcolor: 'black',
           paper_bgcolor: 'black',
           font: { color: 'white' },
           margin: { l: 0, r: 0, b: 0, t: 0 } // Set margin to 0
+        }}
+        config ={{
+          responsive:true
         }}
       />
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
       <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>&lt;</button>
     {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
-      <button key={startPage + index} onClick={() => paginate(startPage + index)} disabled={currentPage === startPage + index}>{startPage + index}</button>
+      <button key={startPage + index} 
+      onClick={() => paginate(startPage + index)}
+      disabled={currentPage === startPage + index}>{startPage + index}
+      </button>
     ))}
     <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === Math.ceil(filteredData.length / rowsPerPage)}>&gt;</button>
          </div>

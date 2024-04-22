@@ -30,11 +30,15 @@ const NPSScorePlot = () => {
         plot_bgcolor: 'rgb(25, 25, 26)', // Set plot background color to black
         paper_bgcolor: 'rgb(25, 25, 26)', // Set paper background color to black,
         margin: { t: 80, b: 80, l: 50, r: 50 }
-      }
+      };
+    var config ={
+      responsive:true
+    };
 return (
   <Plot
   data={data2}
   layout={layout}
+  config={config}
   />
   );
 };

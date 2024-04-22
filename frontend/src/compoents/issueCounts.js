@@ -93,7 +93,10 @@ const layout={
     },
     color: 'white'
   },
-}
+};
+var config ={
+  responsive:true
+};
 return (
   <div>
     <div>
@@ -106,6 +109,7 @@ return (
   <Plot
   data={data2}
   layout={layout}
+  config={config}
   />
   </div>
   );

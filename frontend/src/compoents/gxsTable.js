@@ -137,6 +137,9 @@ const GXSTable = () => {
           font: { color: 'white' },
           margin: { l: 0, r: 0, b: 0, t: 0 } // Set margin to 0
         }}
+        config ={{
+          responsive:true
+        }}
       />
       </div>
     </div>

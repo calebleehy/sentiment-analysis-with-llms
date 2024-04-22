@@ -4,22 +4,22 @@ import data from '../whatif_rec_nps.json';
 import bankData from  '../bank_nps.json'
 
 const GaugeChart = () => {
-    const [selectedRecommendation, setSelectedRecommendation] = useState(data[0].recommendation);
-    const firstTwoRec =  data.slice(0, 2);
-    const recommendations = firstTwoRec.map(item => item.recommendation);
+    const [selectedIssue, setSelectedIssue] = useState(data[0].issue);
+    const firstTwoIssue =  data.slice(0, 2);
+    const issues = firstTwoIssue.map(item => item.issue);
     const gxs = bankData.find(item => item.bank === 'GXS');
     const gxsNPS = gxs ? gxs.nps : null;
     const handleChange = (event) => {
-      setSelectedRecommendation(event.target.value);
+      setSelectedIssue(event.target.value);
     };
   
-    const filteredData = firstTwoRec.find(item => item.recommendation === selectedRecommendation);
+    const filteredData = firstTwoIssue.find(item => item.issue === selectedIssue);
   
     return (
       <div>
-        <select className="custom-select" value={selectedRecommendation} onChange={handleChange} style={{ width: '39vw' }}>
-          {recommendations.map((recommendation, index) => (
-            <option key={index} value={recommendation}>{recommendation}</option>
+        <select className="custom-select" value={selectedIssue} onChange={handleChange} style={{ width: '39vw' }}>
+          {issues.map((issue, index) => (
+            <option key={index} value={issue}>{issue}</option>
           ))}
         </select>
         {filteredData && (
@@ -30,7 +30,7 @@ const GaugeChart = () => {
                 mode: 'gauge+number+delta',
                 value: filteredData.nps,
                 delta: { reference: gxsNPS },
-                title: { text: "What-if NPS",align: 'center',
+                title: { text: "Projected NPS",align: 'center',
                 font: {
                   color: 'white',
                 },},
@@ -49,6 +49,9 @@ const GaugeChart = () => {
               plot_bgcolor: 'rgb(25,25,26)', // Set plot background color to black
         paper_bgcolor: 'rgb(25,25,26)', // Set paper background color to black
              }}
+             config ={{
+              responsive:true
+            }}
           />
         )}
       </div>

@@ -78,11 +78,14 @@ const BankComparisonServicePlot = () => {
     legend: {
       font: { color: 'white' } // Set legend text color to white
     },
-  }
+  };
+  var config ={
+    responsive:true
+  };
 
   return (
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <Plot data={data2} layout={layout} />
+      <Plot data={data2} layout={layout} config={config}/>
       </div>
     )}
   

@@ -10,6 +10,7 @@ import TrustTable from "../compoents/trustTable";
 import WhatIfNPSPlot from "../compoents/whatIfBankNPS";
 import data from "../serv_issue_rec.json";
 import Plot from 'react-plotly.js';
+import { Container } from "react-bootstrap";
 
 const ComparisonPage = () => {
   const lastEntry = data[data.length - 1];
@@ -18,8 +19,9 @@ const ComparisonPage = () => {
         <div>
             <Navigation/>
             <h1 style = {{marginTop:'15vh'}}>How does GXS stand against Trust?</h1>
+            <Container>
             <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1vw', marginTop: '7vh' }}>
-        <div style={{marginTop:'8vh',marginLeft:'0.5vw'}}>
+        <div style={{marginTop:'8vh',marginLeft:'-0.5vw'}}>
           <h2 style={{ color: '#6237A0', fontSize: '2.5vw',marginTop:'2vh' }}>Our Recommedation</h2>
           <Plot
             data={[
@@ -57,17 +59,21 @@ const ComparisonPage = () => {
           <WhatIfNPSPlot />
         </div>
       </div>
-  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1vw',marginTop:'7vh',marginLeft:'-4vw'}}>
+      </Container>
+      <Container>
+  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1vw',marginTop:'7vh',marginLeft:'-5vw'}}>
     <div>
       <NPSScoreByBankPlot />
     </div>
-    <div style={{marginTop:'-24vh'}}>
+    <div style={{marginTop:'-24.2vh'}}>
       <BankComparisonServicePlot />
     </div>
-      <div style={{marginTop:'-6.5vh'}}>
+      <div style={{marginTop:'-7.2vh'}}>
     <BankComparisonIssuePlot/>
     </div>
     </div>
+    </Container>
+    <Container>
     <div style={{ display: 'flex', justifyContent: 'space-between',marginLeft:'2vw',marginTop:'-10vh'}}>
       <div style={{ flex: 1}}>
         <p style={{color:'#6237A0',fontSize:'2.5vw'}}><strong>GXS</strong></p>
@@ -78,7 +84,7 @@ const ComparisonPage = () => {
         <TrustTable />
       </div>
     </div>
-      
+    </Container>
   </div>
 )}
 

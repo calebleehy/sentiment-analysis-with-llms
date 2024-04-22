@@ -64,6 +64,7 @@ const layout={
   paper_bgcolor: 'rgb(25, 25, 26)', // Set paper background color to black
   xaxis: {
     color: 'white',
+    tickangle: -45,
     title: {
       text: 'Month-Year',
       font: {
@@ -86,11 +87,15 @@ const layout={
     },
     color: 'white',
   },
-}
+};
+var config ={
+  responsive:true
+};
 return (
   <Plot
   data={data2}
   layout={layout}
+  config={config}
   />
   );
 };

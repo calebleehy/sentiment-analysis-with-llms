@@ -2,34 +2,8 @@ from llama_cpp import Llama
 import csv, json, os
 import pandas as pd
 here = os.path.dirname(os.path.abspath(__file__)) # all future filepaths are relative to here
-datapath=os.path.normpath(os.path.join(here, '..\\data')) # ..\data directory
-modelpath=os.path.normpath(os.path.join(here, '..\\model\mistral-7b-instruct-v0.2.Q5_K_M.gguf')) # model file
-def load_model(ctx=2048, chatformat="chatml", **kwargs):
-    """
-    returns a loaded model object
-    args: 
-    - ctx = context window, default 2048
-    - chat_format = chatml by default to facilitate JSON generation
-    - additional arguments as specified in llama_cpp_python api can be passed in
-    """
-    if kwargs:
-        llm = Llama(
-            model_path=modelpath,
-            n_gpu_layers=-1, # Uncomment to use GPU acceleration
-            # seed=1337, # Uncomment to set a specific seed
-            n_ctx=ctx, # Uncomment to increase the context window
-            chat_format=chatformat,
-            **kwargs
-        )
-    else:
-        llm = Llama(
-            model_path=modelpath,
-            n_gpu_layers=-1, # Uncomment to use GPU acceleration
-            # seed=1337, # Uncomment to set a specific seed
-            n_ctx=ctx, # Uncomment to increase the context window
-            chat_format=chatformat
-        )
-    return llm
+datapath=os.path.normpath(os.path.join(here, '..\\..\\data')) # ..\data directory
+modelpath=os.path.normpath(os.path.join(here, '..\\..\\model\\mistral-7b-instruct-v0.2.Q5_K_M.gguf')) # model file
 
 def example_generation_sequential(query_list, sysprompt, json_schema, model, temp = 0.3):
     """

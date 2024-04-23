@@ -55,7 +55,7 @@ def generate_sentiment(model, datapath):
 
 def main():
     ## filepath fuckery:
-    abscurrentpath = os.path.dirname(os.path.abspath(__file__)) # lives in backend\generation
+    abscurrentpath = os.path.dirname(os.path.abspath(__file__)) # lives in backend\src\generation
     # os.path.normpath(os.path.join(abspath, relpath))
     llm = Llama(
         model_path=os.path.normpath(os.path.join(abscurrentpath, '..\\model\\mistral-7b-instruct-v0.2.Q5_K_M.gguf')),

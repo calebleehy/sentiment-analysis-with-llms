@@ -24,5 +24,7 @@
 ./frontend/yarn-error.log*
 
 ./backend/.ipynb_checkpoints/
-./backend/server/.dsa3101/
+./backend/server/.dsa3101
 ./backend/server/__pycache__
+./backend/model/
+

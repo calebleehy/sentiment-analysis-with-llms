@@ -13,8 +13,8 @@ def generate_service(model, datapath):
     - model: Llama object, 
     - datapath: will write output service.csv to here
     Notes: 
-    - we define service as a broader category of issue faced by customers: [banking, app]-type 
-    - the summary and service tagging facilitates 
+    - we define service as a broader category of issue faced by customers: [banking, app]-type issue
+    - the summary and service tagging facilitates issue generation downstream
     - this function writes to output file every time a row is processed to save progress in case of crashes or other interrupts
     - the requisite system prompt is located within this function
     """
@@ -29,7 +29,7 @@ def generate_service(model, datapath):
     """
     answers = []
     final_data = pd.read_csv(datapath+'/final_data.csv')
-    sentiment = pd.read_csv(datapath+'/sent_derive.csv')
+    sentiment = pd.read_csv(datapath+'/sent_derive.csv') # implement ability to opt for non-Positive filtering later
     reviews = final_data[['rowid', 'bank', 'review']]
     reviews = reviews.query('bank == "GXS" | bank == "Trust"')
     with open("service.csv", 'w') as file:
@@ -66,7 +66,11 @@ def generate_service(model, datapath):
 
 def main():
     llm = load_model(MODELPATH, 1000)
-    print(generate_service(llm, DATAPATH))
+    data = pd.read_csv(DATAPATH+'/final_data.csv')
+    reviews_data = data[['rowid', 'bank']]
+    service = generate_service(llm, DATAPATH)
+    reviews_data['service'] = service
+    print(reviews_data)
 
 if __name__=="__main__": 
     main() 

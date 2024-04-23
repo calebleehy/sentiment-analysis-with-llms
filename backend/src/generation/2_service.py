@@ -56,6 +56,7 @@ def generate_service(model, datapath):
         )
         # extract answer as json string, load, extract desired field
         answer = json.loads(completion['choices'][0]['message']['content'])
+        answer['rowid'] = row['rowid']
         service, summary = answer["problem_category"],answer["summary"]
         # print(type(answer))
         with open("problem_category.csv", 'a') as file:
@@ -67,10 +68,11 @@ def generate_service(model, datapath):
 def main():
     llm = load_model(MODELPATH, 1000)
     data = pd.read_csv(DATAPATH+'/final_data.csv')
-    reviews_data = data[['rowid', 'bank']]
-    service = generate_service(llm, DATAPATH)
-    reviews_data['service'] = service
-    print(reviews_data)
+    rowid_bank = data[['rowid', 'bank']]
+    service = generate_service(llm, DATAPATH) # list of json's
+    service = pd.DataFrame.from_records(service)
+    service = pd.merge(rowid_bank, service, on='rowid')
+    print(service)
 
 if __name__=="__main__": 
     main() 

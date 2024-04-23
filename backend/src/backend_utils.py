@@ -1,10 +1,10 @@
-import os, csv, json
+import sys, os, csv, json
 import pandas as pd
 from pathlib import Path
 from llama_cpp import Llama
 
 ## GLOBAL VARS
-BACKEND_ROOT = Path(__file__).parents[1]
+BACKEND_ROOT = Path('.').parent.absolute()
 ##
 
 def create_csv(filename, headers):
@@ -40,7 +40,7 @@ def get_modelpath(folder = False):
 def get_datapath():
     root = BACKEND_ROOT
     datapath = os.path.normpath(os.path.join(root, '.\\data'))
-    print(f"getting model file {datapath}")
+    print(f"getting datapath {datapath}")
     return datapath
 def load_model(modelpath,ctx=2048, chatformat="chatml", **kwargs):
     """

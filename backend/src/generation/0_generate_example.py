@@ -1,13 +1,23 @@
 from llama_cpp import Llama
-import csv, json, os
+import csv, json, os, sys
 import pandas as pd
-here = os.path.dirname(os.path.abspath(__file__)) # all future filepaths are relative to here
-datapath=os.path.normpath(os.path.join(here, '..\\..\\data')) # ..\data directory
-modelpath=os.path.normpath(os.path.join(here, '..\\..\\model\\mistral-7b-instruct-v0.2.Q5_K_M.gguf')) # model file
+from pathlib import Path
+
+sys.path.insert(1, os.path.join(sys.path[0], '..'))# adds parent dir to PYTHONPATH to enable importing from there
+from backend_utils import (BACKEND_ROOT, get_here, get_modelpath, get_datapath, load_model)
+print(BACKEND_ROOT)
+DATAPATH = get_datapath()
+MODELPATH = get_modelpath(folder = False)
 
 def example_generation_sequential(query_list, sysprompt, json_schema, model, temp = 0.3):
     """
     an example of how inference can be done on a list of user query strings, other functions have a broad structure similar to this
+    args: 
+    - query_list, python list of user query strings
+    - sysprompt
+    - json_schema, to be used by Llama's response_format
+    - model: Llama object
+    - temp: controls variability in model output, deafult 0.3
     """
     history = [{"role": "system", "content": sysprompt},]
     answers = []
@@ -59,9 +69,10 @@ def main():
             "required": ["truth", "reasoning"],
         },
     }
-    model = load_model()
+    model = load_model(MODELPATH)
     test_responses = example_generation_sequential(test_queries, test_sysprompt, test_schema, model)
     test_responses = pd.DataFrame.from_records(test_responses)
+    test_responses["queries"] = test_queries
     print(test_responses)
 
 if __name__=="__main__": 

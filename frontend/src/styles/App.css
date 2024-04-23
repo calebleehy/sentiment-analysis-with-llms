@@ -4,11 +4,9 @@ body {
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 2.5rem;
   letter-spacing: 1.2px;
-  background: linear-gradient(40deg,
-      rgb(166, 2, 247) 0%,
-      rgba(72, 7, 253, 0) 100%);
+  background: #6237A0;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   display: flex;
@@ -17,4 +15,191 @@ h1 {
 
 .app {
   padding: 4rem;
+}
+.dashboard {
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  background-size: cover;
+  background-attachment: fixed;
+  height: 34vh;
+  width: 30vw;
+  display:block;
+  border-radius: 1vh;
+}
+.gxs-content {
+  position: relative;
+  text-align: left;
+}
+.in-box-text{
+  font-weight:bold;
+  margin-top: 2vh;
+  font-size:3vh;
+}
+
+.plain-background {
+  background-color: #28104E; /* Plain background color */
+  height: 30vh; /* Set the height of the background */
+  position: relative; /* Position relative for absolute positioning of text */
+  width:98.5vw;
+  margin-left:-5vw;
+  margin-top:1vh;
+}
+.key-features-background{
+  background-color: #28104E; /* Plain background color */
+  height: 30vh; /* Set the height of the background */
+  position: relative; /* Position relative for absolute positioning of text */
+  width:30vw;
+  margin-left:-5vw;
+  margin-top:1vh;
+}
+.content-box{
+  background-color: #28104E; /* Plain background color */
+  height:55vh; /* Set the height of the background */
+  position: relative; /* Position relative for absolute positioning of text */
+  width:40vw;
+  padding: 2vh;
+  margin: 1vh;
+  margin-top:0.1vh;
+  border-radius: 2vh; 
+}
+
+.overlay-text {
+  position: absolute; /* Position absolute to overlay the text */
+  top: 15vh; /* Position the text at the vertical center */
+  left: 49vw; /* Position the text at the horizontal center */
+  transform: translate(-50%, -50%); /* Center the text both horizontally and vertically */
+  font-size: 5vh; /* Set the font size of the text */
+  font-weight: bold; /* Set the font weight of the text */
+  color: white; /* Text color */
+}
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+.download-csv {
+  background-color: #deacf5; /* Background color */
+  color: black; /* Text color */
+  padding: 5px 10px; /* Padding inside the button */
+  border-radius: 10px; /* Rounded corners */
+  border: none; /* No border */
+  cursor: pointer; /* Cursor style on hover */
+  font-size: 1.3vw; /* Font size */
+  font-weight: bold; /* Font weight */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+  transition: background-color 0.3s ease; /* Transition effect */
+  margin-left:0.5vw;
+  margin-bottom:1vh;
+  width:21vw;
+  height:7vh;
+}
+
+/* Define hover effect */
+.download-csv:hover {
+  background-color: #6237A0; /* Change background color on hover */
+}
+
+.action-button {
+  margin-top: 2vh;
+  padding: 1vw 3vh;
+  font-size: 3vh;
+  border: none;
+  border-radius: 2vh;
+  background-color: #6237A0;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.action-button:hover {
+  background-color: #9754CB; /* Change background color on hover */
+}
+
+.about-us{
+  background-size: cover;
+  background-attachment: fixed;
+  height: 55vh;
+  width: 45vw;
+  display:block;
+  margin-top:5vh;
+  margin-left:-2vw;
+}
+.key-features-container {
+  display: flex;
+  justify-content: space-between; /* Adjust this property as needed */
+  margin-top: 3vh;
+}
+
+.key-feature {
+  width: 25vw;
+  height: 15vh;
+  border-radius: 10px;
+  background-color: #28104E;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4vh;
+}
+
+.custom-select {
+  padding: 2px;
+  font-size: 16px;
+  border: 2px solid #28104e;
+  border-radius: 8px;
+  background-color: #deacf5;
+  color: #28104e;
+  margin-right:5px;
+  width:21vw;
+  height:7vh;
+}
+
+.custom-select:hover {
+  border-color: #28104e;
+}
+
+.custom-select:focus {
+  border-color: #deacf5; /* Change focus color */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Add focus effect */
+}
+
+/* Style the dropdown arrow */
+.custom-select::after {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+/* Style selected option */
+.custom-select option:checked {
+  background-color: #007bff;
+  color: #fff;
+}
+/* Styles for the container of the multi-select */
+.select-container {
+  width: 21vw; /* Set the width of the container */
+  height: 3vh;
+  margin-right:1vw;
+  margin-bottom: 5vh;
+}
+
+.roboto-regular{
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.roboto-regular-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.selected-page {
+  background-color: #6237A0; /* Set your desired background color */
+  color: white; /* Set your desired text color */
 }

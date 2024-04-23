@@ -159,7 +159,7 @@ const downloadCSV = () => {
         />
         </div>
       </div>
-      <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '470px'}}>
+      <div style={{ overflowX: 'auto', overflowY:'auto',maxHeight: '1000px'}}>
       <Plot
         data={[
           {
@@ -192,9 +192,6 @@ const downloadCSV = () => {
           paper_bgcolor: 'black',
           font: { color: 'white' },
           margin: { l: 0, r: 0, b: 0, t: 0 } // Set margin to 0
-        }}
-        config ={{
-          responsive:true
         }}
       />
       </div>

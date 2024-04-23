@@ -20,7 +20,7 @@ def get_here():
     returns the script's current file location
     """
     return os.path.dirname(os.path.abspath(__file__))
-# def get_
+
 def get_modelpath(folder = False):
     """
     returns path to mistral-7b-instruct-v0.2.Q5_K_M model file by default. 
@@ -37,6 +37,11 @@ def get_modelpath(folder = False):
     print(f"getting model folder {modelfolder}")
     return modelfolder
 
+def get_datapath():
+    root = BACKEND_ROOT
+    datapath = os.path.normpath(os.path.join(root, '.\\data'))
+    print(f"getting model file {datapath}")
+    return datapath
 def load_model(modelpath,ctx=2048, chatformat="chatml", **kwargs):
     """
     returns a loaded model object
@@ -73,6 +78,7 @@ def main():
     print(get_modelpath(folder = True))
     # llm = load_model(get_modelpath())
     llm_larger = load_model(get_modelpath(),50)
+    print(get_datapath())
 
 if __name__ == "__main__":
     main()

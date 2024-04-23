@@ -1,7 +1,5 @@
-from llama_cpp import Llama
-import csv, json, os, sys
+import json, os, sys
 import pandas as pd
-from pathlib import Path
 sys.path.insert(1, os.path.join(sys.path[0], '..'))# adds parent dir to PYTHONPATH to enable importing from there
 from backend_utils import (BACKEND_ROOT, get_here, get_modelpath, get_datapath, load_model, create_csv, insert_row)
 print(BACKEND_ROOT)
@@ -10,7 +8,13 @@ MODELPATH = get_modelpath(folder = False)
 
 def generate_sentiment(model, datapath): 
     """
-    for each review, tag sentiment. takes loaded Llama model object as input. 
+    returns a list of sentiment taggings [Positive, Neutral, Negative] for every review in data/final_data.csv (assumes it has been created)
+    args: 
+    - model: Llama object, 
+    - datapath: will write output sent_derive.csv to here
+    Notes: 
+    - this function writes to output file every time a row is processed to save progress in case of crashes or other interrupts
+    - the requisite system prompt is located within this function
     """
     sent_prompt = f"""
     You are a helpful assistant to a customer experience team that outputs in JSON. 
@@ -18,12 +22,10 @@ def generate_sentiment(model, datapath):
         1. sentiment: each review's tone, tagging them as Positive, Neutral, or Negative
     Your job is to choose between three sentiments ONLY: Positive, Negative, Neutral, and then assign them to each review. I only want one of these three things in the Sentiments column in the output, NO explanantions needed.
     """
-    answers = []
+    answers = [] 
     final_data = pd.read_csv(datapath+'/final_data.csv')
-    final_data["rowid"] = final_data.index
     reviews_data = final_data[['rowid', 'bank', 'review']]
-    subset = reviews_data.loc[218:]
-    with open(os.path.join(datapath,".\\sent_derive.csv"), 'w') as file:
+    with open(os.path.join(datapath,".\\sent_derive.csv"), 'w') as file: 
         file.write("rowid,bank,sentiment\n")
     history = [{"role": "system", "content": sent_prompt}]
     for index, row in reviews_data.iterrows():
@@ -49,13 +51,17 @@ def generate_sentiment(model, datapath):
         with open(os.path.join(datapath,".\\sent_derive.csv"), 'a') as file:
             file.write(f"{row['rowid']},{row['bank']},{answer}\n")
         history.pop()
-    return 1
+        answers.append(answer)
+    return answers
 
 def main():
-    
-    # os.path.normpath(os.path.join(abspath, relpath))
     llm = load_model(MODELPATH)
-    print(generate_sentiment(llm, DATAPATH))
+    data = pd.read_csv(DATAPATH+'/final_data.csv')
+    reviews_data = data[['rowid', 'bank']]
+    sentiment = generate_sentiment(llm, DATAPATH)
+    reviews_data['sentiment'] = sentiment
+    print(reviews_data)
+    
 
 if __name__=="__main__": 
     main() 

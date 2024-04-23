@@ -54,8 +54,7 @@ def main():
 
     all_clients = [final_data_apple, final_data_google]
     final_data = pd.concat(all_clients)
-    DATAPATH = get_datapath()
-    final_data.to_csv(DATAPATH + '\\final_data.csv')
+    final_data.to_csv(get_datapath() + '\\final_data.csv', index_label="rowid")
 
 if __name__=="__main__":
     main()

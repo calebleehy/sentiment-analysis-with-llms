@@ -1,0 +1,52 @@
+[
+    {
+        "service": "App",
+        "issue": "Other",
+        "frequency": 43
+    },
+    {
+        "service": "App",
+        "issue": "Technical glitches",
+        "frequency": 24
+    },
+    {
+        "service": "App",
+        "issue": "Registration and setup",
+        "frequency": 20
+    },
+    {
+        "service": "App",
+        "issue": "Login issues",
+        "frequency": 16
+    },
+    {
+        "service": "App",
+        "issue": "Lack of expected features or functionality",
+        "frequency": 5
+    },
+    {
+        "service": "Banking",
+        "issue": "Technical glitches",
+        "frequency": 9
+    },
+    {
+        "service": "Banking",
+        "issue": "Interest rate concerns",
+        "frequency": 8
+    },
+    {
+        "service": "Banking",
+        "issue": "Other",
+        "frequency": 8
+    },
+    {
+        "service": "Banking",
+        "issue": "Account issues",
+        "frequency": 6
+    },
+    {
+        "service": "Banking",
+        "issue": "Application rejection",
+        "frequency": 3
+    }
+]

@@ -1,12 +1,12 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
-import data from '../full.json';
-//import { getReviewData } from '../api/getData';
+import { useEffect, useState } from 'react';
+import { getReviewData } from '../api/getData';
 
 const ServiceCountsPlot = () => {
   
   //store review data into data
-  /* const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
   //fetch review data by getReviewData method
   const fetchData = async() => {
     try{
@@ -19,7 +19,7 @@ const ServiceCountsPlot = () => {
     };
   };
   //load data everytime
-  useEffect(() => {fetchData();}, []); */
+  useEffect(() => {fetchData();}, []);
   
   const gxs = data.filter(item => item.sentiment === "Negative" && item.bank === 'GXS') //filtering for only GXS and negative sentiment
   const serviceCounts = gxs.reduce((acc, gxs) => { //gets frequency of each service

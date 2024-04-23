@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Plot from 'react-plotly.js';
-//import { getReviewData } from '../api/getData';
-import data from '../full.json';
+import { getReviewData } from '../api/getData';
 
 const RatingsPlot = () => {
   
     //store review data into data
-    /* const [data, setData] = useState([]);
+    const [data, setData] = useState([]);
     //fetch review data by getReviewData method
     const fetchData = async() => {
       try{
@@ -19,7 +18,7 @@ const RatingsPlot = () => {
       };
     };
     //load data everytime
-    useEffect(() => {fetchData();}, []); */
+    useEffect(() => {fetchData();}, []);
     
     const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS
     const ratingCounts = gxs.reduce((acc, gxs) => { //gets frequency of each rating

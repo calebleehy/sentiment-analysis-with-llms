@@ -1,16 +1,61 @@
-import React,{ useState } from "react";
+import React,{ useState, useEffect } from "react";
 import Navigation from "../compoents/navigation";
-import recommendation from '../serv_issue_rec.json';
 import Plot from 'react-plotly.js';
 import NPSScorePlot from "../compoents/npsScore";
-import data from '../whatif_rec_nps.json';
-import bankData from  '../bank_nps.json';
 import '../styles/App.css';
-
+import { getServIssueRec, getWhatifRecNps, getBankNpsData } from "../api/getData";
 
 const SummaryPage = () => {
+    const [recommendation, setRecommencation] = useState([{'Service':'', 'Issue':'', 'Recommendation':'' }]);
+    const [bankData, setBankData] = useState([])
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const data = await getWhatifRecNps();
+          const content = data.whatifRecNpsData;
+          setData(content);
+  
+        } catch (error) {
+  
+        };
+      };
+
+      fetchData();
+      
+      const fetchBankData = async () => {
+        try {
+          const bankData = await getBankNpsData();
+          const content = bankData.bankNpsData;
+          setBankData(content);
+  
+        } catch (error) {
+  
+        };
+      };
+  
+      fetchBankData();
+
+      const fetchRecData = async () => {
+        try {
+          const recommendation = await getServIssueRec();
+          const content = recommendation.servIssueRecData;
+          setRecommencation(content);
+  
+        } catch (error) {
+  
+        };
+      };
+  
+      fetchRecData();
+  
+    }, []);
+
+    console.log(data)
+
     const columns = ["Service", "Issue", "Recommendation"];
-    const [selectedIssue, setSelectedIssue] = useState(data[3]["issue"]);
+    const [selectedIssue, setSelectedIssue] = useState(data[3]?data[3]["issue"]:"All issues");
     const issues = data.map(item => item.issue);
     const gxs = bankData.find(item => item.bank === 'GXS');
     const gxsNPS = gxs ? gxs.nps : null;

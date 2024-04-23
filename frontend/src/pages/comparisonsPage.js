@@ -8,11 +8,34 @@ import BankComparisonIssuePlot from "../compoents/bankComparisonbyIssue";
 import GXSTable from "../compoents/gxsTable";
 import TrustTable from "../compoents/trustTable";
 import WhatIfNPSPlot from "../compoents/whatIfBankNPS";
-import data from "../serv_issue_rec.json";
 import Plot from 'react-plotly.js';
 import { Container } from "react-bootstrap";
-
+import { getServIssueRec } from "../api/getData";
+import { useState, useEffect } from "react";
 const ComparisonPage = () => {
+
+    //store review data into data
+    const [data, setData] = useState([{'Service':'', 'Issue':'', 'Recommendation':'' }]);
+    //fetch review data by getReviewData method
+  
+    //load data everytime
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const data = await getServIssueRec();
+          const content = data.servIssueRecData;
+          setData(content);
+  
+        } catch (error) {
+  
+        };
+      };
+  
+      fetchData();
+  
+    }, []);
+    console.log(data)
+
   const lastEntry = data[data.length - 1];
   const columns = ["Service", "Issue", "Recommendation"];
     return (

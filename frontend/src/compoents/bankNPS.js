@@ -1,12 +1,11 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
-//import { getMonthNps } from '../api/getData';
+import { getMonthNps } from '../api/getData';
 import { useEffect, useState } from 'react';
-import data from '../month_nps.json';
 
 const BankNPSPlot = () => {
   //store review data into data
-  /* const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
   //fetch review data by getReviewData method
   
   //load data everytime
@@ -24,7 +23,7 @@ const BankNPSPlot = () => {
 
     fetchData();
 
-  }, []); */
+  }, []);
   const month = data.map(data => data.month);
   const nps = data.map(data => data.nps);
   var sum = nps.reduce((acc, val) => acc + val, 0);

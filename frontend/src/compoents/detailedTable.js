@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Plot from 'react-plotly.js';
-//import { getReviewData } from '../api/getData';
-import data from '../full.json';
+import { getReviewData } from '../api/getData';
 import Select from 'react-select';
 
 const DetailedTable = () => {
    //store review data into data
-   /* const [data, setData] = useState([0]);
+   const [data, setData] = useState([0]);
    //fetch review data by getReviewData method
    
    //load data everytime
@@ -24,7 +23,7 @@ const DetailedTable = () => {
 
      fetchData();
 
-   }, []); */
+   }, []);
   const gxs = data.filter(item => item.bank === 'GXS') //filtering for only GXS data
   const columns = ["Review","Service","Issue","Rating","Sentiment"];
   const [sentimentFilter, setSentimentFilter] = useState([]);
@@ -160,7 +159,7 @@ const downloadCSV = () => {
         />
         </div>
       </div>
-      <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '470px'}}>
+      <div style={{ overflowX: 'auto', overflowY:'auto',maxHeight: '1000px'}}>
       <Plot
         data={[
           {
@@ -193,9 +192,6 @@ const downloadCSV = () => {
           paper_bgcolor: 'black',
           font: { color: 'white' },
           margin: { l: 0, r: 0, b: 0, t: 0 } // Set margin to 0
-        }}
-        config ={{
-          responsive:true
         }}
       />
       </div>

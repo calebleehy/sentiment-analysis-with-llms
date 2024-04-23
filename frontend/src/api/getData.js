@@ -41,7 +41,7 @@ export const getBankNpsData = async () => {
 
 export const getBankServiceFreq = async () => {
     try {
-        const response = await axios.get('http://127.0.0.1:4000//bankServieFreq');
+        const response = await axios.get('http://127.0.0.1:4000/bankServiceFreq');
         if (response.status === 200){
             console.log(response)
             const data = response.data;
@@ -99,6 +99,44 @@ export const getMonthNps = async () => {
 export const getServIssueRec = async () => {
     try {
         const response = await axios.get('http://127.0.0.1:4000/servIssueRec');
+        if (response.status === 200){
+            console.log(response)
+            const data = response.data;
+            const jsonString = JSON.stringify(data, null, 2);
+            const parsedData = JSON.parse(jsonString);
+            return parsedData;
+        };
+
+    }
+    catch (error){
+    console.error('Error fetching data:', error);
+    throw error;
+    }
+
+}
+
+export const getWhatifBankNps = async () => {
+    try {
+        const response = await axios.get('http://127.0.0.1:4000/whatifBankNps');
+        if (response.status === 200){
+            console.log(response)
+            const data = response.data;
+            const jsonString = JSON.stringify(data, null, 2);
+            const parsedData = JSON.parse(jsonString);
+            return parsedData;
+        };
+
+    }
+    catch (error){
+    console.error('Error fetching data:', error);
+    throw error;
+    }
+
+}
+
+export const getWhatifRecNps = async () => {
+    try {
+        const response = await axios.get('http://127.0.0.1:4000/whatifRecNps');
         if (response.status === 200){
             console.log(response)
             const data = response.data;

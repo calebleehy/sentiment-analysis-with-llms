@@ -1,12 +1,11 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
-//import { getServIssueRec } from '../api/getData';
-import data from  '../serv_issue_rec.json';
+import { getServIssueRec } from '../api/getData';
 import { useState, useEffect } from 'react';
 
 const TopRecommendationsPlot = () => {
   //store review data into data
-  /* const [data, setData] = useState([0]);
+  const [data, setData] = useState([0]);
   //fetch review data by getReviewData method
   const fetchData = async() => {
     try{
@@ -19,7 +18,7 @@ const TopRecommendationsPlot = () => {
     };
   }; 
   //load data everytime
-  useEffect(() => {fetchData();}, []); */
+  useEffect(() => {fetchData();}, []);
   const firstTwoEntries = data.slice(0, 2);
   const columns = ["Service", "Issue", "Recommendation"];
   return (

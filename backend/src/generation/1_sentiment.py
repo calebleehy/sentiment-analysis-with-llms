@@ -1,15 +1,13 @@
 from llama_cpp import Llama
-import csv, json, os
+import csv, json, os, sys
 import pandas as pd
+from pathlib import Path
+sys.path.insert(1, os.path.join(sys.path[0], '..'))# adds parent dir to PYTHONPATH to enable importing from there
+from backend_utils import (BACKEND_ROOT, get_here, get_modelpath, get_datapath, load_model, create_csv, insert_row)
+print(BACKEND_ROOT)
+DATAPATH = get_datapath()
+MODELPATH = get_modelpath(folder = False)
 
-def create_csv(filename, headers):
-    with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(headers)
-def insert_row(filename, new_row):
-    with open(filename, 'a', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(new_row)
 def generate_sentiment(model, datapath): 
     """
     for each review, tag sentiment. takes loaded Llama model object as input. 
@@ -54,18 +52,10 @@ def generate_sentiment(model, datapath):
     return 1
 
 def main():
-    ## filepath fuckery:
-    abscurrentpath = os.path.dirname(os.path.abspath(__file__)) # lives in backend\src\generation
+    
     # os.path.normpath(os.path.join(abspath, relpath))
-    llm = Llama(
-        model_path=os.path.normpath(os.path.join(abscurrentpath, '..\\model\\mistral-7b-instruct-v0.2.Q5_K_M.gguf')),
-        n_gpu_layers=-1, # Uncomment to use GPU acceleration
-        # seed=1337, # Uncomment to set a specific seed
-        n_ctx=1000, # Uncomment to increase the context window
-        chat_format="chatml"
-    )
-    absdatapath=os.path.normpath(os.path.join(abscurrentpath, '..\\data'))
-    print(generate_sentiment(llm, absdatapath))
+    llm = load_model(MODELPATH)
+    print(generate_sentiment(llm, DATAPATH))
 
 if __name__=="__main__": 
     main() 

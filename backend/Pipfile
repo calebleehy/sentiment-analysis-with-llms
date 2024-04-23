@@ -20,8 +20,11 @@ starlette-context = "*"
 uri-template = "*"
 webcolors = "*"
 inquirerpy = "*"
+google-play-scraper = "*"
+app-store-scraper = "*"
+six = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.12"
+python_version = "3.11"

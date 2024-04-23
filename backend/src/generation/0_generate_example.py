@@ -4,7 +4,7 @@ import pandas as pd
 from pathlib import Path
 
 sys.path.insert(1, os.path.join(sys.path[0], '..'))# adds parent dir to PYTHONPATH to enable importing from there
-from backend_utils import (BACKEND_ROOT, get_here, get_modelpath, get_datapath, load_model)
+from backend_utils import (BACKEND_ROOT, get_here, get_modelpath, get_datapath, load_model, create_csv, insert_row)
 print(BACKEND_ROOT)
 DATAPATH = get_datapath()
 MODELPATH = get_modelpath(folder = False)
@@ -74,6 +74,8 @@ def main():
     test_responses = pd.DataFrame.from_records(test_responses)
     test_responses["queries"] = test_queries
     print(test_responses)
+    test_responses.to_csv(DATAPATH+'\\testoutput.csv')
+    print("test responses written to data folder")
 
 if __name__=="__main__": 
     main() 

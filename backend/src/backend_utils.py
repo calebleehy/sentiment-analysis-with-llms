@@ -4,7 +4,7 @@ from pathlib import Path
 from llama_cpp import Llama
 
 ## GLOBAL VARS
-BACKEND_ROOT = Path('.').parent.absolute()
+BACKEND_ROOT = Path(os.path.dirname(os.path.abspath(__file__))).parent.absolute()
 ##
 
 def create_csv(filename, headers):

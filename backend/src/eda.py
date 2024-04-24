@@ -55,6 +55,9 @@ clean_merged_df['issue'] = clean_merged_df['issue'].fillna('-')
 merged_df = clean_merged_df
 #print(clean_merged_df)
 
+## convert table to csv
+merged_df.to_csv("../data/merged.csv", index = False)
+
 
 # FIND TOP 2 NEGATIVE ISSUES IN GXS
 

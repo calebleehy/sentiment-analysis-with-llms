@@ -332,7 +332,6 @@ whatif_bank_nps_df = pd.DataFrame(bank_nps_list, columns = ["bank", "nps"])
 
 full_json_list = full_df.to_json(date_format='%Y-%m-%d', orient='records')
 full_json = loads(full_json_list)
-print(full_json)
 full_json_object = dumps(full_json, indent=4)
 with open("../data/full.json", "w") as outfile:
     outfile.write(full_json_object)

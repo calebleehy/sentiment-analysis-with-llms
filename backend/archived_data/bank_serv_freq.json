@@ -1,0 +1,22 @@
+[
+    {
+        "bank": "GXS",
+        "service": "App",
+        "frequency (%)": 34.7
+    },
+    {
+        "bank": "Trust",
+        "service": "App",
+        "frequency (%)": 29.0
+    },
+    {
+        "bank": "Trust",
+        "service": "Banking",
+        "frequency (%)": 14.7
+    },
+    {
+        "bank": "GXS",
+        "service": "Banking",
+        "frequency (%)": 11.5
+    }
+]

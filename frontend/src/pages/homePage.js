@@ -1,5 +1,5 @@
 import React from "react";
-import Navigation from "../compoents/navigation";
+import Navigation from "../components/navigation";
 import '../styles/App.css';
 import { Container } from "react-bootstrap";
 import trustImage from '../asset/gxsvstrust.jpg';

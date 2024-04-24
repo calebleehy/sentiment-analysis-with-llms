@@ -1,15 +1,15 @@
 import React from "react";
-import Navigation from "../compoents/navigation";
+import Navigation from "../components/navigation";
 import '../styles/App.css';
-import ServiceCountsPlot from '../compoents/serviceCounts';
-import IssueCountsPlot from '../compoents/issueCounts';
-import NPSScorePlot from '../compoents/npsScore';
-import BankNPSPlot from '../compoents/bankNPS';
-import TopRecommendationsPlot from "../compoents/topRecommendations";
-import GaugeChart from "../compoents/gauge";
-import SentimentAnalysisPlot from "../compoents/sentimentAnalysis";
-import DetailedTable from "../compoents/detailedTable";
-import RatingsPlot from "../compoents/ratingCounts";
+import ServiceCountsPlot from '../components/serviceCounts';
+import IssueCountsPlot from '../components/issueCounts';
+import NPSScorePlot from '../components/npsScore';
+import BankNPSPlot from '../components/bankNPS';
+import TopRecommendationsPlot from "../components/topRecommendations";
+import GaugeChart from "../components/gauge";
+import SentimentAnalysisPlot from "../components/sentimentAnalysis";
+import DetailedTable from "../components/detailedTable";
+import RatingsPlot from "../components/ratingCounts";
 import { Container } from "react-bootstrap";
 
 const DashBoardPage = () => {

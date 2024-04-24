@@ -1,7 +1,7 @@
 import React,{ useState, useEffect } from "react";
-import Navigation from "../compoents/navigation";
+import Navigation from "../components/navigation";
 import Plot from 'react-plotly.js';
-import NPSScorePlot from "../compoents/npsScore";
+import NPSScorePlot from "../components/npsScore";
 import '../styles/App.css';
 import { getServIssueRec, getWhatifRecNps, getBankNpsData } from "../api/getData";
 

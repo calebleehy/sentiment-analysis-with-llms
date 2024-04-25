@@ -2,16 +2,16 @@
 This project gauges customer sentiments towards the bank’s services using advanced natural language processing techniques.
 
 ## Introduction
-We are a group of students taking DSA3101 doing a customer feedback sentiment analysis project for GXS Bank. Using advanced Natural Language Processing (NLP) techniques such as Large Language Models (LLMs), we analyzed customer reviews from Google Play Store and Apple Store to help GXS understand and improve customer satisfaction.
+We are a group of students from National University of Singapore taking DSA3101 doing a customer feedback sentiment analysis project for GXS Bank. Using advanced Natural Language Processing (NLP) techniques such as Large Language Models (LLMs), we analyzed customer reviews from Google Play Store and Apple Store to help GXS understand and improve customer satisfaction.
 
 ## Key features
 * Customizable Filters: Filter data by sentiment, service, and issue to focus on specific insights.
 * Competitor Analysis: Compare sentiment trends with competitors to benchmark performance.
 * Actionable Insights: Receive recommendations for improving customer experience based on sentiment analysis.
 
-## Architechture 
+## Architecture 
 
-![architechture](arch.png)
+![architecture](arch.png)
 
 
 ## Installation 
@@ -34,7 +34,7 @@ We are a group of students taking DSA3101 doing a customer feedback sentiment an
     HTTP://localhost:3000
 ##### Optional: if using other web servers (Nginx), build the frontend by:
     npm build
-### 2. install with container
+### 2. Install with container
 ##### Start [docker desktop](https://www.docker.com/products/docker-desktop/) and run:
     docker-compose up --build
 ##### Access the web application at
@@ -49,3 +49,8 @@ We are a group of students taking DSA3101 doing a customer feedback sentiment an
 - Sarah Goh Yue En (Backend)
 - Shi Shuangqi (Backend)
 - Wang Jianing (Frontend)
+
+- Prof Hernandez Marin Sergio (Supervisor)
+
+## Industrial partner
+- GXS Bank Singapore(https://www.gxs.com.sg/)

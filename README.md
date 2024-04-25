@@ -41,8 +41,8 @@ We are a group of students from National University of Singapore taking DSA3101 
     http://localhost
 
 ## Documentation
-Wiki Page: https://docs.google.com/document/d/1cYT9Ljt-SsauDqnpxowzce_r4Xhp_ljDl60fP2XdjmM/edit
-Technical Handover: https://docs.google.com/document/d/1wqhj5kz9XdS5hioQPgAznluJ-uNrKReKkUuNyCnAoPM/edit
+* Wiki Page: https://docs.google.com/document/d/1cYT9Ljt-SsauDqnpxowzce_r4Xhp_ljDl60fP2XdjmM/edit
+* Technical Handover: https://docs.google.com/document/d/1wqhj5kz9XdS5hioQPgAznluJ-uNrKReKkUuNyCnAoPM/edit
 
 ## Contributors 
 - *Caleb Lee Heng Yi* (Frontend)

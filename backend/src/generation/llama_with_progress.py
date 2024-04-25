@@ -1,7 +1,13 @@
 from typing import Sequence
 
 from tqdm import tqdm
-
+"""
+https://github.com/oobabooga/text-generation-webui/blob/main/modules/llama_cpp_python_hijack.py#L21
+monkey patch to add a progress bar to the prompt processing portion of inference
+not super useful for longer prompts because it does not track "thinking" time,
+while being mildly risky because of overwriting library functions at runtime
+tested and works though, cute feature
+"""
 try:
     import llama_cpp
 except:
@@ -80,12 +86,5 @@ for lib in [llama_cpp, llama_cpp_cuda, llama_cpp_cuda_tensorcores]:
     if lib is not None:
         lib.Llama.eval = eval_with_progress
         monkey_patch_generate(lib)
-def create_csv(filename, headers):
-    with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(headers)
-def insert_row(filename, new_row):
-    with open(filename, 'a', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(new_row)
+
         

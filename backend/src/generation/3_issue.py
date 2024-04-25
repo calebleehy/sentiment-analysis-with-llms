@@ -159,7 +159,7 @@ def build_gen_message(df, subset = 0):
     - df: pandas df, expects a 'summary' column, produced by 2_service.generate_service
     - subset: generate from first n review summaries if set, else uses whole df
     """
-    if subset: df = df.iloc[:n]
+    if subset: df = df.iloc[:subset]
     issue_gen_message = df[['summary']].to_string(index=False, justify='left') # input to pass into model
     print("message:\n", issue_gen_message)
     ctx_window = (int(len(issue_gen_message) / 10.0)+50) * 10 # add some overhead for system prompt

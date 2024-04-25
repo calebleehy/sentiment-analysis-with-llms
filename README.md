@@ -60,7 +60,7 @@ OPTIONAL if using other web servers (Nginx)
     http://localhost
 
 ## Documentation
-* Wiki Page: https://docs.google.com/document/d/1cYT9Ljt-SsauDqnpxowzce_r4Xhp_ljDl60fP2XdjmM/edit
+* Wiki Page: [https://docs.google.com/document/d/1cYT9Ljt-SsauDqnpxowzce_r4Xhp_ljDl60fP2XdjmM/edit](https://github.com/calebleehy/gxs-sentiment-analysis/wiki/1.-Introduction)
 * Technical Handover: https://docs.google.com/document/d/1wqhj5kz9XdS5hioQPgAznluJ-uNrKReKkUuNyCnAoPM/edit
 
 ## Contributors 

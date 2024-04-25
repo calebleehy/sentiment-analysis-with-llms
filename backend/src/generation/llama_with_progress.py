@@ -89,34 +89,3 @@ def insert_row(filename, new_row):
         writer = csv.writer(csvfile)
         writer.writerow(new_row)
         
-def generate_issues(model, message, datapath): 
-    # given review, label service aspect: banking or app
-    issue_prompt = f"""
-    You are a helpful assistant to a customer experience team that outputs in JSON. 
-    You will be provided with a list of app store reviews for digital banking apps. Each customer review is unhappy with some app-related issue. 
-    Your job is to come up with a list of common issues affecting these customers. NO MORE THAN 5 issues. 
-    Answer in the following format strictly: 
-    "[issue1, issue2, issue3,...]"
-    """
-    history = [{"role": "system", "content": issue_prompt},{"role":"user","content":message}]
-    completion = model.create_chat_completion(
-        messages=history,
-        temperature=0.7,
-        response_format={
-            "type": "json_object",
-            "schema": {
-                "type": "object",
-                "properties": {
-                    "issue": {"type": "issue"},
-                },
-                "required": ["issues"],
-            },
-        }
-    )
-    # 1. extract answer as json string, 2. load dict, 3. extract desired field
-    answer = json.loads(completion['choices'][0]['message']['content'])["issues"]
-    print(type(answer))
-    # save output
-    with open(os.path.join(datapath,".\\issues.txt"), 'a') as file:
-            file.write(f"{answer}\n")
-    return answer

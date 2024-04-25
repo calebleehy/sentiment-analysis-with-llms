@@ -5,7 +5,56 @@ from backend_utils import (BACKEND_ROOT, get_here, get_modelpath, get_datapath, 
 print(BACKEND_ROOT)
 DATAPATH = get_datapath()
 MODELPATH = get_modelpath(folder = False)
-
+"""
+Implements the following:
+- issue/pain-point inference (generate_issues)
+- tagging of reviews with inferred issues (generate_issue_tagging)
+WARNING: issue inference is by far the most computationally heavy step. 
+for context, using review summaries of all Neutral+Negative reviews resulted in input of nearly 30k tokens and took over 15h to process on 10gb of VRAM
+Additional helper function: build_gen_message for large singular queries
+"""
+def generate_issues(model, message, datapath): 
+    """
+    returns list of up to 5 issues, inferred from the given message
+    args: 
+    - model: Llama object
+    - message: string, input query. 
+    - datapath: appends to data/issues.txt
+    notes: 
+    - due to heavy computation load and risk of crashes, 
+    each call of this function does not overwrite issues.txt, but instead appends a new line to save progress. 
+    especially because this is called twice - once for banking-related issues, and for app-related issues
+    """
+    # given review, label service aspect: banking or app
+    issue_prompt = f"""
+    You are a helpful assistant to a customer experience team that outputs in JSON. 
+    You will be provided with a list of app store reviews for digital banking apps. Each customer review is unhappy with some app-related issue. 
+    Your job is to come up with a list of common issues affecting these customers. NO MORE THAN 5 issues. 
+    Answer in the following format strictly: 
+    "[issue1, issue2, issue3,...]"
+    """
+    history = [{"role": "system", "content": issue_prompt},{"role":"user","content":message}]
+    completion = model.create_chat_completion(
+        messages=history,
+        temperature=0.7,
+        response_format={
+            "type": "json_object",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "issue": {"type": "issue"},
+                },
+                "required": ["issues"],
+            },
+        }
+    )
+    # 1. extract answer as json string, 2. load dict, 3. extract desired field
+    answer = json.loads(completion['choices'][0]['message']['content'])["issues"]
+    print(type(answer))
+    # save output
+    with open(os.path.join(datapath,".\\issues.txt"), 'a') as file:
+            file.write(f"{answer}\n")
+    return answer
 def generate_issue_tagging(model, datapath, issue_list, service, df):
     """
     given issue_list, returns issue tagging for each review in final_data.csv (assumes it has been created)
@@ -81,18 +130,38 @@ def generate_issue_tagging(model, datapath, issue_list, service, df):
             file.write(f"{row['rowid']},\"{answer}\",\"{row['summary']}\"\n")
         history.pop()
     return 1
+def build_gen_message(df, subset = 0):
+    """
+    helper function to load model and build query for generate_issues
+    returns: 
+    - string of concatenated summaries, 
+    - Llama object, with context window resized
+    args:
+    - df: pandas df, expects a 'summary' column, produced by 2_service.generate_service
+    - subset: generate from first n review summaries if set, else uses whole df
+    """
+    if subset: df = df.iloc[:n]
+    issue_gen_message = df[['summary']].to_string(index=False, justify='left') # input to pass into model
+    print("message:\n", issue_gen_message)
+    ctx_window = (int(len(issue_gen_message) / 10.0)+50) * 10 # add some overhead for system prompt
 
+    model = load_model(
+        MODELPATH, 
+        ctx_window, 
+        use_mlock=True,
+        n_threads_batch=64,
+        n_batch=256)
+    return model, issue_gen_message
 def main():
-    
     ## loading, shaping data:
     final_data = pd.read_csv(DATAPATH+'/final_data.csv')
     reviews = final_data[['rowid', 'bank', 'review']]
     reviews = reviews.query('bank == "GXS" | bank == "Trust"')
     # print("reviews:\n",reviews.head())
     
-    sentiment = pd.read_csv(absdatapath+'/sentiment.csv')
+    sentiment = pd.read_csv(DATAPATH+'/sentiment.csv')
     sentiment = sentiment[["rowid", "sentiment"]]
-    service = pd.read_csv(absdatapath+'/problem_category.csv')[['rowid','problem_category','summary']]
+    service = pd.read_csv(DATAPATH+'/service.csv')[['rowid','problem_category','summary']]
     print("service:\n",service.head())
     
     merged = pd.merge(sentiment, reviews, on='rowid') # left join
@@ -112,31 +181,12 @@ def main():
     print("misc:\n",misc)
     print(misc['problem_category'].unique())
     
-    def build_gen_message(df, subset = 0):
-        """returns string of concatenated summaries, sets context window and loads model. 
-        set subset = n to only generate from first n review summaries"""
-        if subset: df = df.iloc[:n]
-        issue_gen_message = df[['summary']].to_string(index=False, justify='left') # input to pass into model
-        print("message:\n", issue_gen_message)
-        ctx_window = (int(len(issue_gen_message) / 10.0)+50) * 10 # add some overhead for system prompt
-    
-        model = Llama(
-            model_path=os.path.normpath(os.path.join(abscurrentpath, '..\\model\\mistral-7b-instruct-v0.2.Q5_K_M.gguf')),
-            n_gpu_layers=-1, # Uncomment to use GPU acceleration
-            # seed=1337, # Uncomment to set a specific seed
-            n_ctx=ctx_window, # Uncomment to increase the context window
-            chat_format="chatml",
-            use_mlock=True,
-            n_threads_batch=64,
-            n_batch=256,
-        )
-        return model, issue_gen_message
-    # llm, issue_gen_message = build_gen_message(banking)
-    # bank_issues = generate_issues(llm, issue_gen_message, absdatapath)
-    # print(bank_issues)
-    # llm, issue_gen_message = build_gen_message(app) # final token count was right on the edge of what my RAM/VRAM could allow, about 30 000
-    # app_issues = generate_issues(llm, issue_gen_message, absdatapath)
-    # print(app_issues)
+    llm, issue_gen_message = build_gen_message(banking)
+    bank_issues = generate_issues(llm, issue_gen_message, DATAPATH)
+    print(bank_issues)
+    llm, issue_gen_message = build_gen_message(app) # final token count was right on the edge of what my RAM/VRAM could allow, about 30 000
+    app_issues = generate_issues(llm, issue_gen_message, DATAPATH)
+    print(app_issues)
     llm = Llama(
         model_path=os.path.normpath(os.path.join(abscurrentpath, '..\\model\\mistral-7b-instruct-v0.2.Q5_K_M.gguf')),
         n_gpu_layers=-1, # Uncomment to use GPU acceleration
@@ -147,8 +197,8 @@ def main():
         # n_threads_batch=64,
         # n_batch=256,
     )
-    print(generate_issue_tagging(llm, absdatapath, ['Account issues (e.g., account locking, difficulty opening accounts, application rejection)', 'Technical issues (e.g., login problems, app malfunction, incorrect information)', 'Interest rate concerns (e.g., decrease, dissatisfaction)', 'Transaction issues (e.g., delayed, failed, fraudulent)', 'Long waiting times (e.g., approval, resolution, onboarding)'], "banking",banking))
-    print(generate_issue_tagging(llm, absdatapath, ['Difficulty applying credit card, savings account', 'Login issues', 'Technical difficulties during registration and setup', 'User interface and design issues', 'Lack of expected features or functionality'], "app",app))
+    print(generate_issue_tagging(llm, DATAPATH, ['Account issues (e.g., account locking, difficulty opening accounts, application rejection)', 'Technical issues (e.g., login problems, app malfunction, incorrect information)', 'Interest rate concerns (e.g., decrease, dissatisfaction)', 'Transaction issues (e.g., delayed, failed, fraudulent)', 'Long waiting times (e.g., approval, resolution, onboarding)'], "banking",banking))
+    print(generate_issue_tagging(llm, DATAPATH, ['Difficulty applying credit card, savings account', 'Login issues', 'Technical difficulties during registration and setup', 'User interface and design issues', 'Lack of expected features or functionality'], "app",app))
 
 if __name__=="__main__": 
     main() 

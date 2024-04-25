@@ -16,16 +16,16 @@ We are a group of students from National University of Singapore taking DSA3101 
 
 ## Installation 
 
-### Data Mining Pipepine
+### Data Mining Pipeline
 
-##### 1. ensure pipenv is installed: https://pipenv.pypa.io/en/stable/index.html
+##### Setp 1: Ensure pipenv is installed: https://pipenv.pypa.io/en/stable/index.html
     pip install --user pipenv
 
-##### 2. install requirements
+##### Step 2: Install requirements
     cd .\backend && pipenv install
 
-##### 3. download model
-    pipenv run huggingface-cli download TheBloke/Mistral-7B-Instruct-v0.2-GGUF mistral-7b-instruct-v0.2.Q5_K_M.gguf --local-dir .\model --local-dir-use-symlinks False
+##### Step 3: Download model
+    pipenv run huggingface-cli download TheBloke/Mistral-7B-Instruct-v0.2-GGUF mistral-7b-instruct-v0.2.Q5_K_M.gguf --local-dir .\model --local-dir-use-symlinks Falsee
 
 OPTIONAL if you want a more sandbox environment to play around: 
 ##### start jupyterlab

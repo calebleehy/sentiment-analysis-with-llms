@@ -16,7 +16,7 @@ We are a group of students from National University of Singapore taking DSA3101 
 
 ## Installation 
 
-### Backend Script
+### Data Mining Pipepine
 
 ##### 1. ensure pipenv is installed: https://pipenv.pypa.io/en/stable/index.html
     pip install --user pipenv

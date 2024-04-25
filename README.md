@@ -50,7 +50,8 @@ We are a group of students from National University of Singapore taking DSA3101 
 - Shi Shuangqi (Backend)
 - Wang Jianing (Frontend)
 
-- Prof Hernandez Marin Sergio (Supervisor)
+## Supervisor
+- Prof Hernandez Marin Sergio
 
 ## Industrial partner
 - GXS Bank Singapore(https://www.gxs.com.sg/)

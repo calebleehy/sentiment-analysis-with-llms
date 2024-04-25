@@ -40,18 +40,22 @@ We are a group of students from National University of Singapore taking DSA3101 
 ##### Access the web application at
     http://localhost
 
+## Documentation
+Wiki Page: https://docs.google.com/document/d/1cYT9Ljt-SsauDqnpxowzce_r4Xhp_ljDl60fP2XdjmM/edit
+Technical Handover: https://docs.google.com/document/d/1wqhj5kz9XdS5hioQPgAznluJ-uNrKReKkUuNyCnAoPM/edit
+
 ## Contributors 
-- Caleb Lee Heng Yi (Frontend)
-- Cheryl Tan Geok Ching (Frontend)
-- Lim Jing Rui (Backend)
-- Ng Elangel (Frontend)
-- Ng Keen Yung (Backend)
-- Sarah Goh Yue En (Backend)
-- Shi Shuangqi (Backend)
-- Wang Jianing (Frontend)
+- *Caleb Lee Heng Yi* (Frontend)
+- *Cheryl Tan Geok Ching* (Frontend)
+- *Lim Jing Rui* (Backend)
+- *Ng Elangel* (Frontend)
+- *Ng Keen Yung* (Backend)
+- *Sarah Goh Yue En* (Backend)
+- *Shi Shuangqi* (Backend)
+- *Wang Jianing* (Frontend)
 
 ## Supervisor
-- Prof Hernandez Marin Sergio
+- Prof *Hernandez Marin Sergio*
 
 ## Industrial partner
-- GXS Bank Singapore(https://www.gxs.com.sg/)
+- GXS Bank Singapore (https://www.gxs.com.sg/)

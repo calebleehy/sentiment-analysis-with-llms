@@ -50,7 +50,8 @@ OPTIONAL if you want a more sandbox environment to play around:
     npm start
 ##### Step7: Access the web application at:
     http://localhost:3000
-##### Optional: if using other web servers (Nginx), build the frontend by:
+OPTIONAL if using other web servers (Nginx), build the frontend by:
+##### Build the frontend 
     npm build
 ### 2. Install with container
 ##### Start [docker desktop](https://www.docker.com/products/docker-desktop/) and run:

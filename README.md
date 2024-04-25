@@ -18,26 +18,26 @@ We are a group of students from National University of Singapore taking DSA3101 
 
 ### Web Application
 ### 1. Install manually
-##### Step 1: Install dependencies in requirement.txt
+- Step 1: Install dependencies in requirement.txt
     pip install -r requirement.txt
-##### Step 2: cd to backend/server directory
+- Step 2: cd to backend/server directory
     cd backend/server
-##### Step 3: start flask server
+- Step 3: start flask server
     python main.py
-##### Step 4: cd to frontend/ directory
+- Step 4: cd to frontend/ directory
     cd frontend/
-##### Step 5: Install frontend dependencies
+- Step 5: Install frontend dependencies
     npm install
-##### Step 6: Start to react server
+- Step 6: Start to react server
     npm start
-##### Step7: Access the web application at:
-    HTTP://localhost:3000
-##### Optional: if using other web servers (Nginx), build the frontend by:
+- Step7: Access the web application at:
+    http://localhost:3000
+- Optional: if using other web servers (Nginx), build the frontend by:
     npm build
 ### 2. Install with container
-##### Start [docker desktop](https://www.docker.com/products/docker-desktop/) and run:
+- Start [docker desktop](https://www.docker.com/products/docker-desktop/) and run:
     docker-compose up --build
-##### Access the web application at
+- Access the web application at
     http://localhost
 
 ## Documentation

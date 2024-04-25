@@ -1,4 +1,4 @@
-import json, os, sys
+import json, os, sys, time
 import pandas as pd
 sys.path.insert(1, os.path.join(sys.path[0], '..'))# adds parent dir to PYTHONPATH to enable importing from there
 from backend_utils import (BACKEND_ROOT, get_here, get_modelpath, get_datapath, load_model, create_csv, insert_row)
@@ -11,18 +11,19 @@ Implements the following:
 - tagging of reviews with inferred issues (generate_issue_tagging)
 WARNING: issue inference is by far the most computationally heavy step. 
 for context, using review summaries of all Neutral+Negative reviews resulted in input of nearly 30k tokens and took over 15h to process on 10gb of VRAM
-Additional helper function: build_gen_message for large singular queries
+Additional helper function: build_gen_message for making large singular queries
 """
-def generate_issues(model, message, datapath): 
+def generate_issues(model, message, datapath, service): 
     """
-    returns list of up to 5 issues, inferred from the given message
+    returns list of up to 5 issues, inferred from the given message, or None
     args: 
     - model: Llama object
     - message: string, input query. 
-    - datapath: appends to data/issues.txt
+    - datapath: appends output to data/issues.csv
+    - service: service area for logging purposes
     notes: 
-    - due to heavy computation load and risk of crashes, 
-    each call of this function does not overwrite issues.txt, but instead appends a new line to save progress. 
+    due to heavy computation load and risk of crashes, 
+    each call of this function attempts to log output to isues.csv 
     especially because this is called twice - once for banking-related issues, and for app-related issues
     """
     # given review, label service aspect: banking or app
@@ -34,33 +35,46 @@ def generate_issues(model, message, datapath):
     "[issue1, issue2, issue3,...]"
     """
     history = [{"role": "system", "content": issue_prompt},{"role":"user","content":message}]
-    completion = model.create_chat_completion(
-        messages=history,
-        temperature=0.7,
-        response_format={
-            "type": "json_object",
-            "schema": {
-                "type": "object",
-                "properties": {
-                    "issue": {"type": "issue"},
+    inittime = time.time()
+    try:
+        completion = model.create_chat_completion(
+            messages=history,
+            temperature=0.7,
+            response_format={
+                "type": "json_object",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "issue": {"type": "issue"},
+                    },
+                    "required": ["issues"],
                 },
-                "required": ["issues"],
-            },
-        }
-    )
-    # 1. extract answer as json string, 2. load dict, 3. extract desired field
-    answer = json.loads(completion['choices'][0]['message']['content'])["issues"]
-    print(type(answer))
+            }
+        )
+        # 1. extract answer as json string, 2. load dict, 3. extract desired field
+        answer = json.loads(completion['choices'][0]['message']['content'])["issues"]
+    except:
+        answer = None
+    endtime = time.time()
+    
     # save output
-    with open(os.path.join(datapath,".\\issues.txt"), 'a') as file:
-            file.write(f"{answer}\n")
+    issues_file = os.path.join(datapath, 'issues.csv')
+    if not os.path.exists(issues_file):
+        with open(issues_file, 'w') as file:
+            file.write("service,answer,inittime,endtime\n")
+    with open(issues_file, 'a') as file:
+            file.write(f"{service},\"{answer}\",{inittime},{endtime}\n")
     return answer
 def generate_issue_tagging(model, datapath, issue_list, service, df):
     """
-    given issue_list, returns issue tagging for each review in final_data.csv (assumes it has been created)
+    for issue in issue_list, creates tagging for each review in final_data.csv, within the given service
+    returns 1 if success
     args: 
     - model: Llama object, 
     - datapath: will read final_data.csv from here, and write output issue.csv to here
+    - issue_list: list of issues that each review will be tagged with
+    - service: whether to write to banking.csv or app.csv
+    - df: pandas df of reviews. expected to be already partitioned according to service
     Notes: 
     - this function writes to output file every time a row is processed to save progress in case of crashes or other interrupts
     - the requisite system prompt is located within this function
@@ -107,6 +121,7 @@ def generate_issue_tagging(model, datapath, issue_list, service, df):
     with open(outputpath, 'w') as file:
         file.write("rowid,issue,summary\n")
     history = [{"role": "system", "content": issuetag_prompt}]
+    answers = []
     for index, row in df.iterrows():
         print(row.to_string())
         history.append({"role":"user","content":row['review']})
@@ -129,7 +144,11 @@ def generate_issue_tagging(model, datapath, issue_list, service, df):
         with open(outputpath, 'a') as file:
             file.write(f"{row['rowid']},\"{answer}\",\"{row['summary']}\"\n")
         history.pop()
-    return 1
+        answers.append({
+            'rowid': row['rowid'],
+            'issue': answer
+        })
+    return answers
 def build_gen_message(df, subset = 0):
     """
     helper function to load model and build query for generate_issues
@@ -152,53 +171,63 @@ def build_gen_message(df, subset = 0):
         n_threads_batch=64,
         n_batch=256)
     return model, issue_gen_message
-def main():
-    ## loading, shaping data:
+def get_nonpositive_reviews(DATAPATH):
+    """
+    helper function for data manipulation. gets reviews for GXS and Trust Bank, merges with sentiment taggings and 
+    returns all that are Neutral or Negative
+    """
+    ## loading, shaping reviews:
     final_data = pd.read_csv(DATAPATH+'/final_data.csv')
     reviews = final_data[['rowid', 'bank', 'review']]
     reviews = reviews.query('bank == "GXS" | bank == "Trust"')
     # print("reviews:\n",reviews.head())
-    
-    sentiment = pd.read_csv(DATAPATH+'/sentiment.csv')
+    ## load sentiment taggings
+    sentiment = pd.read_csv(DATAPATH+'/sent_derive.csv')
     sentiment = sentiment[["rowid", "sentiment"]]
-    service = pd.read_csv(DATAPATH+'/service.csv')[['rowid','problem_category','summary']]
+    service = pd.read_csv(DATAPATH+'/service.csv')[['rowid','service','summary']]
     print("service:\n",service.head())
-    
+    ## merge, filter
     merged = pd.merge(sentiment, reviews, on='rowid') # left join
     merged = pd.merge(merged, service, on='rowid')
     print(merged.head())
-    nonpositive = merged.loc[merged['sentiment'] != " Positive"]
+    nonpositive = merged.loc[merged['sentiment'] != "Positive"]
     print("nonpositive:\n",nonpositive.head())
+    return nonpositive
     
+def main():
+    nonpositive = get_nonpositive_reviews(DATAPATH)
     
-    banking = nonpositive[nonpositive['problem_category'].str.contains("bank",na=False)]
-    app = nonpositive[nonpositive['problem_category']=='app']
-    misc = nonpositive[(~nonpositive['problem_category'].str.contains("bank",na=False))&(nonpositive['problem_category']!='app')]
-    # banking = pd.merge(banking, merged, on='rowid',how='left')
-    # app = pd.merge(app, merged, on='rowid',how='left')
+    banking = nonpositive[nonpositive['service'].str.contains("bank",na=False)]
+    app = nonpositive[nonpositive['service']=='app']
+    misc = nonpositive[(~nonpositive['service'].str.contains("bank",na=False))&(nonpositive['service']!='app')]
+    
     print("banking:\n",banking.head())
     print("app:\n",app.head())
-    print("misc:\n",misc)
-    print(misc['problem_category'].unique())
+    print("misc:\n",misc) # mis-tagged reviews, not a large portion
+    print(misc['service'].unique()) 
     
     llm, issue_gen_message = build_gen_message(banking)
-    bank_issues = generate_issues(llm, issue_gen_message, DATAPATH)
-    print(bank_issues)
+    bank_issues = None
+    while bank_issues is None:
+        bank_issues = generate_issues(llm, issue_gen_message, DATAPATH)
+        print(bank_issues)
+
     llm, issue_gen_message = build_gen_message(app) # final token count was right on the edge of what my RAM/VRAM could allow, about 30 000
-    app_issues = generate_issues(llm, issue_gen_message, DATAPATH)
-    print(app_issues)
-    llm = Llama(
-        model_path=os.path.normpath(os.path.join(abscurrentpath, '..\\model\\mistral-7b-instruct-v0.2.Q5_K_M.gguf')),
-        n_gpu_layers=-1, # Uncomment to use GPU acceleration
-        # seed=1337, # Uncomment to set a specific seed
-        n_ctx=1500, # Uncomment to increase the context window
-        chat_format="chatml",
-        # use_mlock=True,
-        # n_threads_batch=64,
-        # n_batch=256,
-    )
-    print(generate_issue_tagging(llm, DATAPATH, ['Account issues (e.g., account locking, difficulty opening accounts, application rejection)', 'Technical issues (e.g., login problems, app malfunction, incorrect information)', 'Interest rate concerns (e.g., decrease, dissatisfaction)', 'Transaction issues (e.g., delayed, failed, fraudulent)', 'Long waiting times (e.g., approval, resolution, onboarding)'], "banking",banking))
-    print(generate_issue_tagging(llm, DATAPATH, ['Difficulty applying credit card, savings account', 'Login issues', 'Technical difficulties during registration and setup', 'User interface and design issues', 'Lack of expected features or functionality'], "app",app))
+    app_issues = None
+    while app_issues is None:
+        app_issues = generate_issues(llm, issue_gen_message, DATAPATH)
+        print(app_issues)
+
+    llm = load_model(MODELPATH, 1500)
+    if bank_issues:
+        bank_issue_tagging = generate_issue_tagging(llm,DATAPATH, bank_issues, 'banking',banking)
+        print(bank_issue_tagging)
+    if app_issues:
+        app_issue_tagging = generate_issue_tagging(llm,DATAPATH, app_issues, 'app',app)
+        print(app_issue_tagging)
+    ## the initial run below, was done in separate steps
+    # print(generate_issue_tagging(llm, DATAPATH, ['Account issues (e.g., account locking, difficulty opening accounts, application rejection)', 'Technical issues (e.g., login problems, app malfunction, incorrect information)', 'Interest rate concerns (e.g., decrease, dissatisfaction)', 'Transaction issues (e.g., delayed, failed, fraudulent)', 'Long waiting times (e.g., approval, resolution, onboarding)'], "banking",banking))
+    # print(generate_issue_tagging(llm, DATAPATH, ['Difficulty applying credit card, savings account', 'Login issues', 'Technical difficulties during registration and setup', 'User interface and design issues', 'Lack of expected features or functionality'], "app",app))
 
 if __name__=="__main__": 
     main() 

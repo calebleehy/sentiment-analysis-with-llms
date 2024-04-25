@@ -11,7 +11,7 @@ def generate_service(model, datapath):
     returns (service tagging,summary) for each review in data/final_data.csv (assumes it has been created)
     args: 
     - model: Llama object, 
-    - datapath: will write output service.csv to here
+    - datapath: will read final_data.csv from here, and write output service.csv to here
     Notes: 
     - we define service as a broader category of issue faced by customers: [banking, app]-type issue
     - the summary and service tagging facilitates issue generation downstream
@@ -32,11 +32,10 @@ def generate_service(model, datapath):
     sentiment = pd.read_csv(datapath+'/sent_derive.csv') # implement ability to opt for non-Positive filtering later
     reviews = final_data[['rowid', 'bank', 'review']]
     reviews = reviews.query('bank == "GXS" | bank == "Trust"')
-    with open("service.csv", 'w') as file:
+    with open(os.path.join(datapath,".\\service.csv"), 'w') as file:
         file.write("rowid,bank,service,summary\n")
     history = [{"role": "system", "content": service_prompt}]
     for index,row in reviews.iterrows(): 
-        # print(row)
         print(row.to_string())
         history.append({"role":"user","content":row.to_string()})
         completion = model.create_chat_completion(
@@ -59,8 +58,8 @@ def generate_service(model, datapath):
         answer['rowid'] = row['rowid']
         service, summary = answer["problem_category"],answer["summary"]
         # print(type(answer))
-        with open("problem_category.csv", 'a') as file:
-            file.write(f"{row['rowid']},{row["bank"]},{service},\"{summary}\"\n")
+        with open(os.path.join(datapath,".\\service.csv"), 'a') as file:
+            file.write(f"{row['rowid']},{row['bank']},{service},\"{summary}\"\n")
         history.pop()
         answers.append(answer)
     return answers

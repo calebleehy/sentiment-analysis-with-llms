@@ -26,7 +26,7 @@ def main():
 
     ## asking RoBERTa to give us sentiment classification in same format as Mistral
     def sentiment_classifier_roberta(example):
-        encoded_text = tokenizer(example, return_tensors='pt')
+        encoded_text = tokenizer(example, return_tensors='pt', padding='max_length', max_length=512, truncation=True)
 
         # Pass the encoded text through the model
         output = model(**encoded_text)

@@ -3,13 +3,10 @@ from backend_utils import get_datapath
 """
 Cleans up LLM output and merges everything into merged.csv, and then prepares eda_for_reco.csv
 """
-# MERGING DATA
 DATAPATH = get_datapath()
 
-## HELPER FUNCS
-def capitalize_first_letter(df, column_name):
-    df[column_name] = df[column_name].apply(lambda x: x.capitalize() if isinstance(x, str) else x)
 def main():
+    # MERGING DATA
     ## processed scraped data
     scraped_df = pd.read_csv(DATAPATH + './final_data.csv')
     scraped_df = scraped_df.loc[:, ~scraped_df.columns.isin(['developer_response'])]

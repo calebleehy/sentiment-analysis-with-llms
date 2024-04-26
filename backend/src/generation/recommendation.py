@@ -27,7 +27,7 @@ def recom_derive(datapath, modelpath):
         issue_context = sorted_df['review'].unique().tolist() # list of reviews with this issue
         issues_dict[issue] = issue_context
     answers = []  
-    with open("recom_derive.csv", 'w') as file:
+    with open(os.path.join(DATAPATH,"./recom_derive.csv"), 'w') as file:
         file.write("timestamp,issue,recommendation_no,recommendation\n")
     recommendation_no = 1
     recom_prompt = f"""

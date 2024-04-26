@@ -1,0 +1,6 @@
+rowid,bank,service,summary
+0,GXS,app,"Uses app for saving, occasional spending"
+1,GXS,app,"Compliments app, mentions interest rates"
+2,GXS,banking,"Raves about exceptional bank"
+3,GXS,banking,"Customer upset by interest rate decrease"
+4,GXS,app,"Easy to send money"

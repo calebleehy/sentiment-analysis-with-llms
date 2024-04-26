@@ -1,0 +1,5 @@
+,truth,reasoning,queries
+0,True,The sky often appears blue to the human eye due to a scattering of light by the atmosphere.,The sky is blue.
+1,True,"Yes, calculators are designed to perform the addition of numbers.",Calculators can add numbers together
+2,False,"Water is, in fact, wet. It is a universal solvent and is capable of dissolving many substances. The term 'wet' refers to the presence of water or moisture on a surface.",Water is not wet
+3,True,This statement is about the user's preference and cannot be determined to be true or false based on factual information.,My favourite colour is blue

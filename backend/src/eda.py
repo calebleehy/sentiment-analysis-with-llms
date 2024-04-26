@@ -4,7 +4,7 @@ import pandas as pd
 # MERGING DATA
 
 ## processed scraped data
-scraped_df = pd.read_csv('../data/final_data_modified.csv')
+scraped_df = pd.read_csv('../data/final_data.csv')
 scraped_df = scraped_df.loc[:, ~scraped_df.columns.isin(['developer_response'])]
 #print(scraped_df)
 

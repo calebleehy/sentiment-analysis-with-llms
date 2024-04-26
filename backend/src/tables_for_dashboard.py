@@ -9,18 +9,9 @@ from json import loads, dumps
 merged_df = pd.read_csv("../data/merged.csv")
 #print(merged_df)
 
-## eda data (3 issues)
-eda_for_reco_df = pd.read_csv("../data/eda_for_reco.csv")
-#print(eda_for_reco_df)
-
 ## recommendation data
 reco_df = pd.read_csv("../data/recommendation.csv")
-reco_df1 = reco_df[["recommendation_no", "recommendation"]]
-#print(reco_df1)
-
-## merge eda data (3 issues) and recommendation data
-merged_reco_df = pd.merge(eda_for_reco_df, reco_df1, on = 'recommendation_no')
-#print(merged_reco_df)
+#print(reco_df)
 
 ## some cleaning
 merged_df['date'] = pd.to_datetime(merged_df['date'], format="%Y-%m-%d %H:%M:%S")
@@ -333,53 +324,53 @@ whatif_bank_nps_df = pd.DataFrame(bank_nps_list, columns = ["bank", "nps"])
 full_json_list = full_df.to_json(date_format='%Y-%m-%d', orient='records')
 full_json = loads(full_json_list)
 full_json_object = dumps(full_json, indent=4)
-with open("../data/full.json", "w") as outfile:
+with open("../server/data/full.json", "w") as outfile:
     outfile.write(full_json_object)
 
 serv_issue_rec_json_list = serv_issue_rec_df.to_json(orient='records')
 serv_issue_rec_json = loads(serv_issue_rec_json_list)
 serv_issue_rec_json_object = dumps(serv_issue_rec_json, indent=4)
-with open("../data/serv_issue_rec.json", "w") as outfile:
+with open("../server/data/serv_issue_rec.json", "w") as outfile:
     outfile.write(serv_issue_rec_json_object)
 
 bank_nps_json_list = bank_nps_df.to_json(orient='records')
 bank_nps_json = loads(bank_nps_json_list)
 bank_nps_json_object = dumps(bank_nps_json, indent=4)
-with open("../data/bank_nps.json", "w") as outfile:
+with open("../server/data/bank_nps.json", "w") as outfile:
     outfile.write(bank_nps_json_object)
 
 serv_issue_freq_json_list = serv_issue_freq_df.to_json(orient='records')
 serv_issue_freq_json = loads(serv_issue_freq_json_list)
 serv_issue_freq_json_object = dumps(serv_issue_freq_json, indent=4)
-with open("../data/serv_issue_freq.json", "w") as outfile:
+with open("../server/data/serv_issue_freq.json", "w") as outfile:
     outfile.write(serv_issue_freq_json_object)
 
 month_nps_json_list = month_nps_df.to_json(orient='records')
 month_nps_json = loads(month_nps_json_list)
 month_nps_json_object = dumps(month_nps_json, indent=4)
-with open("../data/month_nps.json", "w") as outfile:
+with open("../server/data/month_nps.json", "w") as outfile:
     outfile.write(month_nps_json_object)
 
 bank_serv_freq_json_list = bank_serv_freq_df.to_json(orient='records')
 bank_serv_freq_json = loads(bank_serv_freq_json_list)
 bank_serv_freq_json_object = dumps(bank_serv_freq_json, indent=4)
-with open("../data/bank_serv_freq.json", "w") as outfile:
+with open("../server/data/bank_serv_freq.json", "w") as outfile:
     outfile.write(bank_serv_freq_json_object)
 
 bank_serv_issue_freq_json_list = bank_serv_issue_freq_df.to_json(orient='records')
 bank_serv_issue_freq_json = loads(bank_serv_issue_freq_json_list)
 bank_serv_issue_freq_json_object = dumps(bank_serv_issue_freq_json, indent=4)
-with open("../data/bank_serv_issue_freq.json", "w") as outfile:
+with open("../server/data/bank_serv_issue_freq.json", "w") as outfile:
     outfile.write(bank_serv_issue_freq_json_object)
 
 whatif_rec_nps_json_list = whatif_rec_nps_df.to_json(orient='records')
 whatif_rec_nps_json = loads(whatif_rec_nps_json_list)
 whatif_rec_nps_json_object = dumps(whatif_rec_nps_json, indent=4)
-with open("../data/whatif_rec_nps.json", "w") as outfile:
+with open("../server/data/whatif_rec_nps.json", "w") as outfile:
     outfile.write(whatif_rec_nps_json_object)
 
 whatif_bank_nps_json_list = whatif_bank_nps_df.to_json(orient='records')
 whatif_bank_nps_json = loads(whatif_bank_nps_json_list)
 whatif_bank_nps_json_object = dumps(whatif_bank_nps_json, indent=4)
-with open("../data/whatif_bank_nps.json", "w") as outfile:
+with open("../server/data/whatif_bank_nps.json", "w") as outfile:
     outfile.write(whatif_bank_nps_json_object)

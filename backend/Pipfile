@@ -23,6 +23,7 @@ inquirerpy = "*"
 google-play-scraper = "*"
 app-store-scraper = "*"
 six = "*"
+transformers = "*"
 
 [dev-packages]
 

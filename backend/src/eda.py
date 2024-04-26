@@ -17,7 +17,6 @@ processed_df = processed_df.loc[:, ~processed_df.columns.isin(['bank'])]
 merged_df_init = pd.merge(scraped_df, processed_df, on = 'rowid')
 
 ## some cleaning and renaming
-merged_df_init.rename(columns = {'problem_category': 'service'}, inplace=True)
 merged_df_init['sentiment'] = merged_df_init['sentiment'].replace([' Negative', ' Neutral', ' Neutural', ' Positive'], ['Negative', 'Neutral', 'Neutral', 'Positive'])
 merged_df_init['service'] = merged_df_init['service'].replace(['bank'], ['banking'])
 merged_df_init['issue'] = merged_df_init['issue'].replace(

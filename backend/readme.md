@@ -1,15 +1,15 @@
 # Install and setup instructions
 0. ensure pipenv is installed: https://pipenv.pypa.io/en/stable/index.html
-> pip install --user pipenv
+	pip install --user pipenv
 
 1. edit .env to set up environment variables for LLM GPU offloading
-- please refer to https://github.com/calebleehy/gxs-sentiment-analysis/wiki/6.-User-Manuals
+- please refer to [6a. GPU Offloading for llama‐cpp‐python](https://github.com/calebleehy/gxs-sentiment-analysis/wiki/6a.-GPU-Offloading-for-llama%E2%80%90cpp%E2%80%90python)
 
 2. install requirements, NEEDS PYTHON 11
-> cd ./backend && pipenv install [--python [path to python11's python.exe]]
+	cd ./backend && pipenv install [--python [path to python11's python.exe]]
 
 3. download model
-> pipenv run huggingface-cli download TheBloke/Mistral-7B-Instruct-v0.2-GGUF mistral-7b-instruct-v0.2.Q5_K_M.gguf --local-dir .\model --local-dir-use-symlinks False
+	pipenv run huggingface-cli download TheBloke/Mistral-7B-Instruct-v0.2-GGUF mistral-7b-instruct-v0.2.Q5_K_M.gguf --local-dir .\model --local-dir-use-symlinks False
 
 # File structure:
 	backend
@@ -36,7 +36,7 @@
 archived_data: contains all scraped data and generated results from our initial run. You may treat this as a canonical list of all the files that *should* be generated over the course of running this project for yourself
 
 `.env`: contains environment variables related to installation of llama_cpp_python library, in particular GPU offloading. modify these according to your system. 
-- please refer to https://github.com/calebleehy/gxs-sentiment-analysis/wiki/6.-User-Manuals
+- please refer to [6a. GPU Offloading for llama‐cpp‐python](https://github.com/calebleehy/gxs-sentiment-analysis/wiki/6a.-GPU-Offloading-for-llama%E2%80%90cpp%E2%80%90python)
 
 # Script run order:
     cd ./src

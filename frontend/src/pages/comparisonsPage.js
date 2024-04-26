@@ -1,13 +1,13 @@
 
 import React from "react";
-import Navigation from "../compoents/navigation";
+import Navigation from "../components/navigation";
 import '../styles/App.css';
-import BankComparisonServicePlot from "../compoents/bankComparisonService";
-import NPSScoreByBankPlot from "../compoents/npsScoreByBank";
-import BankComparisonIssuePlot from "../compoents/bankComparisonbyIssue";
-import GXSTable from "../compoents/gxsTable";
-import TrustTable from "../compoents/trustTable";
-import WhatIfNPSPlot from "../compoents/whatIfBankNPS";
+import BankComparisonServicePlot from "../components/bankComparisonService";
+import NPSScoreByBankPlot from "../components/npsScoreByBank";
+import BankComparisonIssuePlot from "../components/bankComparisonbyIssue";
+import GXSTable from "../components/gxsTable";
+import TrustTable from "../components/trustTable";
+import WhatIfNPSPlot from "../components/whatIfBankNPS";
 import Plot from 'react-plotly.js';
 import { Container } from "react-bootstrap";
 import { getServIssueRec } from "../api/getData";

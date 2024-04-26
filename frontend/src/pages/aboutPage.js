@@ -1,6 +1,6 @@
 import React from "react";
 import { Container,Row,Col } from "react-bootstrap";
-import Navigation from "../compoents/navigation";
+import Navigation from "../components/navigation";
 import '../styles/App.css';
 import image from '../asset/image.jpg';
 

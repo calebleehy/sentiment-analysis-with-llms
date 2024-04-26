@@ -1,14 +1,17 @@
 # Install and setup instructions
 0. ensure pipenv is installed: https://pipenv.pypa.io/en/stable/index.html
+
 	pip install --user pipenv
 
 1. edit .env to set up environment variables for LLM GPU offloading
 - please refer to [6a. GPU Offloading for llama‐cpp‐python](https://github.com/calebleehy/gxs-sentiment-analysis/wiki/6a.-GPU-Offloading-for-llama%E2%80%90cpp%E2%80%90python)
 
 2. install requirements, NEEDS PYTHON 11
+
 	cd ./backend && pipenv install [--python [path to python11's python.exe]]
 
 3. download model
+
 	pipenv run huggingface-cli download TheBloke/Mistral-7B-Instruct-v0.2-GGUF mistral-7b-instruct-v0.2.Q5_K_M.gguf --local-dir .\model --local-dir-use-symlinks False
 
 # File structure:
@@ -47,6 +50,7 @@ archived_data: contains all scraped data and generated results from our initial 
 4. [generation/issue](src/generation/issue.py)
 5. [merge](src/merge.py)
 6. [eda](src/eda.py)
+
   a. [evaluation](src/evaluation.py) to generate comparisons to RoBERTA
 7. [generation/recommendation](src/generation/recommendation.py)
 8. [tables_for_dashboard](src/tables_for_dashboard.py)

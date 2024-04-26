@@ -2,6 +2,8 @@ import pandas as pd
 from backend_utils import get_datapath
 """
 Cleans up LLM output and merges everything into merged.csv, and then prepares eda_for_reco.csv
+merged.csv is used by evaluation.py and tables_for_dashboard.py downstream
+Prev: merge.py, Next: (generation/recommendation.py, evaluation.py)
 """
 DATAPATH = get_datapath()
 

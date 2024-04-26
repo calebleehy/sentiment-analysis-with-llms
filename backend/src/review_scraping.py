@@ -5,6 +5,16 @@ import json, os, uuid
 from app_store_scraper import AppStore
 from datetime import datetime
 from backend_utils import get_datapath
+"""
+START HERE
+scrapes all App Store, Play store reviews for:
+- GXS,
+- Trust
+- Maribank
+though later we decided to drop Maribank due to low sample size
+writes to ~/backend/data/final_data.csv
+Next: generation/sentiment.py
+"""
 def main():
     # scraping from google play store
     gxs_g_review = reviews_all( 'sg.com.gxs.app', sleep_milliseconds=0, lang='en', country= 'SG', sort=Sort.NEWEST)

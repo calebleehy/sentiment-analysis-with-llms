@@ -5,7 +5,10 @@ from backend_utils import (BACKEND_ROOT, get_here, get_modelpath, get_datapath, 
 print(BACKEND_ROOT)
 DATAPATH = get_datapath()
 MODELPATH = get_modelpath(folder = False)
-
+"""
+implements sentiment tagging. the first step in generation portion of pipeline.
+Prev: ../review_scraping.py, Next: service.py
+"""
 def generate_sentiment(model, datapath): 
     """
     returns a list of sentiment taggings [Positive, Neutral, Negative] for every review in data/final_data.csv (assumes it has been created)

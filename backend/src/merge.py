@@ -4,6 +4,7 @@ from backend_utils import BACKEND_ROOT, get_here, get_datapath
 """
 mildly hacky pandas manipulation for merging generated text cols
 loads sentiment, service, app, banking dataframes and merges them for use by eda.py
+Prev: generation/issue.py, Next: eda.py
 """
 HERE = get_here()
 DATAPATH = get_datapath()

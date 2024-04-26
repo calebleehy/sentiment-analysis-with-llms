@@ -6,7 +6,10 @@ print(BACKEND_ROOT)
 DATAPATH = get_datapath()
 MODELPATH = get_modelpath(folder = False)
 """
-non-functional attempt at generating recommendations by local LLM
+non-functional/untested attempt at generating recommendations by local LLM, ran out of time to fully test
+In the end used chatGPT to produce the recommendations that you see in the archived recommendation.csv instead,
+see Chatgpt_chat_log_recommendation.pdf for details
+Prev: ../eda.py, Next: ../tables_for_dashboard.py
 """
 def recom_derive(datapath, modelpath): 
     # given sentiment, service, intent, produce recommendation in 5 words or less
@@ -25,18 +28,19 @@ def recom_derive(datapath, modelpath):
         issues_dict[issue] = issue_context
     answers = []  
     with open("recom_derive.csv", 'w') as file:
-        file.write("timestamp,issue,'recommendation_no',recommendation\n")
+        file.write("timestamp,issue,recommendation_no,recommendation\n")
     recommendation_no = 1
+    recom_prompt = f"""
+    You are a helpful assistant to a customer experience team that outputs in JSON. 
+    """
     for key,value in issues_dict.items():
-        recom_prompt = f"""
-        You are a helpful assistant to a customer experience team that outputs in JSON. 
-        """
         user_message = f"""
         Currently, some customers are facing the following issue: {key}
         Please recommend a solution to this in LESS THAN 10 words. 
         Additionally, here are some real customer complaints as context for your decision making: 
         {str(value)}
         """
+        print(user_message)
         ctx_window = (int(len(user_message) / 10.0)+50) * 10 # add some overhead for system prompt
         llm = load_model(modelpath, ctx_window)
         

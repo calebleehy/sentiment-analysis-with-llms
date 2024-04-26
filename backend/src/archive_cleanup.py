@@ -4,6 +4,9 @@ import os, datetime, shutil, json
 """
 1. updates ~/backend/server/data with final json files for dashboard
 2. archives all generated data and clears ~/backend/data for the next run
+unused functions: compare_dirs, update_server_data
+- because tables_for_dashboard now overwrites ~/backend/server/data directly
+Prev: tables_for_dashboard.py, Next: Done!
 """
 ARCHIVE_PATH = os.path.join(BACKEND_ROOT, ".\\archived_data")
 SERVER_DATA_PATH = os.path.join(BACKEND_ROOT, ".\\server\\data")

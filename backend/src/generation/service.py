@@ -5,7 +5,10 @@ from backend_utils import (BACKEND_ROOT, get_here, get_modelpath, get_datapath, 
 print(BACKEND_ROOT)
 DATAPATH = get_datapath()
 MODELPATH = get_modelpath(folder = False)
-
+"""
+implements service tagging
+Prev: sentiment.py, Next: issue.py
+"""
 def generate_service(model, datapath): 
     """
     returns (service tagging,summary) for each review in data/final_data.csv (assumes it has been created)

@@ -8,10 +8,12 @@ MODELPATH = get_modelpath(folder = False)
 """
 Implements the following:
 - issue/pain-point inference (generate_issues)
+    - script will auto retry until success
 - tagging of reviews with inferred issues (generate_issue_tagging)
 WARNING: issue inference is by far the most computationally heavy step. 
 for context, using review summaries of all Neutral+Negative reviews resulted in input of nearly 30k tokens and took over 15h to process on 10gb of VRAM
 Additional helper function: build_gen_message for making large singular queries
+Prev: service.py, Next: ../merge.py
 """
 def generate_issues(model, message, datapath, service): 
     """

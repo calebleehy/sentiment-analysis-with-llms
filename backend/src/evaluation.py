@@ -9,6 +9,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 """
 Evaluate model by comparing sentiment classification with RoBERTa
+generates visuals as seen in tech handover doc, along with other dataframes
+Prev: eda.py
 """
 DATAPATH = get_datapath()
 

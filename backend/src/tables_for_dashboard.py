@@ -5,6 +5,7 @@ from backend_utils import get_datapath, BACKEND_ROOT
 import os
 """
 Creates tables that are passed to the server to be loaded by dashboard
+Prev: recommendation.py, Next: archive_cleanup.py
 """
 DATAPATH = get_datapath()
 SERVER_DATA_PATH = os.path.join(BACKEND_ROOT, "./server/data")

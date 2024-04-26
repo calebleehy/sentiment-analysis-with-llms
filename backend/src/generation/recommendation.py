@@ -62,7 +62,7 @@ def recom_derive(datapath, modelpath):
         )
         answer = json.loads(completion['choices'][0]['message']['content'])["recommendation"]
         #print(type(answer))
-        with open("recom_derive.csv", 'a') as file:
+        with open(os.path.join(DATAPATH,"./recom_derive.csv"), 'a') as file:
             file.write(f"{time.time()},{key},R{recommendation_no},\"{answer}\"\n")
         recommendation_no+=1        
     return 1

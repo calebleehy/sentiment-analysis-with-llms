@@ -24,7 +24,7 @@ We are a group of students from National University of Singapore taking DSA3101 
 ## Installation 
 
 ### Data Mining Pipeline
-
+#### Setup instructions
 ##### Step 0: Ensure pipenv is installed: https://pipenv.pypa.io/en/stable/index.html
     pip install --user pipenv
     
@@ -36,7 +36,7 @@ We are a group of students from National University of Singapore taking DSA3101 
 
 ##### Step 3: Download model
     pipenv run huggingface-cli download TheBloke/Mistral-7B-Instruct-v0.2-GGUF mistral-7b-instruct-v0.2.Q5_K_M.gguf --local-dir .\model --local-dir-use-symlinks False
-
+#### Further steps on actually running the pipeline are located within [backend's readme](backend/readme.md)
 ### Web Application Installation Instructions
 The web application can be installed either manually or with docker containers
 ### 1. Install manually

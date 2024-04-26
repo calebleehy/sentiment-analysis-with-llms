@@ -3,10 +3,10 @@
 > pip install --user pipenv
 
 1. edit .env to set up environment variables for LLM GPU offloading
-- <ADD LINK TO RELEVANT GITHUB WIKI PAGE LATER WHEN DONE>
+- please refer to https://github.com/calebleehy/gxs-sentiment-analysis/wiki/6.-User-Manuals
 
 2. install requirements, NEEDS PYTHON 11
-> cd .\backend && pipenv install [--python <path to python11's python.exe>]
+> cd ./backend && pipenv install [--python [path to python11's python.exe]]
 
 3. download model
 > pipenv run huggingface-cli download TheBloke/Mistral-7B-Instruct-v0.2-GGUF mistral-7b-instruct-v0.2.Q5_K_M.gguf --local-dir .\model --local-dir-use-symlinks False
@@ -19,7 +19,7 @@
 	├── `data`: all scripts in src will read and write from this folder
 	├── `src`
 	│	├── `reviews_scraping.py`
-	│	├── generation: scripts that do LLM inference, will have its own README
+	│	├── generation: scripts that do LLM inference, refer to each one's docstrings for more info
 	│	│	└── ...
 	│	├── `eda.py`
 	│	├── Chatgpt_chat_log_recommendation.pdf
@@ -36,6 +36,19 @@
 archived_data: contains all scraped data and generated results from our initial run. You may treat this as a canonical list of all the files that *should* be generated over the course of running this project for yourself
 
 `.env`: contains environment variables related to installation of llama_cpp_python library, in particular GPU offloading. modify these according to your system. <ADD LINK TO RELEVANT GITHUB WIKI PAGE LATER WHEN DONE>
+
+# Script run order:
+    cd ./src
+	pipenv run [script].py
+1. [review_scraping](src/review_scraping.py)
+2. [generation/sentiment](src/generation/sentiment.py)
+3. [generation/service](src/generation/service.py)
+4. [generation/issue](src/generation/issue.py)
+5. [merge](src/merge.py)
+6. [eda](src/eda.py)
+  a. [evaluation](src/evaluation.py) to generate comparisons to RoBERTA
+7. [generation/recommendation](src/generation/recommendation.py)
+8. [tables_for_dashboard](src/tables_for_dashboard.py)
 
 # Scrapped features: 
 ## jupyterlab: 

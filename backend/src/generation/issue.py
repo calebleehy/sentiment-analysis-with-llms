@@ -1,4 +1,4 @@
-import json, os, sys, time
+import json, os, sys, datetime
 import pandas as pd
 sys.path.insert(1, os.path.join(sys.path[0], '..'))# adds parent dir to PYTHONPATH to enable importing from there
 from backend_utils import (BACKEND_ROOT, get_here, get_modelpath, get_datapath, load_model, create_csv, insert_row)
@@ -6,13 +6,14 @@ print(BACKEND_ROOT)
 DATAPATH = get_datapath()
 MODELPATH = get_modelpath(folder = False)
 """
+WARNING: issue inference is by far the most computationally heavy step. 
 Implements the following:
 - issue/pain-point inference (generate_issues)
-    - script will auto retry until success
+    - script will auto retry this function until success
+    - in the original version of this, it would append to issues.txt. It has since been reworked to log attempts more properly in issues.csv
 - tagging of reviews with inferred issues (generate_issue_tagging)
-WARNING: issue inference is by far the most computationally heavy step. 
-for context, using review summaries of all Neutral+Negative reviews resulted in input of nearly 30k tokens and took over 15h to process on 10gb of VRAM
-Additional helper function: build_gen_message for making large singular queries
+Additional helper function: 
+    build_gen_message for making large singular queries
 Prev: service.py, Next: ../merge.py
 """
 def generate_issues(model, message, datapath, service): 
@@ -37,7 +38,7 @@ def generate_issues(model, message, datapath, service):
     "[issue1, issue2, issue3,...]"
     """
     history = [{"role": "system", "content": issue_prompt},{"role":"user","content":message}]
-    inittime = time.time()
+    inittime = datetime.datetime.now()
     try:
         completion = model.create_chat_completion(
             messages=history,
@@ -57,7 +58,7 @@ def generate_issues(model, message, datapath, service):
         answer = json.loads(completion['choices'][0]['message']['content'])["issues"]
     except:
         answer = None
-    endtime = time.time()
+    endtime = datetime.datetime.now()
     
     # save output
     issues_file = os.path.join(datapath, 'issues.csv')

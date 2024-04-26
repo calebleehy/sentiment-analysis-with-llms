@@ -35,7 +35,8 @@
 
 archived_data: contains all scraped data and generated results from our initial run. You may treat this as a canonical list of all the files that *should* be generated over the course of running this project for yourself
 
-`.env`: contains environment variables related to installation of llama_cpp_python library, in particular GPU offloading. modify these according to your system. <ADD LINK TO RELEVANT GITHUB WIKI PAGE LATER WHEN DONE>
+`.env`: contains environment variables related to installation of llama_cpp_python library, in particular GPU offloading. modify these according to your system. 
+- please refer to https://github.com/calebleehy/gxs-sentiment-analysis/wiki/6.-User-Manuals
 
 # Script run order:
     cd ./src

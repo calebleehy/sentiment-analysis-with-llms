@@ -54,6 +54,8 @@ archived_data: contains all scraped data and generated results from our initial 
 7. [generation/recommendation](src/generation/recommendation.py)
 8. [tables_for_dashboard](src/tables_for_dashboard.py)
 
+For more detailed information on each script, do refer to the docstrings at the top of each file/function
+
 # Scrapped features: 
 ## jupyterlab: 
 Causes cross-platform dependency conflicts that we ran out of time to resolve. in particular the pywin32 and pywinpty sub-dependencies. If you do manage to get it working, here is what you can do:

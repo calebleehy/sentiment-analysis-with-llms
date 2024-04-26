@@ -25,14 +25,17 @@ We are a group of students from National University of Singapore taking DSA3101 
 
 ### Data Mining Pipeline
 
-##### Setp 1: Ensure pipenv is installed: https://pipenv.pypa.io/en/stable/index.html
+##### Step 0: Ensure pipenv is installed: https://pipenv.pypa.io/en/stable/index.html
     pip install --user pipenv
+    
+##### Step 1: edit .env to set up environment variables for LLM GPU offloading
+> see [page 6a](https://github.com/calebleehy/gxs-sentiment-analysis/wiki/6a.-GPU-Offloading-for-llama%E2%80%90cpp%E2%80%90python)
 
-##### Step 2: Install requirements
-    cd .\backend && pipenv install
+##### Step 2: Install requirements, NEEDS PYTHON 11
+    cd .\backend && pipenv install [--python <path to python11's python.exe>]
 
 ##### Step 3: Download model
-    pipenv run huggingface-cli download TheBloke/Mistral-7B-Instruct-v0.2-GGUF mistral-7b-instruct-v0.2.Q5_K_M.gguf --local-dir .\model --local-dir-use-symlinks Falsee
+    pipenv run huggingface-cli download TheBloke/Mistral-7B-Instruct-v0.2-GGUF mistral-7b-instruct-v0.2.Q5_K_M.gguf --local-dir .\model --local-dir-use-symlinks False
 
 OPTIONAL if you want a more sandbox environment to play around: 
 ##### start jupyterlab
@@ -41,7 +44,8 @@ OPTIONAL if you want a more sandbox environment to play around:
     pipenv run python -m llama_cpp.server --model .\model\mistral-7b-instruct-v0.2.Q5_K_M.gguf
 
 
-### Web Application
+### Web Application Installation Instructions
+The web application can be installed either manually or with docker containers
 ### 1. Install manually
 ##### Step 1: Install dependencies in requirement.txt
     pip install -r requirement.txt

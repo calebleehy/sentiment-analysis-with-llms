@@ -4,7 +4,7 @@ from json import loads, dumps
 from backend_utils import get_datapath, BACKEND_ROOT
 import os
 """
-Creates tables that are passed to the server to be 
+Creates tables that are passed to the server to be loaded by dashboard
 """
 DATAPATH = get_datapath()
 SERVER_DATA_PATH = os.path.join(BACKEND_ROOT, "./server/data")

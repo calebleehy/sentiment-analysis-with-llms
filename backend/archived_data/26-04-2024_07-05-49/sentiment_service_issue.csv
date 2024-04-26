@@ -1,4 +1,4 @@
-rowid,bank,sentiment,problem_category,issue
+rowid,bank,sentiment,service,issue
 0, GXS, Positive,app,
 1, GXS, Positive,banking,
 2, GXS, Neutral,banking,Interest rate concerns

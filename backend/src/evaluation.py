@@ -1,5 +1,10 @@
 import pandas as pd
 from backend_utils import get_datapath
+# RoBERTa model
+from transformers import AutoTokenizer
+from transformers import AutoModelForSequenceClassification
+from scipy.special import softmax
+import numpy as np
 """
 Evaluate model by comparing sentiment classification with RoBERTa
 """
@@ -11,14 +16,7 @@ def main():
     # create abbreviated table for sentiment classification only
     merged_abbr_df = merged_df.rename(columns={'sentiment': 'mistral_sentiment'}, inplace=True)
     merged_abbr_df = merged_df[['rowid', 'rating', 'review', 'mistral_sentiment']]
-
-
-    # RoBERTa model
-    from transformers import AutoTokenizer
-    from transformers import AutoModelForSequenceClassification
-    from scipy.special import softmax
-    import numpy as np
-
+    
     ## use RoBERTa base model to evaluate our mistral model
     MODEL = f"cardiffnlp/twitter-roberta-base-sentiment"
     tokenizer = AutoTokenizer.from_pretrained(MODEL)

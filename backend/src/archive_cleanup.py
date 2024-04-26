@@ -80,34 +80,49 @@ def update_server_data(source, dest):
         print("Copy operation cancelled.")
 
 
-def archive_clear_data(archivepath, datapath):
+def archive_clear_data(archivepath, datapath, serverdatapath):
     """
-    if folder specified by datapath is not empty(apart from .gitignore), make new folder in archived_data and copy over all files in data to there. then, empty data folder
+    if folder specified by datapath is not empty(apart from .gitignore), make new folder in archived_data and copy over all files in data to there. 
+    then, empty ~/backend/data folder
+    then, backup generated json for dashboard
     """
+    now = datetime.datetime.now()
+    dt_string = now.strftime("%d-%m-%Y_%H-%M-%S")
+    new_folder_path = os.path.join(archivepath, dt_string)
+    os.mkdir(new_folder_path)
+    print(f"archiving to {new_folder_path}")
     if (
         len(os.listdir(datapath)) > 1
     ):  # if data folder is not empty, apart from .gitignore
-        now = datetime.datetime.now()
-        dt_string = now.strftime("%d_%m_%Y_%H_%M_%S")
-        # new_folder_name = dt_string.replace(" ", "_").replace(":", "_")
-        new_folder_path = os.path.join(archivepath, dt_string)
-        os.mkdir(new_folder_path)
         files = os.listdir(datapath)
         for f in files:
             if f != ".gitignore":
                 shutil.copy(os.path.join(datapath, f), os.path.join(new_folder_path, f))
+                print(f"copying {f}")
         for f in os.listdir(datapath):
             if f != ".gitignore":
                 os.remove(os.path.join(datapath, f))
+                print(f"removing {f}")
+
+    jsonbackup = os.listdir(serverdatapath)
+    jsonbackuppath = os.path.join(new_folder_path, "server_data")
+    os.mkdir(jsonbackuppath)
+    print(f"backing up: {jsonbackup}")
+    for j in jsonbackup:
+        print(f"source: {os.path.join(serverdatapath, j)}")
+        shutil.copy(os.path.join(serverdatapath, j), os.path.join(jsonbackuppath, j))
+    if os.listdir(jsonbackuppath) == jsonbackup:
+        print("Success!")
+    else:
+        print(os.listdir(jsonbackuppath))
 
 
 def main():
     """
-    1. copy over all json from ~/backend/data to ~/backend/server/data
-    2. archive, then clear contents of ~/backend/data
+    1. archive, then clear contents of ~/backend/data
+    2. back up json files from this run of the pipeline
     """
-    update_server_data(get_datapath(), SERVER_DATA_PATH)
-    archive_clear_data(ARCHIVE_PATH, get_datapath())
+    archive_clear_data(ARCHIVE_PATH, get_datapath(), SERVER_DATA_PATH)
 
 
 if __name__ == "__main__":

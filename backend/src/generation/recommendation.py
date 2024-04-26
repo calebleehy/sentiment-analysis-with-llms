@@ -1,109 +1,17 @@
-from llama_cpp import Llama
-import csv, json, warnings
+import json, sys, time, os
 import pandas as pd
-#from tqdm import tqdm
-
-# from modules import shared
-# from modules.cache_utils import process_llamacpp_cache
-
-'''
-try:
-    import llama_cpp
-except:
-    llama_cpp = None
-
-try:
-    import llama_cpp_cuda
-except:
-    llama_cpp_cuda = None
-
-try:
-    import llama_cpp_cuda_tensorcores
-except:
-    llama_cpp_cuda_tensorcores = None
-
-
-def eval_with_progress(self, tokens: Sequence[int]):
-    """
-    A copy of
-
-    https://github.com/abetlen/llama-cpp-python/blob/main/llama_cpp/llama.py
-
-    with tqdm to show prompt processing progress.
-    """
-    assert self._ctx.ctx is not None
-    assert self._batch.batch is not None
-    self._ctx.kv_cache_seq_rm(-1, self.n_tokens, -1)
-
-    if len(tokens) > 1:
-        progress_bar = tqdm(range(0, len(tokens), self.n_batch), desc="Prompt evaluation", leave=False)
-    else:
-        progress_bar = range(0, len(tokens), self.n_batch)
-
-    for i in progress_bar:
-        batch = tokens[i: min(len(tokens), i + self.n_batch)]
-        n_past = self.n_tokens
-        n_tokens = len(batch)
-        self._batch.set_batch(
-            batch=batch, n_past=n_past, logits_all=self.context_params.logits_all
-        )
-        self._ctx.decode(self._batch)
-        # Save tokens
-        self.input_ids[n_past: n_past + n_tokens] = batch
-        # Save logits
-        rows = n_tokens
-        cols = self._n_vocab
-        offset = (
-            0 if self.context_params.logits_all else n_tokens - 1
-        )  # NOTE: Only save the last token logits if logits_all is False
-        self.scores[n_past + offset: n_past + n_tokens, :].reshape(-1)[
-            :
-        ] = self._ctx.get_logits()[offset * cols: rows * cols]
-        # Update n_tokens
-        self.n_tokens += n_tokens
-
-
-def monkey_patch_generate(lib):
-
-    def my_generate(self, *args, **kwargs):
-
-        # if shared.args.streaming_llm:
-            # new_sequence = args[0]
-            # past_sequence = self._input_ids
-
-            # # Do the cache trimming for StreamingLLM
-            # process_llamacpp_cache(self, new_sequence, past_sequence)
-
-        for output in self.original_generate(*args, **kwargs):
-            yield output
-
-    lib.Llama.original_generate = lib.Llama.generate
-    lib.Llama.generate = my_generate
-
-
-for lib in [llama_cpp, llama_cpp_cuda, llama_cpp_cuda_tensorcores]:
-    if lib is not None:
-        lib.Llama.eval = eval_with_progress
-        monkey_patch_generate(lib)
-'''
-
-def create_csv(filename, headers):
-    with open(filename, 'w', newline='', encoding="utf-8") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(headers)
-def insert_row(filename, new_row):
-    with open(filename, 'a', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(new_row)
-
-
-
-def recom_derive(model): 
+sys.path.insert(1, os.path.join(sys.path[0], '..'))# adds parent dir to PYTHONPATH to enable importing from there
+from backend_utils import (BACKEND_ROOT, get_here, get_modelpath, get_datapath, load_model, create_csv, insert_row)
+print(BACKEND_ROOT)
+DATAPATH = get_datapath()
+MODELPATH = get_modelpath(folder = False)
+"""
+non-functional attempt at generating recommendations by local LLM
+"""
+def recom_derive(datapath, modelpath): 
     # given sentiment, service, intent, produce recommendation in 5 words or less
     
-    app_data = pd.read_csv('C:/Users/shish/gxs-sentiment-analysis/backend/data/eda_for_reco.csv')
-    app_data["rowid"] = app_data.index
-    
+    app_data = pd.read_csv(datapath+'/eda_for_reco.csv')    
     issue_counts = app_data['issue'].value_counts().reset_index()
     issue_counts.columns = ['issue', 'count']
     sorted_issues = issue_counts['issue'].tolist()
@@ -115,27 +23,26 @@ def recom_derive(model):
     for issue in unique_issues:
         issue_context = sorted_df['review'].unique().tolist() # list of reviews with this issue
         issues_dict[issue] = issue_context
-
-    recom_prompt = f"""
-    You are a helpful assistant to a customer experience team that outputs in JSON. 
-    Currently, some customers are facing the following issue: {issue}
-    Please recommend a solution to this in LESS THAN 10 words. 
-    Additionally, here are some real customer complaints as context for your decision making: 
-    {issue_context}
-    """
-    answers = []    
-
-    # string/csv wrangling
-    subset = sorted_df.loc[:5]
-    # ssi = ssi[0:10]
+    answers = []  
     with open("recom_derive.csv", 'w') as file:
-        file.write("rowid,service,issue,recommendation_no,review, recommendation\n")
-    history = [{"role": "system", "content": recom_prompt}]
-    for index, row in subset.iterrows():
-        #row = ssi.iloc[i]
-        print(row.to_string())
-        history.append({"role":"user","content":row.to_string()})
-        completion = model.create_chat_completion(
+        file.write("timestamp,issue,'recommendation_no',recommendation\n")
+    recommendation_no = 1
+    for key,value in issues_dict.items():
+        recom_prompt = f"""
+        You are a helpful assistant to a customer experience team that outputs in JSON. 
+        """
+        user_message = f"""
+        Currently, some customers are facing the following issue: {key}
+        Please recommend a solution to this in LESS THAN 10 words. 
+        Additionally, here are some real customer complaints as context for your decision making: 
+        {str(value)}
+        """
+        ctx_window = (int(len(user_message) / 10.0)+50) * 10 # add some overhead for system prompt
+        llm = load_model(modelpath, ctx_window)
+        
+        history = [{"role": "system", "content": recom_prompt}]
+        history.append({"role":"user","content":user_message})
+        completion = llm.create_chat_completion(
             messages=history,
             temperature=0.7,
             response_format={
@@ -152,23 +59,14 @@ def recom_derive(model):
         answer = json.loads(completion['choices'][0]['message']['content'])["recommendation"]
         #print(type(answer))
         with open("recom_derive.csv", 'a') as file:
-            file.write(f"{row['rowid']}, {row['service']},{row['issue']},{row['recommendation_no']},{row['review']} {answer}\n")
-        history.pop()
-        print(file)
+            file.write(f"{time.time()},{key},R{recommendation_no},\"{answer}\"\n")
+        recommendation_no+=1        
     return 1
 
 def main():
-    here = os.path.dirname(os.path.abspath(__file__)) # lives in backend\generation
-    absdatapath=os.path.normpath(os.path.join(here, '..\\data'))
-    llm = Llama(
-        model_path="C:/Users/shish/gxs-sentiment-analysis/backend/.model/mistral-7b-instruct-v0.2.Q5_K_M.gguf",
-        n_gpu_layers=-1, # Uncomment to use GPU acceleration
-        # seed=1337, # Uncomment to set a specific seed
-        n_ctx=1000, # Uncomment to increase the context window
-        chat_format="chatml"
-    )
+    # llm = load_model(MODELPATH, 10000)    
     # gxs_sample_gen = generate_recommendation_from_review(gxs.iloc[0:10,], recommendations_sys_prompt, llm)
-    print(recom_derive(llm))
+    print(recom_derive(DATAPATH, MODELPATH))
 
 if __name__=="__main__": 
     main() 

@@ -5,6 +5,8 @@ from transformers import AutoTokenizer
 from transformers import AutoModelForSequenceClassification
 from scipy.special import softmax
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 """
 Evaluate model by comparing sentiment classification with RoBERTa
 """
@@ -50,8 +52,6 @@ def main():
 
 
     # plotting results of both models for comparison
-    import seaborn as sns
-    import matplotlib.pyplot as plt
     plt.style.use('ggplot')
 
     ## comparing frequency of each sentiment class for each model

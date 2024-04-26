@@ -24,6 +24,10 @@ google-play-scraper = "*"
 app-store-scraper = "*"
 six = "*"
 transformers = "*"
+scipy = "*"
+seaborn = "*"
+matplotlib = "*"
+torch = "*"
 
 [dev-packages]
 

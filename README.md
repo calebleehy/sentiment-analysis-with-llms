@@ -9,9 +9,16 @@ We are a group of students from National University of Singapore taking DSA3101 
 * Competitor Analysis: Compare sentiment trends with competitors to benchmark performance.
 * Actionable Insights: Receive recommendations for improving customer experience based on sentiment analysis.
 
-## Architecture 
+## Architecture
 
-![architecture](arch.png)
+### Backend Process Flow
+![Backend Process Flow](https://github.com/calebleehy/gxs-sentiment-analysis/assets/76025287/fcd6f400-ab5f-4e09-8fee-63454c37e42c)
+
+### Backend Structure
+![Backend Structure](https://github.com/calebleehy/gxs-sentiment-analysis/assets/76025287/1a09d251-94f6-41ed-95ab-528ea855a642)
+
+### Frontend Struture
+![Frontend Structure](https://github.com/calebleehy/gxs-sentiment-analysis/assets/76025287/d8bfe7ba-1bf5-413e-8240-a010b7943120)
 
 
 ## Installation 

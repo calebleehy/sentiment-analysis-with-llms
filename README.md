@@ -1,8 +1,8 @@
-# gxs-sentiment-analysis
+# sentiment-analysis-with-llms
 This project gauges customer sentiments towards the bank’s services using advanced natural language processing techniques.
 
 ## Introduction
-We are a group of students from National University of Singapore taking DSA3101 doing a customer feedback sentiment analysis project for GXS Bank. Using advanced Natural Language Processing (NLP) techniques such as Large Language Models (LLMs), we analyzed customer reviews from Google Play Store and Apple Store to help GXS understand and improve customer satisfaction.
+We are a group of students from National University of Singapore taking DSA3101 doing a customer feedback sentiment analysis project for our Bank client. Using advanced Natural Language Processing (NLP) techniques such as Large Language Models (LLMs), we analyzed customer reviews from Google Play Store and Apple Store to help the client understand and improve customer satisfaction.
 
 ## Key features
 * Customizable Filters: Filter data by sentiment, service, and issue to focus on specific insights.
@@ -12,13 +12,13 @@ We are a group of students from National University of Singapore taking DSA3101 
 ## Architecture
 
 ### Backend Process Flow
-![Backend Process Flow](https://github.com/calebleehy/gxs-sentiment-analysis/assets/76025287/fcd6f400-ab5f-4e09-8fee-63454c37e42c)
+![Backend Process Flow](https://github.com/calebleehy/sentiment-analysis-with-llms/assets/76025287/fcd6f400-ab5f-4e09-8fee-63454c37e42c)
 
 ### Backend Structure
-![Backend Structure](https://github.com/calebleehy/gxs-sentiment-analysis/assets/76025287/1a09d251-94f6-41ed-95ab-528ea855a642)
+![Backend Structure](https://github.com/calebleehy/sentiment-analysis-with-llms/assets/76025287/1a09d251-94f6-41ed-95ab-528ea855a642)
 
 ### Frontend Struture
-![Frontend Structure](https://github.com/calebleehy/gxs-sentiment-analysis/assets/76025287/d8bfe7ba-1bf5-413e-8240-a010b7943120)
+![Frontend Structure](https://github.com/calebleehy/sentiment-analysis-with-llms/assets/76025287/d8bfe7ba-1bf5-413e-8240-a010b7943120)
 
 
 ## Installation 
@@ -29,7 +29,7 @@ We are a group of students from National University of Singapore taking DSA3101 
     pip install --user pipenv
     
 ##### Step 1: edit .env to set up environment variables for LLM GPU offloading
-> see [page 6a](https://github.com/calebleehy/gxs-sentiment-analysis/wiki/6a.-GPU-Offloading-for-llama%E2%80%90cpp%E2%80%90python)
+> see [page 6a](https://github.com/calebleehy/sentiment-analysis-with-llms/wiki/6a.-GPU-Offloading-for-llama%E2%80%90cpp%E2%80%90python)
 
 ##### Step 2: Install requirements, NEEDS PYTHON 11
     cd .\backend && pipenv install [--python <path to python11's python.exe>]

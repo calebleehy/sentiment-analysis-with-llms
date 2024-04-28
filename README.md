@@ -79,6 +79,3 @@ OPTIONAL if using other web servers (Nginx)
 
 ## Supervisor
 - Prof *Hernandez Marin Sergio*
-
-## Industrial partner
-- GXS Bank Singapore (https://www.gxs.com.sg/)
